@@ -1,5 +1,8 @@
 {
   "name": "BerryDeliCakes",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.0.1"
+  }
 }
