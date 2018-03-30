@@ -1,0 +1,30 @@
+%h1 New user
+
+= form_tag users_path do
+
+  = label :user, :userName, 'User Name'
+  = text_field :user, 'userName'
+  
+  = label :user, :password, 'Password'
+  = text_field :user, 'password'
+
+  = label :user, :name, 'Name'
+  = text_field :user, 'name'
+  
+  = label :user, :lastName, 'Last Name'
+  = text_field :user, 'lastName'
+
+  = label :user, :phone, 'Phone'
+  = text_field :user, 'phone'
+  
+  = label :user, :email, 'Email'
+  = text_field :user, 'email'
+
+  = label :user, :address, 'Address'
+  = text_area :user, 'address'
+  
+  = submit_tag 'Save Changes'
+
+
+= link_to 'Back', users_path
+

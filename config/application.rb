@@ -17,6 +17,8 @@ module BerryDeliCakes
     
     #Fonts assets (added 03/04/2018)
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    
+    config.generators do |g|
+      g.template_engine :haml
+    end
   end
 end

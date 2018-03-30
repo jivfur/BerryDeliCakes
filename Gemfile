@@ -5,16 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-<<<<<<< HEAD
-# Add BootStrap to rails
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
-=======
 # Add Bootstrap
 gem 'bootstrap', '~> 4.0.0'
 # Add jQuery-rails for BootStrap JS
 gem 'jquery-rails'
->>>>>>> master
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use postgresql as the database for Active Record
@@ -41,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'haml-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
