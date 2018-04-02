@@ -1,5 +1,20 @@
 %h1 New flavor
 
-= render 'form'
+// = render 'form'
+// = form_tag({action: :upload}, multipart: true) do 
+//   = label :flavor, :name, 'Name'
+//   = text_field :flavor, 'name'
+//   = file_field_tag 'flavorImgURL'
 
+%form#new_flavor.new_flavor{:action => "/flavors", :method => "post", :enctype=>"multipart/form-data"}
+  .form-group
+    %label{:for => :flavor_name} Name
+    %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text"}/
+  .form-group
+    %label{:for => :flavor_flavorImgURL} Flavor Picture
+    %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file"}/
+  %button.btn.btn-primary{:type => "submit"} Submit
+
+
+// = render 'form' 
 = link_to 'Back', flavors_path

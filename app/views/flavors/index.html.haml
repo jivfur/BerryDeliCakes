@@ -1,23 +1,37 @@
 %h1 Listing flavors
+.container
+- @flavors.each_with_index do |flavor, index|
+  - if index%4 == 0 then
+    .row
+  .col
+    .row
+      %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL),:height => "200", :width => "200"}/
+      // =link_to  do flavor end
+    .row
+      %p= flavor.name
+        
+// %table
+// %table
+//   %thead
+//     %tr
+//       %th Name
+//       %th Flavorimgurl
+//       %th
+//       %th
+//       %th
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Flavorimgurl
-      %th
-      %th
-      %th
+//   %tbody
+//     - @flavors.each do |flavor|
+//       %tr
+//         %td= flavor.name
+//         %td= flavor.flavorImgURL
+//         %td= link_to 'Show', flavor
+//         %td= link_to 'Edit', edit_flavor_path(flavor)
+//         %td= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' }
 
-  %tbody
-    - @flavors.each do |flavor|
-      %tr
-        %td= flavor.name
-        %td= flavor.flavorImgURL
-        %td= link_to 'Show', flavor
-        %td= link_to 'Edit', edit_flavor_path(flavor)
-        %td= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' }
+// %br
 
-%br
+
+
 
 = link_to 'New Flavor', new_flavor_path

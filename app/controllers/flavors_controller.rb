@@ -1,10 +1,14 @@
 class FlavorsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_flavor, only: [:show, :edit, :update, :destroy]
+
+  
 
   # GET /flavors
   # GET /flavors.json
   def index
     @flavors = Flavor.all
+    logger.debug @flavors
   end
 
   # GET /flavors/1
@@ -24,8 +28,17 @@ class FlavorsController < ApplicationController
   # POST /flavors
   # POST /flavors.json
   def create
-    @flavor = Flavor.new(flavor_params)
-
+    logger.debug "Something HERE"
+    logger.debug params
+    logger.debug flavor_params
+      logger.debug "**************************"
+    uploaded_io = params[:flavor][:flavorImgURL]
+    File.open(Rails.root.join('app','assets', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
+    file.write(uploaded_io.read)
+    logger.debug uploaded_io.read
+    end
+    aux = {name: params[:flavor][:name],flavorImgURL: uploaded_io.original_filename};
+    @flavor = Flavor.new(aux)
     respond_to do |format|
       if @flavor.save
         format.html { redirect_to @flavor, notice: 'Flavor was successfully created.' }
@@ -71,4 +84,6 @@ class FlavorsController < ApplicationController
     def flavor_params
       params.require(:flavor).permit(:name, :flavorImgURL)
     end
+    
+    
 end
