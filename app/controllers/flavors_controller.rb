@@ -33,7 +33,7 @@ class FlavorsController < ApplicationController
     logger.debug flavor_params
       logger.debug "**************************"
     uploaded_io = params[:flavor][:flavorImgURL]
-    File.open(Rails.root.join('app','assets', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
+    File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
     file.write(uploaded_io.read)
     logger.debug uploaded_io.read
     end

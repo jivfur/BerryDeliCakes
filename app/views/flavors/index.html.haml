@@ -1,14 +1,13 @@
 %h1 Listing flavors
 .container
-- @flavors.each_with_index do |flavor, index|
-  - if index%4 == 0 then
-    .row
-  .col
-    .row
-      %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL),:height => "200", :width => "200"}/
-      // =link_to  do flavor end
-    .row
-      %p= flavor.name
+.row
+  - @flavors.each_with_index do |flavor, index|
+    .col-md-4.col-md-offset-4
+      .row
+        %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"200", :width=>"200"}/
+        // =link_to  do flavor end
+      .row
+        %p= flavor.name
         
 // %table
 // %table
@@ -32,6 +31,7 @@
 // %br
 
 
-
+%a.btn-floating.btn-lg.purple-gradient
+  %i.fa.fa-bolt
 
 = link_to 'New Flavor', new_flavor_path
