@@ -1,0 +1,25 @@
+= form_for @cake do |f|
+  - if @cake.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cake.errors.count, "error")} prohibited this cake from being saved:"
+      %ul
+        - @cake.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :flavor
+    = f.text_field :flavor
+  .field
+    = f.label :decorationImgURL
+    = f.text_field :decorationImgURL
+  .field
+    = f.label :comments
+    = f.text_area :comments
+  .field
+    = f.label :levels
+    = f.number_field :levels
+  .field
+    = f.label :gallery
+    = f.check_box :gallery
+  .actions
+    = f.submit 'Save'

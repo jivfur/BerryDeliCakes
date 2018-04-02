@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Cake:
+  = @cake_price.cake
+%p
+  %b Size:
+  = @cake_price.size
+%p
+  %b Price:
+  = @cake_price.price
+
+= link_to 'Edit', edit_cake_price_path(@cake_price)
+\|
+= link_to 'Back', cake_prices_path

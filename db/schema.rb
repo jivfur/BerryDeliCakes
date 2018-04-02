@@ -10,10 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330212159) do
+ActiveRecord::Schema.define(version: 20180402173402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cake_prices", force: :cascade do |t|
+    t.bigint "cake_id"
+    t.integer "size"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cake_id"], name: "index_cake_prices_on_cake_id"
+  end
+
+  create_table "cakes", force: :cascade do |t|
+    t.bigint "flavor_id"
+    t.string "decorationImgURL", limit: 250
+    t.text "comments"
+    t.integer "levels"
+    t.boolean "gallery"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id"], name: "index_cakes_on_flavor_id"
+  end
+
+  create_table "flavors", force: :cascade do |t|
+    t.string "name", limit: 50
+    t.string "flavorImgURL", limit: 250
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.date "orderDate"
+    t.datetime "deliveryDate"
+    t.text "deliveryAddress"
+    t.string "deliveryPhone", limit: 13
+    t.integer "status"
+    t.text "comments"
+    t.bigint "cake_price_id"
+    t.integer "paidStatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cake_price_id"], name: "index_orders_on_cake_price_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "userName", limit: 12
@@ -29,4 +72,8 @@ ActiveRecord::Schema.define(version: 20180330212159) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "cake_prices", "cakes"
+  add_foreign_key "cakes", "flavors"
+  add_foreign_key "orders", "cake_prices"
+  add_foreign_key "orders", "users"
 end

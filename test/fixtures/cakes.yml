@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flavor: one
+  decorationImgURL: MyString
+  comments: MyText
+  levels: 1
+  gallery: false
+
+two:
+  flavor: two
+  decorationImgURL: MyString
+  comments: MyText
+  levels: 1
+  gallery: false

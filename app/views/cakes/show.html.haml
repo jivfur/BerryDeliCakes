@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Flavor:
+  = @cake.flavor
+%p
+  %b Decorationimgurl:
+  = @cake.decorationImgURL
+%p
+  %b Comments:
+  = @cake.comments
+%p
+  %b Levels:
+  = @cake.levels
+%p
+  %b Gallery:
+  = @cake.gallery
+
+= link_to 'Edit', edit_cake_path(@cake)
+\|
+= link_to 'Back', cakes_path

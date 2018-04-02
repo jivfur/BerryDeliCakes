@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @order.user
+%p
+  %b Orderdate:
+  = @order.orderDate
+%p
+  %b Deliverydate:
+  = @order.deliveryDate
+%p
+  %b Deliveryaddress:
+  = @order.deliveryAddress
+%p
+  %b Deliveryphone:
+  = @order.deliveryPhone
+%p
+  %b Status:
+  = @order.status
+%p
+  %b Comments:
+  = @order.comments
+%p
+  %b Cakeprice:
+  = @order.cakePrice
+%p
+  %b Paidstatus:
+  = @order.paidStatus
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

@@ -1,0 +1,29 @@
+%h1 Listing cakes
+
+%table
+  %thead
+    %tr
+      %th Flavor
+      %th Decorationimgurl
+      %th Comments
+      %th Levels
+      %th Gallery
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cakes.each do |cake|
+      %tr
+        %td= cake.flavor
+        %td= cake.decorationImgURL
+        %td= cake.comments
+        %td= cake.levels
+        %td= cake.gallery
+        %td= link_to 'Show', cake
+        %td= link_to 'Edit', edit_cake_path(cake)
+        %td= link_to 'Destroy', cake, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Cake', new_cake_path

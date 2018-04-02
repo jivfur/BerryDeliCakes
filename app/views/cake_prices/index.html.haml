@@ -1,0 +1,25 @@
+%h1 Listing cake_prices
+
+%table
+  %thead
+    %tr
+      %th Cake
+      %th Size
+      %th Price
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cake_prices.each do |cake_price|
+      %tr
+        %td= cake_price.cake
+        %td= cake_price.size
+        %td= cake_price.price
+        %td= link_to 'Show', cake_price
+        %td= link_to 'Edit', edit_cake_price_path(cake_price)
+        %td= link_to 'Destroy', cake_price, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Cake price', new_cake_price_path
