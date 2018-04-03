@@ -6,8 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # Add Bootstrap
-#gem 'bootstrap', '~> 4.0.0'
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+#gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap', '~> 4.0.0'
+
 
 # Add jQuery-rails for BootStrap JS
 gem 'jquery-rails'
