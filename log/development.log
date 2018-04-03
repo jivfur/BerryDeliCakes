@@ -13478,3 +13478,73 @@ puma (3.11.3) lib/puma/server.rb:624:in `handle_request'
 puma (3.11.3) lib/puma/server.rb:438:in `process_client'
 puma (3.11.3) lib/puma/server.rb:302:in `block in run'
 puma (3.11.3) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:33:53 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec2ba22e8>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 73ms (Views: 70.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:33:58 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec26bd0e8>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (6.0ms)
+Completed 200 OK in 70ms (Views: 67.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:34:00 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec10f3730>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (6.9ms)
+Completed 200 OK in 73ms (Views: 71.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:34:47 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec2ab1c80>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 66ms (Views: 64.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:35:29 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec21cdda8>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (5.9ms)
+Completed 200 OK in 68ms (Views: 66.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 02:35:53 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x00000005996f10>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 72ms (Views: 69.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/flavors" for 50.24.145.240 at 2018-04-03 04:06:17 +0000
+Cannot render console from 50.24.145.240! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fdec28ec918>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.3ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 67ms (Views: 65.3ms | ActiveRecord: 0.3ms)
+
+
