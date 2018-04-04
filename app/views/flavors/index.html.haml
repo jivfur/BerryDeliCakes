@@ -4,7 +4,7 @@
   - @flavors.each_with_index do |flavor, index|
     .col-md-4.col-md-offset-4
       .row
-        %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"200", :width=>"200"}/
+        %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}/
         // =link_to  do flavor end
       .row
         %p= flavor.name
@@ -31,7 +31,7 @@
 // %br
 
 
-%a.btn-floating.btn-lg.purple-gradient
-  %i.fa.fa-bolt
+// %a.btn-floating.btn-lg.purple-gradient
+//   %i.fa.fa-bolt
 
 = link_to 'New Flavor', new_flavor_path
