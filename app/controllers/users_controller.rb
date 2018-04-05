@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   
@@ -27,12 +28,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    #user_params.delete :passwordConfirm
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to "/index.html"}
+        #format.html { redirect_to @user, notice: 'User was successfully created.' }
+        #format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -75,7 +78,8 @@ class UsersController < ApplicationController
     #   params.fetch(:user, {})
     # end
     
-     def user_params
-    params.require(:user).permit(:userName, :password, :name, :lastName, :phone, :email, :address)
-  end
+    def user_params
+      params[:user].delete :passwordConfirm
+      params.require(:user).permit(:userName, :password, :name, :lastName, :phone, :email, :address)
+    end
 end
