@@ -22626,3 +22626,13 @@ Processing by FlavorsController#index as HTML
 Completed 200 OK in 154ms (Views: 149.4ms | ActiveRecord: 2.7ms)
 
 
+Started GET "/flavors.html" for 165.91.13.38 at 2018-04-05 23:46:09 +0000
+Cannot render console from 165.91.13.38! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by FlavorsController#index as HTML
+#<Flavor::ActiveRecord_Relation:0x007fefc25f4128>
+  Rendering flavors/index.html.haml within layouts/application
+  [1m[36mFlavor Load (0.4ms)[0m  [1m[34mSELECT "flavors".* FROM "flavors"[0m
+  Rendered flavors/index.html.haml within layouts/application (67.7ms)
+Completed 200 OK in 136ms (Views: 134.7ms | ActiveRecord: 0.4ms)
+
+
