@@ -313,10 +313,10 @@
                           .col-12.col-md-6.col-lg-4
                             .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
                               .post-thumb
-                                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}/
+                                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"10%"}/
                                 // =link_to  do flavor end
                               .post-content
-                                %h4.post-headline= flavor.name
+                                %p.post-headline= flavor.name
                   .tab
                     Contact Info:
                     %p

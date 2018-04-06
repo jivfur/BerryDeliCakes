@@ -8,7 +8,6 @@ class FlavorsController < ApplicationController
   # GET /flavors.json
   def index
     @flavors = Flavor.all
-    logger.debug @flavors
   end
 
   # GET /flavors/1

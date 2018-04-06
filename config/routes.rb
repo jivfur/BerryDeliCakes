@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-
+  root   'pages#index'
   resources :orders
   resources :cake_prices
   resources :cakes
   resources :flavors
   resources :users
   
+  get "/contacts/"=> "contacts#index"
   get "/pages/:page" => "pages#show"
   post   '/login'   => 'sessions#create'
   delete '/logout'  => 'sessions#destroy'
