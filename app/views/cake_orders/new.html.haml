@@ -78,7 +78,7 @@
               %li.breadcrumb-item.active{"aria-current" => "page"} 
   //NEW THINGS GO HERE
   .container
-    %form#regForm{:action => "cake_orders/", :method => "post"}
+    %form#regForm{:action => "/cake_orders", :method => "post"}
       .tab
         %h4 Choose your favorite flavor
         .container
@@ -91,8 +91,8 @@
                     %img.img-thumbnail{:onclick => "document.getElementById('flavor"+flavor.id.to_s+"').checked=true; document.getElementById('sFlavor').innerHTML=\""+flavor.name+"\"" , :src => File.join("../","flavorsUploads",flavor.flavorImgURL)}/
                   .post-content
                     .post-headline= flavor.name
-                    %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "cake[flavor]", :type => "radio", :value => flavor.id}/
-                    %label.custom-control-input{:for => "cake_orders[flavor]"}
+                    %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "order[flavor_id]", :type => "radio", :value => flavor.id}/
+                    %label.custom-control-input{:for => "order[flavor_id]"}
             
       .tab
         %h4 Choose a design
@@ -110,7 +110,7 @@
                         .post-headline= flavor.name
           .form-group
             %label{:for => :cakes_decorationImgURL} Flavor Picture
-            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"cake_orders[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
+            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
         .container
           .row
             .col-12.col-md-6.col-lg-4
@@ -123,10 +123,10 @@
         %h4 Some details
         .form-group
           %label{:for => "cake_levels"} Levels
-          %input#cake_levels.form-control{:name => "cake_orders[levels]", :placeholder => "How many levels?", :type => "text", :onchange => "document.getElementById('sLevels').innerHTML='Levels: '+document.getElementById('cake_levels').value" }/
+          %input#cake_levels.form-control{:name => "order[levels]", :placeholder => "How many levels?", :type => "text", :onchange => "document.getElementById('sLevels').innerHTML='Levels: '+document.getElementById('cake_levels').value" }/
         .form-group
           %label{:for => :size} Size
-          %select#cakeSize.custom-select.custom-select-lg.mb-3{:name => "cake_orders[size]", :onchange => "document.getElementById('sSize').innerHTML='Size: '+document.getElementById('cakeSize').value+ ' people'"}
+          %select#cakeSize.custom-select.custom-select-lg.mb-3{:name => "order[size]", :onchange => "document.getElementById('sSize').innerHTML='Size: '+document.getElementById('cakeSize').value+ ' people'"}
             %option{:selected => "selected" } Open this select menu
             %option{:value => "6"} 4" - 6 people
             %option{:value => "10"} 6" - 10 people
@@ -135,20 +135,20 @@
             %option{:value => "56"} 12" - 56 people
         .form-group
           %label{:for => "comments"} Comments
-          %input#cake_comments.form-control{:name => "cake_orders[comments]", :placeholder => "Do I need to know something extra?", :type => "text", :onchange => "document.getElementById('sComments').innerHTML='Levels: '+document.getElementById('comments').value"}/
+          %input#cake_comments.form-control{:name => "order[comments]", :placeholder => "Do I need to know something extra?", :type => "text", :onchange => "document.getElementById('sComments').innerHTML='Comments: '+document.getElementById('cake_comments').value"}/
       .tab
         %h4 Order Delivery Details
         .form-group
           %label{:for =>"order_delivery_date"} Delivery Date and Hour
-          %input#order_delivery_date.form-control{:name => "cake_orders[deliveryDate]", :type => "datetime-local",:onchange => "document.getElementById('sDate').innerHTML='Date: '+document.getElementById('order_delivery_date').value"}/
+          %input#order_delivery_date.form-control{:name => "order[deliveryDate]", :type => "datetime-local",:onchange => "document.getElementById('sDate').innerHTML='Date: '+document.getElementById('order_delivery_date').value"}/
           //:deliveryAddress, :deliveryPhone
           // I need to add user phone and address
         .form-group
           %label{:for => "phone_delivery"} Delivery Phone Number
-          %input#phone_delivery.form-control{:name => "cake_orders[deliveryPhone]", :type => "tel", :onchange => "document.getElementById('sPhone').innerHTML='Phone: '+document.getElementById('phone_delivery').value"}/
+          %input#phone_delivery.form-control{:name => "order[deliveryPhone]", :type => "tel", :onchange => "document.getElementById('sPhone').innerHTML='Phone: '+document.getElementById('phone_delivery').value"}/
         .form-group
           %label{:for => "address_delivery"} Delivery Address
-          %input#address_delivery.form-control{:name => "cake_orders[deliveryAddress]", :type => "text" ,:onchange => "document.getElementById('sAddress').innerHTML='Address: '+document.getElementById('address_delivery').value"}/
+          %input#address_delivery.form-control{:name => "order[deliveryAddress]", :type => "text" ,:onchange => "document.getElementById('sAddress').innerHTML='Address: '+document.getElementById('address_delivery').value"}/
       .tab
         Cake Summary
         %section.blog_area.section_padding_0_80
