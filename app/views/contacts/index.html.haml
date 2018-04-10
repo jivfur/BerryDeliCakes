@@ -298,25 +298,28 @@
         .modal-content
           #orderCakeView
             .modal-header
-              %h4.modal-title Step 1: Design your cake
+              %h4.modal-title Design your cake
               %button.close{"data-dismiss" => "modal", :type => "button"}
                 %span{"aria-hidden" => "true"} ×
                 %span.sr-only Close
             .modal-body
               .well
                 %form#regForm{:action => ""}
-                  %h1 Flavor:
                   .tab
+                    Choose your favorite flavor
                     .container
                       .row
                         - @flavors.each_with_index do |flavor, index|
                           .col-12.col-md-6.col-lg-4
                             .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                              %input.form-check-input{:checked => "checked", :name => "cake[flavor]", :type => "radio", :value => flavor.id}/
+                              %label.form-check-label{:for => "cake[flavor]"}
+                                .post-headline= flavor.name
                               .post-thumb
-                                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"10%"}/
+                                //%img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL)}/
                                 // =link_to  do flavor end
                               .post-content
-                                %p.post-headline= flavor.name
+                                
                   .tab
                     Contact Info:
                     %p

@@ -14,6 +14,8 @@ class CakesController < ApplicationController
 
   # GET /cakes/new
   def new
+    #@flavors = Flavor.all
+    #@previousCakes = Cake.find_by_gallery(true) #It will return previous cakes
     @cake = Cake.new
   end
 
