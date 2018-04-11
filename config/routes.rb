@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :flavors
   resources :users
   resources :cake_orders
+  resources :sessions
   
   get "/contacts/"=> "contacts#index"
   get "/pages/:page" => "pages#show"

@@ -34,41 +34,41 @@ class UsersController < ApplicationController
     puts "users ctrl -- create"
     #user_params.delete :passwordConfirm
     
-    @user = User.where(:email => user_params[:email] || :userName => user_params[:userName)
-    if @user.nil?
-      redirect_to user_path()
-    else
-      @user = User.new(user_params)
+    # @user = User.where({:email => user_params[:email] || :userName => user_params[:userName]})
+    # if @user.nil?
+    #   redirect_to user_path() #User exist
+    # else
+    #   @user = User.new(user_params)
     
-    flag_exist_username = 0;
+    # flag_exist_username = 0;
     
-    User.all.each do |user|
-      if @user.userName == user.userName
-        puts "same username in DB-- go to the index.html page directly"
-        flash[:notice] = 'someone already use the user name'
-        redirect_to "/index.html" and return
+    # User.all.each do |user|
+    #   if @user.userName == user.userName
+    #     puts "same username in DB-- go to the index.html page directly"
+    #     flash[:notice] = 'someone already use the user name'
+    #     redirect_to "/index.html" and return
 
-        flag_exist_username = 1;
-      end
-    end
-    if (@user.password.length>=6)
-    else
-      puts "password length is shorter than 6"
-      flash[:notice] = 'password has to longer than 6'
-      redirect_to "/index.html" and return
-    end
-    if valid_email?(@user.email)
-    else
-      puts "not valid email"
-      flash[:notice] = 'email format : xxx@xxx.xxx'
-      redirect_to "/index.html" and return
-    end
+    #     flag_exist_username = 1;
+    #   end
+    # end
+    # if (@user.password.length>=6)
+    # else
+    #   puts "password length is shorter than 6"
+    #   flash[:notice] = 'password has to longer than 6'
+    #   redirect_to "/index.html" and return
+    # end
+    # if valid_email?(@user.email)
+    # else
+    #   puts "not valid email"
+    #   flash[:notice] = 'email format : xxx@xxx.xxx'
+    #   redirect_to "/index.html" and return
+    # end
     
-    pp User.all
+    # pp User.all
 
 
     
-
+    @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         format.html { redirect_to "/index.html"}

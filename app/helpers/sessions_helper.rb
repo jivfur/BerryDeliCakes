@@ -1,6 +1,10 @@
+require 'pp'
 module SessionsHelper
     def log_in(user)
-        session[:user_id] = user.id
+        ##slogger.debug
+        pp user
+        #session[:user_id] = user.id
+        session[:loggedIn] = "BerryDeliCakesUserAccepted"
     end
     
     def current_user
