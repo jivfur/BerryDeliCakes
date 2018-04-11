@@ -32,52 +32,33 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     puts "users ctrl -- create"
-    #user_params.delete :passwordConfirm
-    
-    # @user = User.where({:email => user_params[:email] || :userName => user_params[:userName]})
-    # if @user.nil?
-    #   redirect_to user_path() #User exist
-    # else
-    #   @user = User.new(user_params)
-    
-    # flag_exist_username = 0;
-    
-    # User.all.each do |user|
-    #   if @user.userName == user.userName
-    #     puts "same username in DB-- go to the index.html page directly"
-    #     flash[:notice] = 'someone already use the user name'
-    #     redirect_to "/index.html" and return
 
-    #     flag_exist_username = 1;
-    #   end
-    # end
-    # if (@user.password.length>=6)
-    # else
-    #   puts "password length is shorter than 6"
-    #   flash[:notice] = 'password has to longer than 6'
-    #   redirect_to "/index.html" and return
-    # end
-    # if valid_email?(@user.email)
-    # else
-    #   puts "not valid email"
-    #   flash[:notice] = 'email format : xxx@xxx.xxx'
-    #   redirect_to "/index.html" and return
-    # end
-    
-    # pp User.all
-
-
-    
-    @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to "/index.html"}
-        #format.html { redirect_to @user, notice: 'User was successfully created.' }
-        #format.json { render :show, status: :created, location: @user }
+    @user_check_username = User.find_by_userName(params[:username])
+    @user_check_email = User.find_by_userName(params[:email])
+    if ( @user_check_username == nil && @user_check_email == nil )
+      puts "@user nil"
+      
+      @user = User.new(user_params)
+      puts "@user.userName = #{@user.userName}"
+      puts "@user.password = #{@user.password}"
+      if (@user.password.length>=6)
+        respond_to do |format|
+          if @user.save
+            pp User.all
+            format.html { redirect_to "/index.html"}
+          else
+            format.html { render :new }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        puts "password length is shorter than 6"
+        flash[:notice] = 'password has to longer than 6'
+        redirect_to "/index.html" and return
       end
+    else
+      puts "@user is already exist -- sad path"
+      redirect_to "/index.html" #it would be better go to sign up page directly
     end
   end
 
@@ -125,10 +106,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:userName, :password, :name, :lastName, :phone, :email, :address)
     end
     
-    def valid_email?(email)
-      
-      email.present? &&
-       (email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
-       #&& User.find_by(email: email).empty?
-    end
 end
