@@ -13,7 +13,8 @@
   %tbody
     - @cake_prices.each do |cake_price|
       %tr
-        %td= cake_price.cake
+        %td= cake_price.id
+        %td= cake_price.cake.id
         %td= cake_price.size
         %td= cake_price.price
         %td= link_to 'Show', cake_price

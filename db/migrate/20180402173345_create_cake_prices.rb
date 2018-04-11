@@ -4,7 +4,6 @@ class CreateCakePrices < ActiveRecord::Migration[5.1]
       t.belongs_to :cake, foreign_key: true
       t.integer :size
       t.float :price
-
       t.timestamps
     end
   end
