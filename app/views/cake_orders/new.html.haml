@@ -1,3 +1,6 @@
+-if(session[:loggedIn] != "BerryDeliCakesUserAccepted")
+  -redirect_to root_path
+
 %head
   %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %meta{:charset => "UTF-8"}/
@@ -355,7 +358,7 @@
               %span.sr-only Close
           .modal-body
             .well
-              %form#loginForm
+              %form#loginForm{:action => "/users", :method =>"get"}
                 .form-group
                   %label.control-label{:for => :username} Username
                   %input#usernameL.form-control{:name => :username, :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
