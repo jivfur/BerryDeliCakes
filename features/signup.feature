@@ -2,7 +2,7 @@ Feature: signup
   
     Scenario: signup
    
-    Given I am on the signup page
+    Given I am in the signup page
     Then I should see "Sign Up"
     And I fill in "userName" with "Mickey Dolenz"
     And I fill in "email" with "mickey@monkees.com"

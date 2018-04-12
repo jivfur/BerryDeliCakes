@@ -69,6 +69,11 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
+  #puts "I am on -- login steps"
+  visit path_to(page_name)
+end
+
+Given /^(?:|I )am in (.+)$/ do |page_name|
   puts "I am on -- login steps"
   visit path_to(page_name)
 end

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     puts "users ctrl -- create"
-
+    
     @user_check_username = User.find_by_userName(params[:username])
     @user_check_email = User.find_by_userName(params[:email])
     if ( @user_check_username == nil && @user_check_email == nil )
@@ -42,6 +42,10 @@ class UsersController < ApplicationController
       puts "@user.userName = #{@user.userName}"
       puts "@user.password = #{@user.password}"
       if (@user.password.length>=6)
+        if (@user.userName == 'admin' && @user.password == 'adminPW')
+          puts "admin case"
+          @user.role = 1
+        end
         respond_to do |format|
           if @user.save
             pp User.all
