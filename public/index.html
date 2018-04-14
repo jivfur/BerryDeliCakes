@@ -52,6 +52,10 @@
                                 <!--<button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing up</button>-->
                                 <a href="#" data-toggle="modal" data-target="#registerModal" id="registerLink">Sign up</a>
                             </div>
+                            <div class="signout">
+                                <!--<button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing out</button>-->
+                                <a href="#" data-toggle="modal" data-target="#signoutModal" id="signoutLink">Sign out</a>
+                            </div>
                         </div>
                         <!-- Search Button Area -->
                         <div class="search_button">
@@ -95,7 +99,7 @@
                                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">Previous Designs</a>
+                                    <a class="nav-link previous" href="archive.html">Previous Designs</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="staticflavors.html">Flavors</a>
@@ -822,7 +826,7 @@
         <div class="modal-content">
             <div id="registerView">
                 <div class="modal-header">
-                    <h4 class="modal-title">Register</h4>
+                    <h4 class="modal-title register">Register</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 </div>
                 <div class="modal-body">
@@ -879,7 +883,7 @@
         <div class="modal-content">
             <div id="loginView">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
+                    <h4 class="modal-title login">Login</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 </div>
                 <div class="modal-body">
@@ -902,7 +906,30 @@
         </div>
     </div>
 </div>
-        
+
+
+<div class="modal fade" id="signoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="signoutView">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="well">
+                        <form id="signoutForm" action="/signout" method="post">
+                            <div class="form-group">
+                                <label for="username" class="control-label">Do you want to really sign out?</label>
+                            </div>
+                            <button type="submit" class="btn  contact-btn btn-block">Signout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
     
 
     <!-- Jquery-2.2.4 js -->
