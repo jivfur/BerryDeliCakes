@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
-  belongs_to :user
-  belongs_to :cakePrice
+  belongs_to :user, optional:true
+  belongs_to :cakePrice, optional:true
 end
