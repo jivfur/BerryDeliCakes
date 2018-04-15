@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415151708) do
+ActiveRecord::Schema.define(version: 20180415172826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20180415151708) do
     t.datetime "updated_at", null: false
     t.bigint "cake_price_id"
     t.bigint "user_id"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    t.bigint "cake_price_id"
+>>>>>>> 5ddcce10a88d861e31b5d725fc93a7e7acb4df67
+>>>>>>> 3a5342ae803409cf25f9b6c2ba59579aeb3b3cf8
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -67,7 +74,6 @@ ActiveRecord::Schema.define(version: 20180415151708) do
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "cake_prices", "cakes"

@@ -5,8 +5,6 @@ class CakeOrdersController < ApplicationController
     def new
         @flavors = Flavor.all
         @previousCakes = Cake.find_by_gallery(true) #It will return previous cakes
-        
-        
     end
     
     
@@ -25,6 +23,16 @@ class CakeOrdersController < ApplicationController
         cakes_params[:gallery]=false
         @cake = Cake.new(cakes_params)
         if @cake.save
+            ####Uploading the picture#####
+            orders_dir = Rails.root.join('public',@cake.id.to_s)
+            Dir.mkdir(orders_dir) unless File.exists?(orders_dir) 
+            uploaded_io = cake_order_params[:decorationImgURL]
+            File.open(Rails.root.join(orders_dir, uploaded_io.original_filename), 'wb') do |file|
+                file.write(uploaded_io.read)
+            end
+            @cake.decorationImgURL = Rails.root.join(orders_dir,uploaded_io.original_filename)
+            @cake.save
+            ########
             #@cake = Cake.find_by_decorationImgURL(@cake.decorationImgURL)
             logger.debug "Cake Id Is"+@cake.id.to_s
             #save the price...at this time it is only size...

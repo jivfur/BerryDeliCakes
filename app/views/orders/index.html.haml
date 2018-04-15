@@ -19,13 +19,13 @@
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.user
+        %td= order.user_id
         %td= order.deliveryDate
         %td= order.deliveryAddress
         %td= order.deliveryPhone
         %td= order.status
         %td= order.comments
-        %td= order.cakePrice
+        %td= order.cake_price_id
         %td= order.paidStatus
         %td= link_to 'Show', order
         %td= link_to 'Edit', edit_order_path(order)
