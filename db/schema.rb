@@ -52,14 +52,7 @@ ActiveRecord::Schema.define(version: 20180415172826) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-<<<<<<< HEAD
     t.bigint "cake_price_id"
-=======
-<<<<<<< HEAD
-=======
-    t.index ["cake_price_id"], name: "index_orders_on_cake_price_id"
->>>>>>> 5116753e9994dbcaf9ced84d90b008afadc40865
->>>>>>> eaa9950271b26256e1fa7f97140c6ebb2cbbee86
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
