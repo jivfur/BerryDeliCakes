@@ -79,6 +79,7 @@
   //NEW THINGS GO HERE
   .container
     %form#regForm{:action => "/cake_orders", :method => "post"}
+      %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" }
       .tab
         %h4 Choose your favorite flavor
         .container
@@ -88,7 +89,7 @@
               .col-12.col-md-6.col-lg-4
                 .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
                   .post-thumb
-                    %img.img-thumbnail{:onclick => "document.getElementById('flavor"+flavor.id.to_s+"').checked=true; document.getElementById('sFlavor').innerHTML=\""+flavor.name+"\"" , :src => File.join("../","flavorsUploads",flavor.flavorImgURL)}/
+                    %img.img-thumbnail{:id=>"thumbnail"+flavor.id.to_s ,:onclick => "document.getElementById('flavor"+flavor.id.to_s+"').checked=true; document.getElementById('sFlavor').innerHTML=\""+flavor.name+"\"" , :src => File.join("../","flavorsUploads",flavor.flavorImgURL)}/
                   .post-content
                     .post-headline= flavor.name
                     %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "order[flavor_id]", :type => "radio", :value => flavor.id}/

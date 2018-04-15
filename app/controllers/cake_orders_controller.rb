@@ -40,8 +40,7 @@ class CakeOrdersController < ApplicationController
                 ##@cake_price = CakePrice.find_by_cake_id(@cake.id)
                 ##pp @cake_price
                 order_params = Hash.new
-                user = User.find_by_id(1);
-                order_params[:user_id]=user.id
+                order_params[:user_id]=cake_order_params[:user_id]
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
@@ -81,6 +80,6 @@ class CakeOrdersController < ApplicationController
     private
         # Never trust parameters from the scary internet, only allow the white list through.
         def cake_order_params
-            params.require(:order).permit(:deliveryDate, :deliveryAddress, :deliveryPhone, :comments,:flavor_id, :decorationImgURL, :comments, :levels,:size)
+            params.require(:order).permit(:user_id,:deliveryDate, :deliveryAddress, :deliveryPhone, :comments,:flavor_id, :decorationImgURL, :comments, :levels,:size)
         end
 end

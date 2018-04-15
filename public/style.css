@@ -620,11 +620,14 @@ li {
 :: 6.0 Blog Area CSS 
 -------------------- */
 
-.post-thumb img {
+
+
+.post-thumb img :active{
     border-radius: 30px;
     margin-bottom: 30px;
     height: 350px;
     width: 350px;
+    border: none; /* red */
 }
 
 .post-meta {
@@ -719,10 +722,11 @@ li {
 /* List Blog Area CSS */
 
 .list-blog.single-post .post-thumb,
-.list-blog.single-post .post-content {
+.list-blog.single-post .post-content :active {
     -ms-flex-preferred-size: 50%;
     flex-basis: 50%;
     margin-right: 15px;
+    border: 2px solid #f44336; /* red */
 }
 
 .list-blog.single-post .post-content {
@@ -741,8 +745,9 @@ li {
     border-bottom: none;
 }
 
-.blog_area .col-12:last-of-type .list-blog.single-post .post-thumb img {
+.blog_area .col-12:last-of-type .list-blog.single-post .post-thumb img :avtive{
     margin-bottom: 0;
+    border: 2px solid #f44336; /* red */
 }
 
 /* --------------------
@@ -1322,10 +1327,11 @@ li {
     margin-bottom: 0;
 }
 
-.related-post-slider .post-thumb img {
+.related-post-slider .post-thumb img: active{
     height: 205px;
     width: 205px;
     margin-bottom: 10px;
+    border: 2px solid #f44336; /* red */
 }
 
 .related-post-slider .owl-prev,
