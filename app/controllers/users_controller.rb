@@ -10,6 +10,17 @@ class UsersController < ApplicationController
     logger.debug "User/Index"
     @users = User.all
   end
+  
+  def signout
+    puts "users ctrl -- signout"
+    if session[:user_id] != nil
+      puts "#{session[:user_id]} is tried to log out"
+    end
+    session[:user_id] = nil
+    puts "session went to nil"
+    flash[:notice] = 'successfully sign out'
+    redirect_to "/index.html"
+  end
 
   # GET /users/1
   # GET /users/1.json
@@ -58,7 +69,8 @@ class UsersController < ApplicationController
       else
         puts "password length is shorter than 6"
         flash[:notice] = 'password has to longer than 6'
-        redirect_to "/index.html" and return
+        #redirect_to "/index.html" and return
+        render html: "<script> alert('fadsadsa')</script>".html_safe
       end
     else
       puts "@user is already exist -- sad path"
