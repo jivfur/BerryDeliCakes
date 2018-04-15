@@ -93,6 +93,17 @@
             time: 2000
         });
     }
+    
+    var clikedpicture;
+    
+    $( ".post-thumb" ).click(function(){
+        alert($(this).attr("id"));
+        if ( $( this ).css( "border" ) == "0px none rgb(33, 37, 41)" ){
+            $(this).css("border","2px solid #008CBA");
+        } else {
+            $(this).css("border", 'none');
+        }
+    });
 
     // :: 6.0 PreventDefault a Click
     $("a[href='#']").on('click', function ($) {
