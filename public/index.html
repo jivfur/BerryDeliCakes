@@ -22,6 +22,23 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
+    
+    <!--<script type="text/javascript" src=""></script>-->
+    <script language="JavaScript">
+        var password = document.getElementById("passwordR")
+          , confirm_password = document.getElementById("confirmPasswordR");
+        
+        function validatePassword(){
+          if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
+        
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 
 </head>
 
@@ -879,7 +896,7 @@
                                 <span class="help-block"></span>
                             </div>
                             <div id="registerErrorMsg" class="alert alert-danger collapse" role="alert">Register error</div>
-                            <button type="submit" class="btn contact-btn btn-block" name="user[register]">Register</button>
+                            <button type="submit" class="btn contact-btn btn-block">Register</button>
                         </form>
                     </div>
                 </div>

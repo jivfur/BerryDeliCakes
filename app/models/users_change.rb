@@ -1,0 +1,2 @@
+class UsersChange < ApplicationRecord
+end

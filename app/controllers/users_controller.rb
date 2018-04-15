@@ -44,14 +44,21 @@ class UsersController < ApplicationController
   def create
     puts "users ctrl -- create"
     
-    @user_check_username = User.find_by_userName(params[:username])
-    @user_check_email = User.find_by_userName(params[:email])
-    if ( @user_check_username == nil && @user_check_email == nil )
-      puts "@user nil"
       
       @user = User.new(user_params)
+      @user_check_username = User.find_by_userName(@user.userName)
+      @user_check_email = User.find_by_email(@user.email)
+      if (@user_check_username != nil)
+        puts "@user_check_username = #{@user_check_username.userName}"
+      end
+      if (@user_check_email != nil) 
+        puts "@user_check_email = #{@user_check_email.userName}" 
+      end
       puts "@user.userName = #{@user.userName}"
       puts "@user.password = #{@user.password}"
+      
+      if ( @user_check_username == nil && @user_check_email == nil )
+      puts "@user nil"
       if (@user.password.length>=6)
         if (@user.userName == 'admin' && @user.password == 'adminPW')
           puts "admin case"
