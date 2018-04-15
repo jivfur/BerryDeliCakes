@@ -1,3 +1,5 @@
+-if not(defined? session["role"]) || session["role"]==false then
+  -redirect_to(root)
 %head
   %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %meta{:charset => "UTF-8"}/
@@ -65,6 +67,7 @@
         .col-12
           .bradcumb-title.text-center
             %h2 Add New Flavor
+            %p=session["user_id"].to_s
   .breadcumb-nav
     .container
       .row
