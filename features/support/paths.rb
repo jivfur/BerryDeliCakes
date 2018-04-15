@@ -20,6 +20,21 @@ module NavigationHelpers
       
     when /^the admin new_category page$/
       '/admin/categories/new'
+      
+    when /^the login page$/
+      '/'#wrong
+      
+    when /^the signup page$/
+      '/'#wrong
+      
+    when /^root page$/
+      '/'
+      
+    when /^the index page$/
+      '/index.html'
+      
+    when /^the users new order page$/
+      '/cake_orders/new'
 
     when /^my orders page$/
       '/orders/'

@@ -69,6 +69,11 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
+  #puts "I am on -- login steps"
+  visit path_to(page_name)
+end
+
+Given /^(?:|I )am in (.+)$/ do |page_name|
   puts "I am on -- login steps"
   visit path_to(page_name)
 end
@@ -76,6 +81,37 @@ end
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
+
+When /^(?:|I )press_html "yummyfood-footer-nav"$/ do
+  puts "press html yummy statement"
+  #find(:css, 'div[title="nav-link"]').click
+  find(:css, 'a[class="nav-link previous"]').click
+end
+
+When /^(?:|I )press_html "register"$/ do
+  puts "press html register"
+  #find(:css, 'div[title="nav-link"]').click
+  find(:css, 'h4[class="modal-title register"]').click
+end
+
+# When /^(?:|I )press_html "([^"]*)"$/ do |html_link|
+#   puts "press html registerView"
+#   #find(:css, 'div[title="nav-link"]').click
+#   find(:css, 'a[class="html_link"]').click
+# end
+
+And /^(?:|I )press_html "Register"/ do
+   puts "press html register2"
+  #find(:css, 'div[title="nav-link"]').click
+  find(:css, 'button[class="btn contact-btn btn-block"]').click
+end
+
+When /^(?:|I )press_html "signin"/ do
+  puts "press html signin"
+  #find(:css, 'div[title="nav-link"]').click
+  find(:css, 'h4[class="modal-title login"]').click
+end
+
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
