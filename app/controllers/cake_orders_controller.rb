@@ -34,9 +34,11 @@ class CakeOrdersController < ApplicationController
             cake_price_params[:price] = 0.0
             @cake_price = CakePrice.new(cake_price_params)
             if @cake_price.save
+                pp @cake_price
                 #save the order and status is ordered....
                 #I need a user...I was thinking that maybe there wont be necessary to have user
-                @cake_price = CakePrice.find_by_cake_id(@cake.id)
+                ##@cake_price = CakePrice.find_by_cake_id(@cake.id)
+                ##pp @cake_price
                 order_params = Hash.new
                 user = User.find_by_id(7);
                 order_params[:user_id]=user.id
@@ -50,6 +52,7 @@ class CakeOrdersController < ApplicationController
                 order_params[:cake_price_id] =@cake_price.id
                 order_params[:paidStatus]=0
                 #logger.debug Order.instance_methods
+                pp order_params
                 @order = Order.new(order_params)
                 # logger.debug @order.orderDate
                 # logger.debug order_params
@@ -58,7 +61,7 @@ class CakeOrdersController < ApplicationController
                 if @order.save
                     redirect_to order_path(@order.id)
                 else
-                    logger.debug "Order erros "
+                    logger.debug "Order errors "
                     logger.debug @order.errors.full_messages
                 end
             else
