@@ -36,6 +36,9 @@ module NavigationHelpers
     when /^the users new order page$/
       '/cake_orders/new'
 
+    when /^my orders page$/
+      '/orders/'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

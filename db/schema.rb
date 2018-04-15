@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411020448) do
+ActiveRecord::Schema.define(version: 20180411215553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20180411020448) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.date "orderDate"
     t.datetime "deliveryDate"
     t.text "deliveryAddress"
@@ -53,8 +52,8 @@ ActiveRecord::Schema.define(version: 20180411020448) do
     t.integer "paidStatus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.bigint "cake_price_id"
-    t.index ["cake_price_id"], name: "index_orders_on_cake_price_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -74,6 +73,5 @@ ActiveRecord::Schema.define(version: 20180411020448) do
 
   add_foreign_key "cake_prices", "cakes"
   add_foreign_key "cakes", "flavors"
-  add_foreign_key "orders", "cake_prices"
   add_foreign_key "orders", "users"
 end
