@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411215553) do
+ActiveRecord::Schema.define(version: 20180415151708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20180411215553) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.date "orderDate"
     t.datetime "deliveryDate"
     t.text "deliveryAddress"
     t.string "deliveryPhone", limit: 13
@@ -53,7 +52,7 @@ ActiveRecord::Schema.define(version: 20180411215553) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "cake_price_id"
+    t.bigint "cake_price_id", optional: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

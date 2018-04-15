@@ -40,9 +40,8 @@ class CakeOrdersController < ApplicationController
                 ##@cake_price = CakePrice.find_by_cake_id(@cake.id)
                 ##pp @cake_price
                 order_params = Hash.new
-                user = User.find_by_id(7);
+                user = User.find_by_id(1);
                 order_params[:user_id]=user.id
-                order_params[:orderDate]=Time.now
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
@@ -53,15 +52,19 @@ class CakeOrdersController < ApplicationController
                 order_params[:paidStatus]=0
                 #logger.debug Order.instance_methods
                 pp order_params
+                
                 @order = Order.new(order_params)
                 # logger.debug @order.orderDate
                 # logger.debug order_params
                 ##pp @cakePrice
-                pp @order
+                @order.cake_price_id=@cake_price.id
                 if @order.save
                     redirect_to order_path(@order.id)
                 else
+                    
                     logger.debug "Order errors "
+                    pp @order
+                    pp @cake_price
                     logger.debug @order.errors.full_messages
                 end
             else
