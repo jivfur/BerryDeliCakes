@@ -53,10 +53,6 @@ ActiveRecord::Schema.define(version: 20180415172826) do
     t.datetime "updated_at", null: false
     t.bigint "cake_price_id"
     t.bigint "user_id"
-<<<<<<< HEAD
-=======
-    t.index ["cake_price_id"], name: "index_orders_on_cake_price_id"
->>>>>>> 5116753e9994dbcaf9ced84d90b008afadc40865
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -75,6 +71,5 @@ ActiveRecord::Schema.define(version: 20180415172826) do
 
   add_foreign_key "cake_prices", "cakes"
   add_foreign_key "cakes", "flavors"
-  add_foreign_key "orders", "cake_prices"
   add_foreign_key "orders", "users"
 end
