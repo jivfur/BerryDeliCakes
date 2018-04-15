@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20180415151708) do
     t.integer "paidStatus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cake_price_id"
     t.bigint "user_id"
-    t.bigint "cake_price_id", optional: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

@@ -1,6 +1,7 @@
 (function ($) {
     'use strict';
-
+    var prevPict = false;
+    
     if ($.fn.owlCarousel) {
         // :: 1.0 Welcome Post Slider Active Code
         $(".welcome-post-sliders").owlCarousel({
@@ -94,15 +95,25 @@
         });
     }
     
-    var clikedpicture;
+    var clikedpicture = null;
     
     $( ".post-thumb" ).click(function(){
-        alert($(this).attr("id"));
-        if ( $( this ).css( "border" ) == "0px none rgb(33, 37, 41)" ){
+        if(clikedpicture == null){
+            // clikedpicture = (this).attr("id");
+            clikedpicture = this;
             $(this).css("border","2px solid #008CBA");
-        } else {
-            $(this).css("border", 'none');
         }
+        else{
+            var something = clikedpicture;
+            $(something).css("border", 'none');
+            clikedpicture = this;
+            $(this).css("border","2px solid #008CBA");
+        }
+        //if ( $( this ).css( "border" ) == "0px none rgb(33, 37, 41)" ){
+        //    $(this).css("border","2px solid #008CBA");
+        //} else {
+        //    $(this).css("border", 'none');
+        //}
     });
 
     // :: 6.0 PreventDefault a Click
