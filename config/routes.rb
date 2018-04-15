@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/pages/:page" => "pages#show"
   post   '/login'   => 'sessions#create'
   delete '/logout'  => 'sessions#destroy'
-  post   '/signout'   => 'users#destroy'
+  get '/users/signout' => 'users#signout'
+  post '/users/signout', to: 'users#signout'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
