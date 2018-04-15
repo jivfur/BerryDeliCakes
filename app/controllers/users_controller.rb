@@ -63,6 +63,7 @@ class UsersController < ApplicationController
         if (@user.userName == 'admin' && @user.password == 'adminPW')
           puts "admin case"
           @user.role = 1
+        else @user.role = 0
         end
         respond_to do |format|
           if @user.save
