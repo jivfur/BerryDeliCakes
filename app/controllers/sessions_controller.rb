@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
             if @user.password == params[:password]
                 puts "password match"
                 log_in(@user)
-                redirect_to new_cake_order_path # Where to redirect when user is correct
+                #redirect_to new_cake_order_path # Where to redirect when user is correct
+                redirect_to users_path
             else
                 puts "password is not match"
                 flash[:danger] = 'Invalid email/password combination' # Not quite right!

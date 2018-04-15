@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root   'pages#index'
+  #root   'pages#index'
+  root 'users#index'
+  
   resources :orders
   resources :cake_prices
   resources :cakes
