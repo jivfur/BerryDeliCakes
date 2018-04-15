@@ -78,7 +78,7 @@
               %li.breadcrumb-item.active{"aria-current" => "page"} 
   //NEW THINGS GO HERE
   .container
-    %form#regForm{:action => "/cake_orders", :method => "post"}
+    %form#regForm{:action => "/cake_orders", :method => "post", :enctype=>"multipart/form-data"}
       %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" }
       .tab
         %h4 Choose your favorite flavor
