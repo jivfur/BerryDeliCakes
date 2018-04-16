@@ -1,7 +1,9 @@
 {
   "name": "BerryDeliCakes",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "wow.js": "^1.2.2"
+  },
   "devDependencies": {
     "webpack": "^4.0.1"
   }

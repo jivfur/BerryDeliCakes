@@ -5,10 +5,9 @@
 // end
 
 
-window.onload = function(){
-    var hw = document.getElementById('hw');
-    vsprintf("check point in javascript)
-    hw.addEventListener('click', function(){
-        alert('Hello world');
-    })
-}
+// window.onload = function(){
+//     var hw = document.getElementById('hw');
+//     hw.addEventListener('click', function(){
+//         alert('Hello world');
+//     })
+// }
