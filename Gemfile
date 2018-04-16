@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'yarn', '~> 0.1.1'
+
 # Add Bootstrap
 #gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'bootstrap', '~> 4.0.0'
