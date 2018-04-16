@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'yarn', '~> 0.1.1'
+gem 'bundler', '~> 1.16', '>= 1.16.1'
 
 # Add Bootstrap
 #gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
@@ -42,7 +42,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'haml-rails'
-
+gem 'yarn'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
