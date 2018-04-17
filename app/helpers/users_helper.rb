@@ -15,5 +15,5 @@ module UsersHelper
       else
         return false
       end
-   end
+    end
 end

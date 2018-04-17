@@ -1,25 +1,3 @@
-//%h1 Listing users
-
-// %table
-//   %thead
-//     %tr
-//       %th
-//       %th
-//       %th
-
-//   %tbody
-//     - @users.each do |user|
-//       %trS
-//         %td= user.id
-//         %td= user.userName
-//         %td= link_to 'Show', user
-//         %td= link_to 'Edit', edit_user_path(user)
-//         %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-// %br
-
-// = link_to 'New User', new_user_path
-
 !!!
 %html{:lang => "en"}
   / <div class="notice">
@@ -79,19 +57,21 @@
                 //- if !session[:user.id].nil?
                 //.login
                 -if logged_out?
-                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
+                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
                   //.register
                   %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
                 -if signged_in?
+                  %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
+                  %a= " | "
                   %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
-              / Search Form
-              .search-hidden-form
-                %form{:action => "#", :method => "get"}
-                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-                  %input.d-none{:type => "submit", :value => ""}/
-                  %span.searchBtn
-                    %i.fa.fa-times{"aria-hidden" => "true"}
+            / Search Form
+            .search-hidden-form
+              %form{:action => "#", :method => "get"}
+                %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+                %input.d-none{:type => "submit", :value => ""}/
+                %span.searchBtn
+                  %i.fa.fa-times{"aria-hidden" => "true"}
     / ****** Top Header Area End ******
     / ****** Header Area Start ******
     %header.header_area
@@ -100,7 +80,7 @@
           / Logo Area Start
           .col-12
             .logo_area.text-center
-              %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+              %a.yummy-logo{:href => "/users"} BerryDeli Cakes
         .row
           .col-12
             %nav.navbar.navbar-expand-lg
@@ -111,7 +91,7 @@
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
                   %li.nav-item.active
-                    %a.nav-link{:href => "index.html"}
+                    %a.nav-link{:href => "/users"}
                       Home
                       %span.sr-only (current)
                   %li.nav-item
@@ -566,7 +546,7 @@
             .footer-content
               / Logo Area Start
               .footer-logo-area.text-center
-                %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+                %a.yummy-logo{:href => "/users"} BerryDeli Cakes
               / Menu Area Start
               %nav.navbar.navbar-expand-lg
                 %button.navbar-toggler{"aria-controls" => "yummyfood-footer-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-footer-nav", "data-toggle" => "collapse", :type => "button"}
@@ -576,7 +556,7 @@
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
                     %li.nav-item.active
-                      %a.nav-link{:href => "index.html"}
+                      %a.nav-link{:href => "/users"}
                         Home
                         %span.sr-only (current)
                     %li.nav-item
@@ -661,6 +641,53 @@
                     %input#passwordL.form-control{:name => "password", :placeholder => "Password", :required => "", :title => "Please enter your password", :type => "password"}/
                   #loginErrorMsg.alert.alert-danger.collapse{:role => "alert"} Login error
                   %button.btn.contact-btn.btn-block{:type => "submit"} Login
+    #editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          #editView
+            .modal-header
+              %h4.modal-title.register Edit
+              %button.close{"data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+                %span.sr-only Close
+            .modal-body
+              .well
+                %form#editForm{:action => "/session/edit", "data-toggle" => "validator", :method => "post"}
+                  .form-group
+                    %label.control-label{:for => "user[name]"} Name
+                    %input#nameR.form-control{:name => "user[name]", :placeholder => "Name", :title => "Please enter your name", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "user[lastname]"} Lastname
+                    %input#lastNameR.form-control{:name => "user[lastName]", :placeholder => "Lastname", :title => "Please enter your lastname", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "user[email]"} E-mail
+                    %input#emailR.form-control{:name => "user[email]", :placeholder => "E-mail", :title => "Please enter your email", :type => "email"}/
+                  .form-group
+                    %label.control-label{:for => "user[phone]"} Phone
+                    %input#phoneR.form-control{:name => "user[phone]", :placeholder => "Phone Number", :title => "Please enter your telephone", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "user[address]"} Address
+                    %input#addressR.form-control{:name => "user[address]", :placeholder => "Address", :title => "Please enter your address", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "user[userName]"} Username
+                    %input#usernameR.form-control{:name => "user[userName]", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+                    %span.help-block
+                  .form-group
+                    %label.control-label{:for => "user[password]"} Password
+                    %input#passwordR.form-control{:name => "user[password]", :pattern => ".{6,}", :placeholder => "Password", :required => "", :title => "6 min password required", :type => "password"}/
+                    /
+                      <input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
+                    %span.help-block Min. 6 characteres
+                    / <input type="password" placeholder="Password" id="password" required>
+                    / <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+                  .form-group
+                    %label.control-label{:for => "user[password]"} Confirm Password
+                    %input#confirm_passwordR.form-control{:name => "user[passwordConfirm]", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
+                    / <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
+                    %span.help-block
+                  #registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+                  %button.btn.contact-btn.btn-block{:type => "submit"} Edit
+
     #signoutModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
       .modal-dialog{:role => "document"}
         .modal-content

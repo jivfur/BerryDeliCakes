@@ -19,8 +19,12 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     puts "session went to nil"
     flash[:notice] = 'successfully sign out'
-    redirect_to "/index.html"
+    redirect_to users_path
   end
+  
+  # def userlist
+  #   puts "users ctrl -- userlist"
+  # end
 
   # GET /users/1
   # GET /users/1.json
@@ -37,6 +41,8 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     puts "users ctrl -- edit"
+    #@user = User.find_by_id.session[:user_id]
+    #@user = current_user
   end
 
   # POST /users
@@ -59,31 +65,31 @@ class UsersController < ApplicationController
       
       if ( @user_check_username == nil && @user_check_email == nil )
       puts "@user nil"
-      if (@user.password.length>=6)
-        if (@user.userName == 'admin' && @user.password == 'adminPW')
-          puts "admin case"
-          @user.role = 1
-        else @user.role = 0
-        end
-        respond_to do |format|
-          if @user.save
-            pp User.all
-            format.html { redirect_to "/index.html"}
-          else
-            format.html { render :new }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
+        if (@user.password.length>=6)
+          if (@user.userName == 'admin' && @user.password == 'adminPW')
+            puts "admin case"
+            @user.role = 1
+          else @user.role = 0
           end
+          respond_to do |format|
+            if @user.save
+              pp User.all
+              format.html { redirect_to "/index.html"}
+            else
+              format.html { render :new }
+              format.json { render json: @user.errors, status: :unprocessable_entity }
+            end
+          end
+        else
+          puts "password length is shorter than 6"
+          flash[:notice] = 'password has to longer than 6'
+          #redirect_to "/index.html" and return
+          render html: "<script> alert('fadsadsa')</script>".html_safe
         end
       else
-        puts "password length is shorter than 6"
-        flash[:notice] = 'password has to longer than 6'
-        #redirect_to "/index.html" and return
-        render html: "<script> alert('fadsadsa')</script>".html_safe
+        puts "@user is already exist -- sad path"
+        redirect_to "/index.html" #it would be better go to sign up page directly
       end
-    else
-      puts "@user is already exist -- sad path"
-      redirect_to "/index.html" #it would be better go to sign up page directly
-    end
   end
 
   # PATCH/PUT /users/1
@@ -106,10 +112,11 @@ class UsersController < ApplicationController
   def destroy
     puts "users ctrl -- destroy"
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
+    redirect_to sessions_path
   end
 
   private
