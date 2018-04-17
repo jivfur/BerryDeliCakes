@@ -69,13 +69,16 @@ class UsersController < ApplicationController
           if (@user.userName == 'admin' && @user.password == 'adminPW')
             puts "admin case"
             @user.role = 1
+            flash[:notice] = 'Hello admin, Have a NICE day'
           else @user.role = 0
           end
           respond_to do |format|
             if @user.save
               pp User.all
-              format.html { redirect_to "/index.html"}
+              flash[:notice] = 'successfully sign up'
+              format.html { redirect_to users_path}
             else
+              flash[:notice] = 'no response from server ... Please try again later'
               format.html { render :new }
               format.json { render json: @user.errors, status: :unprocessable_entity }
             end
@@ -88,7 +91,8 @@ class UsersController < ApplicationController
         end
       else
         puts "@user is already exist -- sad path"
-        redirect_to "/index.html" #it would be better go to sign up page directly
+        flash[:notice] = 'This user is already exist'
+        redirect_to users_path #it would be better go to sign up page directly
       end
   end
 
@@ -98,6 +102,7 @@ class UsersController < ApplicationController
     puts "users ctrl -- update"
     respond_to do |format|
       if @user.update(user_params)
+        flash[:notice] = 'successfully updated'
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -112,6 +117,7 @@ class UsersController < ApplicationController
   def destroy
     puts "users ctrl -- destroy"
     @user.destroy
+    flash[:notice] = 'successfully destroyed user'
     # respond_to do |format|
     #   format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
     #   format.json { head :no_content }
