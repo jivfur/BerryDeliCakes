@@ -59,7 +59,8 @@ class CakeOrdersController < ApplicationController
             File.open(Rails.root.join(orders_dir, uploaded_io.original_filename), 'wb') do |file|
                 file.write(uploaded_io.read)
             end
-            @cake.decorationImgURL = Rails.root.join(orders_dir,uploaded_io.original_filename)
+            @cake.decorationImgURL = File.join(@cake.id.to_s,uploaded_io.original_filename)
+            #@cake.decorationImgURL = uploaded_io.original_filename
             @cake.save
             ########
             #@cake = Cake.find_by_decorationImgURL(@cake.decorationImgURL)
