@@ -7,6 +7,34 @@ class CakeOrdersController < ApplicationController
         @previousCakes = Cake.find_by_gallery(true) #It will return previous cakes
     end
     
+    def index
+        logger.debug(session[:user_id])
+        if(session[:user_id])
+            @user = User.find(session[:user_id])
+            if(@user.role == false)
+                #you are not an admin
+                logger.debug("this is the user"+@user.id.to_s)
+                @orders = Order.where({:user_id =>@user.id}).order(:created_at) #bring all the orders of this user ordered by creation date
+            else
+                #you are ad admin
+                @orders = Order.find().order(:created_at)
+            end
+            @orders = Order.find(7)
+            logger.debug("The user who bought this is: "+@orders.user_id.to_s)
+            logger.debug("The user who bought this is: "+@orders.id.to_s)
+            #logger.debug("I found "+@orders.length.to_s)
+            # @orders.each do |order|
+            #     logger.debug("My order is: "+order.id.to_s)
+            #     @cakesPrice = CakePrice.find_by_cake_price_id(order.cake_price_id)
+            #     @cakesPrice.each do |cakePrice|
+            #         @cakes = Cake.find_by_cake_id(cakePrice.cake_id)
+            #     end
+            # end
+        else
+            redirect_to("/")
+        end    
+    end
+    
     
     def create
         Order.transaction do
@@ -61,8 +89,8 @@ class CakeOrdersController < ApplicationController
                 pp order_params
                 
                 @order = Order.new(order_params)
-                # logger.debug @order.orderDate
-                # logger.debug order_params
+                logger.debug @order
+                logger.debug order_params
                 ##pp @cakePrice
                 @order.cake_price_id=@cake_price.id
                 if @order.save

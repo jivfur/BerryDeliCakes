@@ -12,8 +12,14 @@ module SessionsHelper
     end
     
     def log_out
+        session[:user_id] = -1
+        session[:loggedIn] = "G0T0F4C3800K"
+        session[:role] = false
         session.delete(:user_id)
+        session.delete(:loggedIn)
+        session.delete(:role)
         @current_user = nil 
         flash[:notice] = 'successfully sign out'
+        
     end
 end
