@@ -78,9 +78,8 @@
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Orders
     .container
-      // -@orders.each do |order|
-      //   %p=order.deliveryDate
-       
+      -@cakeOrders.each do|key,order|
+        %p=order[:cake].decorationImgURL
        
        
       // - @flavors.each_with_index do |flavor, index|
