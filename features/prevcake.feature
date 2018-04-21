@@ -1,4 +1,4 @@
-Feature: ex
+Feature: previous
   Scenario: prev
   
     As a user,...t
