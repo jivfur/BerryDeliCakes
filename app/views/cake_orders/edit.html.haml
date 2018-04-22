@@ -1,0 +1,440 @@
+%html
+  %body
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "../../width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %title BerryDeli Cakes/orders
+    %link{:href => "../../img/core-img/favicon.ico", :rel => "icon"}/
+    %link{:href => "../../style.css", :rel => "stylesheet"}/
+    %link{:href => "../../css/responsive/responsive.css", :rel => "stylesheet"}/
+  %body
+    #preloader
+      .yummy-load
+    #pattern-switcher
+      Shopping Cart
+    .top_header_area
+      .container
+        .row
+          .col-5.col-sm-6
+            .top_social_bar
+              %a{:href => "#"}
+                %i.fa.fa-facebook{"aria-hidden" => "true"}
+          .col-7.col-sm-6
+            .signup-search-area.d-flex.align-items-center.justify-content-end
+              .login_register_area.d-flex
+                .login
+                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
+                .register
+                  %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+              .search_button
+                %a.searchBtn{:href => "#"}
+                  %i.fa.fa-search{"aria-hidden" => "true"}
+              .search-hidden-form
+                %form{:action => "#", :method => "get"}
+                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+                  %input.d-none{:type => "submit", :value => ""}/
+                  %span.searchBtn
+                    %i.fa.fa-times{"aria-hidden" => "true"}
+    %header.header_area
+      .container
+        .row
+          .col-12
+            .logo_area.text-center
+              %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+        .row
+          .col-12
+            %nav.navbar.navbar-expand-lg
+              %button.navbar-toggler{"aria-controls" => "yummyfood-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-nav", "data-toggle" => "collapse", :type => "button"}
+                %i.fa.fa-bars{"aria-hidden" => "true"}
+                Menu
+              #yummyfood-nav.collapse.navbar-collapse.justify-content-center
+                %ul#yummy-nav.navbar-nav
+                  %li.nav-item
+                    %a.nav-link{:href => "index.html"}
+                      Home
+                      %span.sr-only (current)
+                  %li.nav-item
+                    %a.nav-link{:href => "archive.html"} Previous Designs
+                  %li.nav-item
+                    %a.nav-link{:href => "flavors.html"} Flavors
+                  %li.nav-item
+                    %a.nav-link{:href => "contact.html"} Contact Me
+    .breadcumb-area{:style => "background-image: url(../../img/bg-img/breadcumb.jpg);"}
+      .container.h-100
+        .row.h-100.align-items-center
+          .col-12
+            .bradcumb-title.text-center
+              %h2 Cake Orders
+    .breadcumb-nav
+      .container
+        .row
+          .col-12
+            %nav{"aria-label" => "breadcrumb"}
+              %ol.breadcrumb
+                %li.breadcrumb-item
+                  %a{:href => "index.html"}
+                    %i.fa.fa-home{"aria-hidden" => "true"}
+                    Home
+                %li.breadcrumb-item.active{"aria-current" => "page"} Orders
+    .container
+    %form#regForm{:action => "/cake_orders", :method => "post", :enctype=>"multipart/form-data"}
+      %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" }
+      .tab
+        %h4 Choose your favorite flavor
+        .container
+          .row
+            // %fieldset
+            - @flavors.each_with_index do |flavor, index|
+              .col-12.col-md-6.col-lg-4
+                .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                  .post-thumb
+                    %img.img-thumbnail{:id=>"thumbnail"+flavor.id.to_s ,:onclick => "document.getElementById('flavor"+flavor.id.to_s+"').checked=true; document.getElementById('sFlavor').innerHTML=\""+flavor.name+"\"" , :src => File.join("..","..","flavorsUploads",flavor.flavorImgURL)}/
+                  .post-content
+                    .post-headline= flavor.name
+                    %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "order[flavor_id]", :type => "radio", :value => flavor.id}/
+                    %label.custom-control-input{:for => "order[flavor_id]"}
+          
+      .tab
+        %h4 Choose a design
+        .row
+          %fieldset
+            -if !@previousCake.nil? then
+              - @previousCakes.each_with_index do |previousCake, index|
+                .col-12.col-md-6.col-lg-4
+                  .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                    %input.form-input.radioFlavor{:style => "visibility:hidden;", :id =>"previousCake"+previousCake.id.to_s, :name => "cake[decorationImgURL]", :type => "radio", :value => previousCake.decorationImgURL}/
+                    %label.form-label{:for => "cake_orders[decorationImgURL]"}
+                      .post-thumb
+                        %img.img-thumbnail{:onclick => "document.getElementById('previousCake"+previousCake.id.to_s+"').checked=true" , :src => File.join("../","../","flavorsUploads",flavor.flavorImgURL)}/
+                      .post-content
+                        .post-headline= flavor.name
+          .form-group
+            %label{:for => :cakes_decorationImgURL} Flavor Picture
+            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
+        .container
+          .row
+            .col-12.col-md-6.col-lg-4
+              .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                .post-thumb
+                  %img.img-thumbnail{:id =>"previewImg",:style => "visibility:hidden;"}/
+                .post-content
+                  .post-headline{:id =>"previewHeadLine",:style => "visibility:hidden;"} Your Design
+      .tab
+        %h4 Some details
+        .form-group
+          %label{:for => "cake_levels"} Levels
+          %input#cake_levels.form-control{:name => "order[levels]", :placeholder => "How many levels?", :type => "text", :onchange => "document.getElementById('sLevels').innerHTML='Levels: '+document.getElementById('cake_levels').value" }/
+        .form-group
+          %label{:for => :size} Size
+          %select#cakeSize.custom-select.custom-select-lg.mb-3{:name => "order[size]", :onchange => "document.getElementById('sSize').innerHTML='Size: '+document.getElementById('cakeSize').value+ ' people'"}
+            %option{:selected => "selected" } Open this select menu
+            %option{:value => "6"} 4" - 6 people
+            %option{:value => "10"} 6" - 10 people
+            %option{:value => "28"} 8" - 28 people
+            %option{:value => "42"} 10" - 42 people
+            %option{:value => "56"} 12" - 56 people
+        .form-group
+          %label{:for => "comments"} Comments
+          %input#cake_comments.form-control{:name => "order[comments]", :placeholder => "Do I need to know something extra?", :type => "text", :onchange => "document.getElementById('sComments').innerHTML='Comments: '+document.getElementById('cake_comments').value"}/
+      .tab
+        %h4 Order Delivery Details
+        .form-group
+          %label{:for =>"order_delivery_date"} Delivery Date and Hour
+          %input#order_delivery_date.form-control{:name => "order[deliveryDate]", :type => "datetime-local",:onchange => "document.getElementById('sDate').innerHTML='Date: '+document.getElementById('order_delivery_date').value"}/
+          //:deliveryAddress, :deliveryPhone
+          // I need to add user phone and address
+        .form-group
+          %label{:for => "phone_delivery"} Delivery Phone Number
+          %input#phone_delivery.form-control{:name => "order[deliveryPhone]", :type => "tel", :onchange => "document.getElementById('sPhone').innerHTML='Phone: '+document.getElementById('phone_delivery').value"}/
+        .form-group
+          %label{:for => "address_delivery"} Delivery Address
+          %input#address_delivery.form-control{:name => "order[deliveryAddress]", :type => "text" ,:onchange => "document.getElementById('sAddress').innerHTML='Address: '+document.getElementById('address_delivery').value"}/
+      .tab
+        Cake Summary
+        %section.blog_area.section_padding_0_80
+          .container
+            .row.justify-content-center
+              .col-12.col-lg-8
+                .row
+                  / Single Post
+                  .col-12
+                    .single-post.wow.fadeInUp{"data-wow-delay" => ".2s"}
+                      / Post Thumb
+                      .post-thumb
+                        %img#summaryImg{:alt => "", :src => ""}/
+                      / Post Content
+                      .post-content
+                        %p#sFlavor
+                        %p#sSize
+                        %p#sLevels
+                        %p#sComments
+                        %p#sDate
+                        %p#sPhone
+                        %p#sAddress
+                        
+                        
+
+                
+      %div{:style => "overflow:auto;"}
+        %div{:style => "float:right;"}
+          %button.btn.btn-primary#prevBtn{:onclick => "nextPrev(-1)", :type => "button"} Previous
+          %button.btn.btn-primary#nextBtn{:onclick => "nextPrev(1)", :type => "button"} Next
+      %div{:style => "text-align:center;margin-top:40px;"}
+        %span.step
+        %span.step
+        %span.step
+        %span.step
+        %span.step
+
+    #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "../../img/instagram-img/1.jpg"}/
+
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "../../img/instagram-img/2.jpg"}/
+
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "../../img/instagram-img/3.jpg"}/
+
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "../../img/instagram-img/4.jpg"}/
+
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "../../img/instagram-img/5.jpg"}/
+
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    
+      .instagram_gallery_item
+        
+        %img{:alt => "", :src => "img/instagram-img/6.jpg"}/
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+      .instagram_gallery_item
+        %img{:alt => "", :src => "img/instagram-img/1.jpg"}/
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+      .instagram_gallery_item
+        %img{:alt => "", :src => "img/instagram-img/2.jpg"}/
+        .hover_overlay
+          .yummy-table
+            .yummy-table-cell
+              .follow-me.text-center
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  Like me
+    .social_icon_area.clearfix
+      .container
+        .row
+          .col-12
+            .footer-social-area.d-flex
+              .single-icon
+                %a{:href => "#"}
+                  %i.fa.fa-facebook{"aria-hidden" => "true"}
+                  %span facebook
+    %footer.footer_area
+      .container
+        .row
+          .col-12
+            .footer-content
+              .footer-logo-area.text-center
+                %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+              %nav.navbar.navbar-expand-lg
+                %button.navbar-toggler{"aria-controls" => "yummyfood-footer-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-footer-nav", "data-toggle" => "collapse", :type => "button"}
+                  %i.fa.fa-bars{"aria-hidden" => "true"}
+                  Menu
+                #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
+                  %ul.navbar-nav
+                    %li.nav-item.active
+                      %a.nav-link{:href => "#"}
+                        Home
+                        %span.sr-only (current)
+                    %li.nav-item
+                      %a.nav-link{:href => "archive.html"} Previous Designs
+                    %li.nav-item
+                      %a.nav-link{:href => "flavors.html"} Flavors
+                    %li.nav-item
+                      %a.nav-link{:href => "reviews.html"} Customer Reviews
+                    %li.nav-item
+                      %a.nav-link{:href => "contact.html"} Contact Me
+      .container
+        .row
+          .col-12
+            .copy_right_text.text-center
+              %p
+                Copyright @2018 | BerryDeli Cakes
+                %i.fa.fa-heart-o{"aria-hidden" => "true"}
+        
+    #registerModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          #registerView
+            .modal-header
+              %h4.modal-title Register
+              %button.close{"data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+                %span.sr-only Close
+            .modal-body
+              .well
+                %form#registerForm{"data-toggle" => "validator"}
+                  .form-group
+                    %label.control-label{:for => "name"} Name
+                    %input#nameR.form-control{:name => "name", :placeholder => "Name", :title => "Please enter your name", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "lastname"} Lastname
+                    %input#lastNameR.form-control{:name => "lastname", :placeholder => "Lastname", :title => "Please enter your lastname", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "email"} E-mail
+                    %input#emailR.form-control{:name => "email", :placeholder => "E-mail", :title => "Please enter your email", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "phone"} Phone
+                    %input#phoneR.form-control{:name => "phone", :placeholder => "Phone Number", :title => "Please enter your telephone", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "address"} Address
+                    %input#addressR.form-control{:name => "address", :placeholder => "Address", :title => "Please enter your address", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "username"} Username
+                    %input#usernameR.form-control{:name => "username", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+                    %span.help-block
+                  .form-group
+                    %label.control-label{:for => "password"} Password
+                    %input#passwordR.form-control{:name => "password", :placeholder => "Password", :required => "", :title => "Please enter your password", :type => "password"}/
+                    %span.help-block Min. 6 characters
+                  .form-group
+                    %label.control-label{:for => "password"} Confirm Password
+                    %input#confirmPasswordR.form-control{:name => "passwordConfirm", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
+                    %span.help-block
+                  #registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+                  %button.btn.contact-btn.btn-block{:type => "submit"} Register
+    #loginModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          #loginView
+            .modal-header
+              %h4.modal-title Login
+              %button.close{"data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+                %span.sr-only Close
+            .modal-body
+              .well
+                %form#loginForm
+                  .form-group
+                    %label.control-label{:for => "username"} Username
+                    %input#usernameL.form-control{:name => "username", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+                  .form-group
+                    %label.control-label{:for => "password"} Password
+                    %input#passwordL.form-control{:name => "password", :placeholder => "Password", :required => "", :title => "Please enter your password", :type => "password"}/
+                  #loginErrorMsg.alert.alert-danger.collapse{:role => "alert"} Login error
+                  %button.btn.contact-btn.btn-block{:type => "submit"} Login
+
+    
+    
+    
+    
+  %script{:src => "../../js/jquery/jquery-2.2.4.min.js"}
+  %script{:src => "../../js/bootstrap/popper.min.js"}
+  %script{:src => "../../js/bootstrap/bootstrap.min.js"}
+  %script{:src => "../../js/others/plugins.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"}
+  %script{:src => "../../js/google-map/map-active.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src =>"../../js/multistep.js"}
+  %script{:src =>"../../js/util.js"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+// %table
+// %table
+//   %thead
+//     %tr
+//       %th Name
+//       %th Flavorimgurl
+//       %th
+//       %th
+//       %th
+
+//   %tbody
+//     - @flavors.each do |flavor|
+//       %tr
+//         %td= flavor.name
+//         %td= flavor.flavorImgURL
+//         %td= link_to 'Show', flavor
+//         %td= link_to 'Edit', edit_flavor_path(flavor)
+//         %td= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' }
+
+// %br
+
+
+// %a.btn-floating.btn-lg.purple-gradient
+//   %i.fa.fa-bolt
+
+// = link_to 'New Flavor', new_flavor_path

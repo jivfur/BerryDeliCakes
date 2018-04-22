@@ -9,6 +9,8 @@ class CakeOrdersController < ApplicationController
     
     def index
         logger.debug(session[:user_id])
+        
+        
         @cakeOrders = Hash.new # this will be all the orders, organized by orders Id
         if(session[:user_id])
             user = User.find(session[:user_id])
@@ -29,10 +31,24 @@ class CakeOrdersController < ApplicationController
                 myOrder[:cake] = cake
                 myOrder[:cakePrice] = cakePrice
                 @cakeOrders[order.id]=myOrder
+                logger.debug("Order is:" +  order.id.to_s)
             end
         else
             redirect_to("/")
         end    
+    end
+    
+    def edit
+        @flavors = Flavor.all
+        order = Order.find params[:id]
+        @myOrder = Hash.new
+        cakePrice = CakePrice.find(order.cake_price_id)
+        cake = Cake.find(cakePrice.cake_id)
+        @myOrder[:order] = order
+        @myOrder[:cake] = cake
+        @myOrder[:cakePrice] = cakePrice
+    
+        
     end
     
     
