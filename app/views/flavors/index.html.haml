@@ -84,11 +84,16 @@
           .col-12.col-md-6.col-lg-4
             .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
               .post-thumb
-                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}/
-                // =link_to  do flavor end
+                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}
+                .project_title
+                  .post-date-commnents.d-flex
+                    %a{:href => "#"} June 20, 2017
+                    %a{:href => "#"} Our New Design
+                  %a{:href => "#"}
+                    %h5 Pick Me!
               .post-content
                 %h4.post-headline= flavor.name
-
+              
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
     
       .instagram_gallery_item
