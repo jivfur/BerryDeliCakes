@@ -52,22 +52,24 @@ class FlavorsController < ApplicationController
   # PATCH/PUT /flavors/1
   # PATCH/PUT /flavors/1.json
   def update
+    aux = {name: params[:flavor][:name]}
     uploaded_io = params[:flavor][:flavorImgURL]
-    pp uploaded_io.instance_of?
-    # File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
-    #   file.write(uploaded_io.read)
-    #   logger.debug uploaded_io.read
-    # end
-    # aux = {name: params[:flavor][:name],flavorImgURL: uploaded_io.original_filename};
-    # respond_to do |format|
-    #   if @flavor.update(aux)
-    #     format.html { redirect_to @flavor, notice: 'Flavor was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @flavor }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @flavor.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    logger.debug("uploaded_io type")
+    if(uploaded_io)
+      File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+      end
+      aux[:flavorImgURL]= uploaded_io.original_filename;
+    end
+    respond_to do |format|
+      if @flavor.update(aux)
+        format.html { redirect_to @flavor, notice: 'Flavor was successfully updated.' }
+        format.json { render :show, status: :ok, location: @flavor }
+      else
+        format.html { render :edit }
+        format.json { render json: @flavor.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /flavors/1
