@@ -1,14 +1,14 @@
-
 %html
   %body
     %meta{:charset => "UTF-8"}/
     %meta{:content => "", :name => "description"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => "../../width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %title BerryDeli Cakes/orders
-    %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
-    %link{:href => "style.css", :rel => "stylesheet"}/
-    %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
+    %link{:href => "../../img/core-img/favicon.ico", :rel => "icon"}/
+    %link{:href => "../../style.css", :rel => "stylesheet"}/
+    %link{:href => "../../css/responsive/responsive.css", :rel => "stylesheet"}/
+  %body
     #preloader
       .yummy-load
     #pattern-switcher
@@ -60,7 +60,7 @@
                     %a.nav-link{:href => "flavors.html"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "contact.html"} Contact Me
-    .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}
+    .breadcumb-area{:style => "background-image: url(../../img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center
           .col-12
@@ -78,20 +78,120 @@
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Orders
     .container
-      - @cakeOrders.each do |key, order|
-        .col-12.col-md-6.col-lg-4
-          .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
-            .post-thumb
-              %img.img-thumbnail{:src => order[:cake].decorationImgURL, :height=>"150px"}
-              // =link_to  do flavor end
-            .post-content
-              %h4.post-headline= order[:order].created_at
+    %form#regForm{:action => "/cake_orders", :method => "post", :enctype=>"multipart/form-data"}
+      %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" }
+      .tab
+        %h4 Choose your favorite flavor
+        .container
+          .row
+            // %fieldset
+            - @flavors.each_with_index do |flavor, index|
+              .col-12.col-md-6.col-lg-4
+                .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                  .post-thumb
+                    %img.img-thumbnail{:id=>"thumbnail"+flavor.id.to_s ,:onclick => "document.getElementById('flavor"+flavor.id.to_s+"').checked=true; document.getElementById('sFlavor').innerHTML=\""+flavor.name+"\"" , :src => File.join("..","..","flavorsUploads",flavor.flavorImgURL)}/
+                  .post-content
+                    .post-headline= flavor.name
+                    %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "order[flavor_id]", :type => "radio", :value => flavor.id}/
+                    %label.custom-control-input{:for => "order[flavor_id]"}
+          
+      .tab
+        %h4 Choose a design
+        .row
+          %fieldset
+            -if !@previousCake.nil? then
+              - @previousCakes.each_with_index do |previousCake, index|
+                .col-12.col-md-6.col-lg-4
+                  .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                    %input.form-input.radioFlavor{:style => "visibility:hidden;", :id =>"previousCake"+previousCake.id.to_s, :name => "cake[decorationImgURL]", :type => "radio", :value => previousCake.decorationImgURL}/
+                    %label.form-label{:for => "cake_orders[decorationImgURL]"}
+                      .post-thumb
+                        %img.img-thumbnail{:onclick => "document.getElementById('previousCake"+previousCake.id.to_s+"').checked=true" , :src => File.join("../","../","flavorsUploads",flavor.flavorImgURL)}/
+                      .post-content
+                        .post-headline= flavor.name
+          .form-group
+            %label{:for => :cakes_decorationImgURL} Flavor Picture
+            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
+        .container
+          .row
+            .col-12.col-md-6.col-lg-4
+              .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                .post-thumb
+                  %img.img-thumbnail{:id =>"previewImg",:style => "visibility:hidden;"}/
+                .post-content
+                  .post-headline{:id =>"previewHeadLine",:style => "visibility:hidden;"} Your Design
+      .tab
+        %h4 Some details
+        .form-group
+          %label{:for => "cake_levels"} Levels
+          %input#cake_levels.form-control{:name => "order[levels]", :placeholder => "How many levels?", :type => "text", :onchange => "document.getElementById('sLevels').innerHTML='Levels: '+document.getElementById('cake_levels').value" }/
+        .form-group
+          %label{:for => :size} Size
+          %select#cakeSize.custom-select.custom-select-lg.mb-3{:name => "order[size]", :onchange => "document.getElementById('sSize').innerHTML='Size: '+document.getElementById('cakeSize').value+ ' people'"}
+            %option{:selected => "selected" } Open this select menu
+            %option{:value => "6"} 4" - 6 people
+            %option{:value => "10"} 6" - 10 people
+            %option{:value => "28"} 8" - 28 people
+            %option{:value => "42"} 10" - 42 people
+            %option{:value => "56"} 12" - 56 people
+        .form-group
+          %label{:for => "comments"} Comments
+          %input#cake_comments.form-control{:name => "order[comments]", :placeholder => "Do I need to know something extra?", :type => "text", :onchange => "document.getElementById('sComments').innerHTML='Comments: '+document.getElementById('cake_comments').value"}/
+      .tab
+        %h4 Order Delivery Details
+        .form-group
+          %label{:for =>"order_delivery_date"} Delivery Date and Hour
+          %input#order_delivery_date.form-control{:name => "order[deliveryDate]", :type => "datetime-local",:onchange => "document.getElementById('sDate').innerHTML='Date: '+document.getElementById('order_delivery_date').value"}/
+          //:deliveryAddress, :deliveryPhone
+          // I need to add user phone and address
+        .form-group
+          %label{:for => "phone_delivery"} Delivery Phone Number
+          %input#phone_delivery.form-control{:name => "order[deliveryPhone]", :type => "tel", :onchange => "document.getElementById('sPhone').innerHTML='Phone: '+document.getElementById('phone_delivery').value"}/
+        .form-group
+          %label{:for => "address_delivery"} Delivery Address
+          %input#address_delivery.form-control{:name => "order[deliveryAddress]", :type => "text" ,:onchange => "document.getElementById('sAddress').innerHTML='Address: '+document.getElementById('address_delivery').value"}/
+      .tab
+        Cake Summary
+        %section.blog_area.section_padding_0_80
+          .container
+            .row.justify-content-center
+              .col-12.col-lg-8
+                .row
+                  / Single Post
+                  .col-12
+                    .single-post.wow.fadeInUp{"data-wow-delay" => ".2s"}
+                      / Post Thumb
+                      .post-thumb
+                        %img#summaryImg{:alt => "", :src => ""}/
+                      / Post Content
+                      .post-content
+                        %p#sFlavor
+                        %p#sSize
+                        %p#sLevels
+                        %p#sComments
+                        %p#sDate
+                        %p#sPhone
+                        %p#sAddress
+                        
+                        
+
+                
+      %div{:style => "overflow:auto;"}
+        %div{:style => "float:right;"}
+          %button.btn.btn-primary#prevBtn{:onclick => "nextPrev(-1)", :type => "button"} Previous
+          %button.btn.btn-primary#nextBtn{:onclick => "nextPrev(1)", :type => "button"} Next
+      %div{:style => "text-align:center;margin-top:40px;"}
+        %span.step
+        %span.step
+        %span.step
+        %span.step
+        %span.step
 
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
     
       .instagram_gallery_item
         
-        %img{:alt => "", :src => "img/instagram-img/1.jpg"}/
+        %img{:alt => "", :src => "../../img/instagram-img/1.jpg"}/
 
         .hover_overlay
           .yummy-table
@@ -103,7 +203,7 @@
     
       .instagram_gallery_item
         
-        %img{:alt => "", :src => "img/instagram-img/2.jpg"}/
+        %img{:alt => "", :src => "../../img/instagram-img/2.jpg"}/
 
         .hover_overlay
           .yummy-table
@@ -115,7 +215,7 @@
     
       .instagram_gallery_item
         
-        %img{:alt => "", :src => "img/instagram-img/3.jpg"}/
+        %img{:alt => "", :src => "../../img/instagram-img/3.jpg"}/
 
         .hover_overlay
           .yummy-table
@@ -127,7 +227,7 @@
     
       .instagram_gallery_item
         
-        %img{:alt => "", :src => "img/instagram-img/4.jpg"}/
+        %img{:alt => "", :src => "../../img/instagram-img/4.jpg"}/
 
         .hover_overlay
           .yummy-table
@@ -139,7 +239,7 @@
     
       .instagram_gallery_item
         
-        %img{:alt => "", :src => "img/instagram-img/5.jpg"}/
+        %img{:alt => "", :src => "../../img/instagram-img/5.jpg"}/
 
         .hover_overlay
           .yummy-table
@@ -285,12 +385,17 @@
     
     
     
-    
-    %script{:src => "js/jquery/jquery-2.2.4.min.js"}
-    %script{:src => "js/bootstrap/popper.min.js"}
-    %script{:src => "js/bootstrap/bootstrap.min.js"}
-    %script{:src => "js/others/plugins.js"}
-    %script{:src => "js/active.js"}
+  %script{:src => "../../js/jquery/jquery-2.2.4.min.js"}
+  %script{:src => "../../js/bootstrap/popper.min.js"}
+  %script{:src => "../../js/bootstrap/bootstrap.min.js"}
+  %script{:src => "../../js/others/plugins.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"}
+  %script{:src => "../../js/google-map/map-active.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src =>"../../js/multistep.js"}
+  %script{:src =>"../../js/util.js"}
+
 
 
 
