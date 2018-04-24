@@ -9,35 +9,52 @@ class CakeOrdersController < ApplicationController
     
     def index
         logger.debug(session[:user_id])
+        
+        
+        @cakeOrders = Hash.new # this will be all the orders, organized by orders Id
         if(session[:user_id])
-            @user = User.find(session[:user_id])
-            if(@user.role == false)
+            user = User.find(session[:user_id])
+            if(user.role == false)
                 #you are not an admin
-                logger.debug("this is the user"+@user.id.to_s)
-                @orders = Order.where({:user_id =>@user.id}).order(:created_at) #bring all the orders of this user ordered by creation date
+                logger.debug("this is the user"+user.id.to_s)
+                orders = Order.where({:user_id =>user.id}).order(:created_at) #bring all the orders of this user ordered by creation date
             else
                 #you are ad admin
-                @orders = Order.find().order(:created_at)
+                orders = Order.all.order(:created_at)
             end
-            @orders = Order.find(7)
-            logger.debug("The user who bought this is: "+@orders.user_id.to_s)
-            logger.debug("The user who bought this is: "+@orders.id.to_s)
-            #logger.debug("I found "+@orders.length.to_s)
-            # @orders.each do |order|
-            #     logger.debug("My order is: "+order.id.to_s)
-            #     @cakesPrice = CakePrice.find_by_cake_price_id(order.cake_price_id)
-            #     @cakesPrice.each do |cakePrice|
-            #         @cakes = Cake.find_by_cake_id(cakePrice.cake_id)
-            #     end
-            # end
+            logger.debug("I found "+orders.length.to_s)
+            orders.each_with_index do |order,order_index|
+                myOrder = Hash.new
+                cakePrice = CakePrice.find(order.cake_price_id)
+                cake = Cake.find(cakePrice.cake_id)
+                myOrder[:order] = order
+                myOrder[:cake] = cake
+                myOrder[:cakePrice] = cakePrice
+                @cakeOrders[order.id]=myOrder
+                logger.debug("Order is:" +  order.id.to_s)
+            end
         else
             redirect_to("/")
         end    
     end
     
+    def edit
+        @flavors = Flavor.all
+        order = Order.find params[:id]
+        @myOrder = Hash.new
+        cakePrice = CakePrice.find(order.cake_price_id)
+        cake = Cake.find(cakePrice.cake_id)
+        @myOrder[:order] = order
+        @myOrder[:cake] = cake
+        @myOrder[:cakePrice] = cakePrice
+    
+        
+    end
+    
     
     def create
         Order.transaction do
+        
         #remember you need user Id for Orders
         #i need to send parameters that i need
         #I need flavors
@@ -58,7 +75,8 @@ class CakeOrdersController < ApplicationController
             File.open(Rails.root.join(orders_dir, uploaded_io.original_filename), 'wb') do |file|
                 file.write(uploaded_io.read)
             end
-            @cake.decorationImgURL = Rails.root.join(orders_dir,uploaded_io.original_filename)
+            @cake.decorationImgURL = File.join(@cake.id.to_s,uploaded_io.original_filename)
+            #@cake.decorationImgURL = uploaded_io.original_filename
             @cake.save
             ########
             #@cake = Cake.find_by_decorationImgURL(@cake.decorationImgURL)
@@ -76,7 +94,7 @@ class CakeOrdersController < ApplicationController
                 ##@cake_price = CakePrice.find_by_cake_id(@cake.id)
                 ##pp @cake_price
                 order_params = Hash.new
-                order_params[:user_id]=cake_order_params[:user_id]
+                order_params[:user_id]=session[:user_id]
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]

@@ -78,7 +78,20 @@
 //NEW THINGS GO HERE
 
 .container
-  =render 'form'
+  %form#new_flavor.new_flavor{:action => "/flavors/"+@flavor.id.to_s, :method => "POST", :enctype=>"multipart/form-data"}
+    %input{:name => "_method", :type => "hidden", :value => "patch"}
+    .form-group
+      %label{:for => :flavor_name} Name
+      %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text", :value => @flavor.name}/
+    .container
+      .row
+        .col
+          %img.img-thumbnail{:src => File.join("../../","flavorsUploads",@flavor.flavorImgURL), :height=>"150px"}
+        .col
+          .form-group
+            %label{:for => :flavor_flavorImgURL} Flavor Picture
+            %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file"}/
+    %button.btn.btn-primary{:type => "submit"} Submit
   =link_to 'Show', @flavor
   =link_to 'Back', flavors_path
 

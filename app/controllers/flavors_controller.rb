@@ -22,6 +22,18 @@ class FlavorsController < ApplicationController
 
   # GET /flavors/1/edit
   def edit
+    logger.debug("USER IS: "+session[:user_id].to_s)
+    if(session[:user_id])
+      logger.debug("USER IS: "+session[:user_id].to_s)
+      user = User.find(session[:user_id])
+      if(user.role==false)
+        redirect_to "/"
+      end
+    else
+      redirect_to "/"
+    end
+  
+    
   end
 
   # POST /flavors
@@ -30,7 +42,7 @@ class FlavorsController < ApplicationController
     logger.debug "Something HERE"
     logger.debug params
     logger.debug flavor_params
-      logger.debug "**************************"
+    logger.debug "**************************"
     uploaded_io = params[:flavor][:flavorImgURL]
     File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
     file.write(uploaded_io.read)
@@ -52,8 +64,17 @@ class FlavorsController < ApplicationController
   # PATCH/PUT /flavors/1
   # PATCH/PUT /flavors/1.json
   def update
+    aux = {name: params[:flavor][:name]}
+    uploaded_io = params[:flavor][:flavorImgURL]
+    logger.debug("uploaded_io type")
+    if(uploaded_io)
+      File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+      end
+      aux[:flavorImgURL]= uploaded_io.original_filename;
+    end
     respond_to do |format|
-      if @flavor.update(flavor_params)
+      if @flavor.update(aux)
         format.html { redirect_to @flavor, notice: 'Flavor was successfully updated.' }
         format.json { render :show, status: :ok, location: @flavor }
       else
