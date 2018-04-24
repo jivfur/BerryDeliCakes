@@ -32,8 +32,6 @@ class FlavorsController < ApplicationController
     else
       redirect_to "/"
     end
-  
-    
   end
 
   # POST /flavors
