@@ -11,8 +11,7 @@
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
     #preloader
       .yummy-load
-    #pattern-switcher
-      Shopping Cart
+    
     .top_header_area
       .container
         .row
@@ -57,9 +56,9 @@
                   %li.nav-item
                     %a.nav-link{:href => "archive.html"} Previous Designs
                   %li.nav-item
-                    %a.nav-link{:href => "flavors.html"} Flavors
+                    %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
-                    %a.nav-link{:href => "contact.html"} Contact Me
+                    %a.nav-link{:href => "/contacts"} Contact Me
     .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center
@@ -82,12 +81,20 @@
       .row
         - @flavors.each_with_index do |flavor, index|
           .col-12.col-md-6.col-lg-4
-            .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
-              .post-thumb
-                %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}/
+            .welcome-single-slide
+              .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
+                .project_title
+                  %a{:href => "/flavors/"+flavor.id.to_s+"/edit"}
+                    %h5 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  %a{:href => "/flavors/"+flavor.id.to_s+"/edit"}
+                    //"data-confirm" => "Are you sure?", "data-method" => "delete", :href => "/flavors/"+flavor.id.to_s, :rel => "nofollow"
+                    %h5 <i class="fa fa-trash" aria-hidden="true"></i>
+                  .post-content
+                    %h4.post-headline= flavor.name
+                .post-thumb
+                  %img.img-thumbnail{:src => File.join(".","flavorsUploads",flavor.flavorImgURL), :height=>"150px"}/
                 // =link_to  do flavor end
-              .post-content
-                %h4.post-headline= flavor.name
+                  
 
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
     
@@ -208,11 +215,9 @@
                     %li.nav-item
                       %a.nav-link{:href => "archive.html"} Previous Designs
                     %li.nav-item
-                      %a.nav-link{:href => "flavors.html"} Flavors
+                      %a.nav-link{:href => "/flavors"} Flavors
                     %li.nav-item
-                      %a.nav-link{:href => "reviews.html"} Customer Reviews
-                    %li.nav-item
-                      %a.nav-link{:href => "contact.html"} Contact Me
+                      %a.nav-link{:href => "/contacts"} Contact Me
       .container
         .row
           .col-12
