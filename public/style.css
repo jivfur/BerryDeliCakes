@@ -64,6 +64,13 @@ h6 {
     line-height: 1.25;
 }
 
+h7 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    color: #232d37;
+    line-height: 1.25;
+    font-size: x-large;
+}
 p {
     color: #51545f;
     font-size: 16px;
@@ -1503,4 +1510,20 @@ li {
     z-index:9999;
 }
 
+.btn-flavor ul {
+    margin-right: 50;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    left: 80%;
+    top: 90.5%;
+}
 
+.btn-flavor li {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-flavor li .fa {
+    position: static;
+}
