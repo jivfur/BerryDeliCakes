@@ -23,6 +23,7 @@ class FlavorsController < ApplicationController
   # GET /flavors/1/edit
   def edit
     logger.debug("USER IS: "+session[:user_id].to_s)
+<<<<<<< HEAD
     #if(session[:user_id])
       #logger.debug("USER IS: "+session[:user_id].to_s)
       #user = User.find(session[:user_id])
@@ -34,6 +35,17 @@ class FlavorsController < ApplicationController
     #end
   
     
+=======
+    if(session[:user_id])
+      logger.debug("USER IS: "+session[:user_id].to_s)
+      user = User.find(session[:user_id])
+      if(user.role==false)
+        redirect_to "/"
+      end
+    else
+      redirect_to "/"
+    end
+>>>>>>> 96b4421ab533735a2c4061f1b5af4e20ea125d36
   end
 
   # POST /flavors
