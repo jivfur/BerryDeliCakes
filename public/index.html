@@ -246,7 +246,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
                         <img src="img/catagory-img/3.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#orderStatusModal" id="orderStatusLink">
                                 <h5>Order Status</h5>
                             </a>
                         </div>
@@ -952,6 +952,32 @@
         </div>
     </div>
 </div>        
+
+
+
+<div class="modal fade" id="orderStatusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="orderStatusView">
+                <div class="modal-header">
+                    <h4 class="modal-title">Order Status</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="well">
+                        <form id="OrderStatusForm" action="/cake_orders" method="get">
+                            <div class="form-group">
+                                <label for="OrderId" class="control-label">Order Id</label>
+                                <input type="text" class="form-control" id="OrderId" name="cake_orders[id]" required title="Order Id Number" placeholder="Order Id Number">
+                            </div>
+                            <button type="button" class="btn  contact-btn btn-block" onClick="window.location= '/cake_orders/'+document.getElementById('OrderId').value">Check Order Status</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
 
     <!-- Jquery-2.2.4 js -->

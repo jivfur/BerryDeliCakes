@@ -52,12 +52,13 @@ class CakeOrdersController < ApplicationController
     end
     
     def show
+        
         @order = Order.find(params[:id])
-        pp @order
         @cakePrice = CakePrice.find(@order.cake_price_id)
-        pp @cakePrice
         @cake = Cake.find(@cakePrice.cake_id)
-        pp @cake
+        flash[:notice] = "Your order looks delicious!!!"
+        rescue ActiveRecord::RecordNotFound
+            flash[:notice] = "Order was not Found"
     end
     
     
