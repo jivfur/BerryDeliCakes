@@ -1,7 +1,4 @@
 module CakeOrdersHelper
-    def cakeStatusMethod
-    end
-    
     def paidStatusMethod
         paidStatusDic = ["No Paid", "Half Paid", "Full Paid"]
     end
