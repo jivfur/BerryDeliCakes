@@ -51,6 +51,15 @@ class CakeOrdersController < ApplicationController
         
     end
     
+    def show
+        @order = Order.find(params[:id])
+        pp @order
+        @cakePrice = CakePrice.find(@order.cake_price_id)
+        pp @cakePrice
+        @cake = Cake.find(@cakePrice.cake_id)
+        pp @cake
+    end
+    
     
     def create
         Order.transaction do
@@ -98,7 +107,7 @@ class CakeOrdersController < ApplicationController
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
-                order_params[:status]=1
+                order_params[:status]=0
                 order_params[:comments]=cake_order_params[:comments]
                 #order_params[:cake_price_id]=@cake_price.id
                 order_params[:cake_price_id] =@cake_price.id
@@ -112,7 +121,8 @@ class CakeOrdersController < ApplicationController
                 ##pp @cakePrice
                 @order.cake_price_id=@cake_price.id
                 if @order.save
-                    redirect_to order_path(@order.id)
+                    flash[:notice] = "Your Cake is on its way!!!"
+                    redirect_to cake_order_path(@order.id)
                 else
                     
                     logger.debug "Order errors "
