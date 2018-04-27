@@ -316,3 +316,61 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then("I should go to Show Cake Order Page for {string} order") do |string|
+  puts "/cake_orders/"+eval(string).to_s
+  visit "/cake_orders/"+eval(string).to_s
+end
+
+
+Given("the following cake orders exist:") do |table|
+  user = User.last
+  cakePrice = CakePrice.last
+  table.hashes.each do |movie|
+    movie[:user_id] = user.id
+    movie[:cake_price_id] = cakePrice.id
+    puts user.id
+    @order = Order.create!(movie)
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    end
+end
+
+Given("the following user exist:") do |table|
+  table.hashes.each do |movie|
+    user = User.create!(movie)
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    end
+end
+
+Given("the following flavor exist:") do |table|
+  table.hashes.each do |movie|
+    flavor = Flavor.create!(movie)
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    end
+end
+
+Given("the following cake exist:") do |table|
+  flavor = Flavor.last
+  table.hashes.each do |movie|
+    movie[:flavor_id] = flavor.id
+    cake = Cake.create!(movie)
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    end
+end
+
+Given("the following cake price exist:") do |table|
+  cake = Cake.last
+  table.hashes.each do |movie|
+    movie[:cake_id] = cake.id
+    cakePrice = CakePrice.create!(movie)
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    end
+end
+
+
+

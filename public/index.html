@@ -965,12 +965,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="well">
-                        <form id="OrderStatusForm" action="/cake_orders" method="get">
+                        <form id="OrderStatusForm" action="/cake_orders/" method="get">
                             <div class="form-group">
                                 <label for="OrderId" class="control-label">Order Id</label>
                                 <input type="text" class="form-control" id="OrderId" name="cake_orders[id]" required title="Order Id Number" placeholder="Order Id Number">
                             </div>
-                            <button type="button" class="btn  contact-btn btn-block" onClick="window.location= '/cake_orders/'+document.getElementById('OrderId').value">Check Order Status</button>
+                            <button type="submit" id = "btnOrderStatus" class="btn  contact-btn btn-block">Check Order Status</button>
                         </form>
                     </div>
                 </div>
