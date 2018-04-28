@@ -29,6 +29,12 @@ module NavigationHelpers
       
     when /^root page$/
       '/'
+    
+    when /^the users path$/
+      '/users' 
+    when /^the user listing path$/
+      '/sessions' 
+      
       
     when /^the index page$/
       '/index.html'
