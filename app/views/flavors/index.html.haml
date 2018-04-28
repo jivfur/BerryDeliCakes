@@ -1,6 +1,7 @@
 
 %html
   %body
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "UTF-8"}/
     %meta{:content => "", :name => "description"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
@@ -17,7 +18,7 @@
         .row
           .col-5.col-sm-6
             .top_social_bar
-              %a{:href => "#"}
+              %a{:href => "https://www.facebook.com/berrydelicakes/"}
                 %i.fa.fa-facebook{"aria-hidden" => "true"}
           .col-7.col-sm-6
             .signup-search-area.d-flex.align-items-center.justify-content-end
@@ -76,8 +77,9 @@
                     %i.fa.fa-home{"aria-hidden" => "true"}
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Flavors
-    %section.archive-area.section_padding_80
     .container
+      %a{:href => "/flavors/new"}
+        %btn-add.btn-add Add New
       .row
         - @flavors.each_with_index do |flavor, index|
           .col-12.col-md-6.col-lg-4
