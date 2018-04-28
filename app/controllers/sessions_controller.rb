@@ -5,6 +5,10 @@ class SessionsController < ApplicationController
     end
     
     def index
+        if current_user == nil
+            flash[:notice] = 'it is required to log in as admin. Please try to login.'
+            redirect_to users_path
+        end
         if current_user.role == false
             puts "illegal path"
             flash[:notice] = 'it is allowed only for admin'
