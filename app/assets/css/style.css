@@ -64,13 +64,6 @@ h6 {
     line-height: 1.25;
 }
 
-h7 {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 700;
-    color: #232d37;
-    line-height: 1.25;
-    font-size: x-large;
-}
 p {
     color: #51545f;
     font-size: 16px;
@@ -372,12 +365,11 @@ li {
     color: #222;
 }
 
-.top_header_area .signup-search-area .login .mypage a {
+.top_header_area .signup-search-area .login a {
     margin-right: 13px;
     border-right: 2px solid #c2c2c2;
     padding-right: 13px;
 }
-
 
 .top_header_area .signup-search-area .search_button {
     margin-left: 54px;
@@ -1511,37 +1503,4 @@ li {
     z-index:9999;
 }
 
-.btn-flavor ul {
-    margin-right: 50;
-    padding: 0;
-    list-style-type: none;
-    position: absolute;
-    left: 80%;
-    top: 90.5%;
-}
 
-.btn-flavor li {
-    cursor: pointer;
-    display: inline-block;
-}
-
-.btn-flavor li .fa {
-    position: static;
-}
-
-.btn-add {
-    background-color: #e7e7e7; 
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 17px;
-    margin-bottom: 4px;
-    cursor: pointer;
-    color: DarkOrange;
-}
-
-.btn-add:hover {
-    background-color: Black;
-}
