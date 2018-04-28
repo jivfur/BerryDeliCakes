@@ -1,10 +1,12 @@
+
 class CakesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_cake, only: [:show, :edit, :update, :destroy]
 
   # GET /cakes
   # GET /cakes.json
   def index
-    @cakes = Cake.all
+    @cakes = Cake.where({:gallery => true})
   end
 
   # GET /cakes/1
@@ -14,9 +16,6 @@ class CakesController < ApplicationController
 
   # GET /cakes/new
   def new
-    #@flavors = Flavor.all
-    #@previousCakes = Cake.find_by_gallery(true) #It will return previous cakes
-    @cake = Cake.new
   end
 
   # GET /cakes/1/edit
@@ -26,11 +25,24 @@ class CakesController < ApplicationController
   # POST /cakes
   # POST /cakes.json
   def create
-    @cake = Cake.new(cake_params)
+    aux = {levels: params[:cake][:levels], gallery: true, flavor_id: Flavor.last.id, comments: params[:cake][:comments]}
+    uploaded_io = params[:cake][:decorationImgURL]
+    logger.debug("uploaded_io type")
+    folderAux=Time.now.to_i.to_s
+    orders_dir = Rails.root.join("public","previousCake",folderAux)
+    Dir.mkdir(orders_dir) unless File.exists?(orders_dir)
+    if(uploaded_io)
+      File.open(Rails.root.join(orders_dir, uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+      end
+      aux[:decorationImgURL]= File.join(folderAux,uploaded_io.original_filename);
+    end
+    
+    @cake = Cake.new(aux)
 
     respond_to do |format|
       if @cake.save
-        format.html { redirect_to @cake, notice: 'Cake was successfully created.' }
+        format.html { redirect_to cakes_path, notice: 'Cake was successfully created.' }
         format.json { render :show, status: :created, location: @cake }
       else
         format.html { render :new }

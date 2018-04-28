@@ -7,10 +7,20 @@ class CakeOrdersController < ApplicationController
         @previousCakes = Cake.find_by_gallery(true) #It will return previous cakes
     end
     
+    def previous
+        # If user selects one of the previous cakes.
+        if params(:cakeId)
+            @cake = Cake.find(params(:cakeId))
+        end
+        redirect_to new_cake_order_path()
+    end
+    
+    
+    
+    
+    
     def index
         logger.debug(session[:user_id])
-        
-        
         @cakeOrders = Hash.new # this will be all the orders, organized by orders Id
         if(session[:user_id])
             user = User.find(session[:user_id])

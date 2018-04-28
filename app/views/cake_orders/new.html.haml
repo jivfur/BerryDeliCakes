@@ -102,7 +102,14 @@
         %h4 Choose a design
         .row
           %fieldset
-            -if !@previousCake.nil? then
+            -if @cake
+              %input{:ẗype => "hidden", :name =>"order[cakeId]", :value => @cake.id}
+              .post-thumb
+                  %img.img-thumbnail{:src => File.join("../",@cake.id,@cake.decorationImgURL)}/
+                .post-content
+                  .post-headline
+              
+            -else if !@previousCake.nil? then
               - @previousCakes.each_with_index do |previousCake, index|
                 .col-12.col-md-6.col-lg-4
                   .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
@@ -111,10 +118,10 @@
                       .post-thumb
                         %img.img-thumbnail{:onclick => "document.getElementById('previousCake"+previousCake.id.to_s+"').checked=true" , :src => File.join("../","flavorsUploads",flavor.flavorImgURL)}/
                       .post-content
-                        .post-headline= flavor.name
-          .form-group
-            %label{:for => :cakes_decorationImgURL} Flavor Picture
-            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
+                        .post-headline 
+            .form-group
+              %label{:for => :cakes_decorationImgURL} Previous Design Selected
+              %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
         .container
           .row
             .col-12.col-md-6.col-lg-4
