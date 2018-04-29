@@ -10,9 +10,8 @@
     %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
     %link{:href => "style.css", :rel => "stylesheet"}/
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
-    #preloader
-      .yummy-load
-    
+    // #preloader
+    .yummy-load
     .top_header_area
       .container
         .row
@@ -78,8 +77,11 @@
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Flavors
     .container
-      %a{:href => "/flavors/new"}
-        %btn-add.btn-add Add New
+      -if current_user!=nil
+        -if current_user.role == true
+          .container
+            %a{:href => "/flavors/new"}
+              %btn-add.btn-add Add New
       .row
         - @flavors.each_with_index do |flavor, index|
           .col-12.col-md-6.col-lg-4
