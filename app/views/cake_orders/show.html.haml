@@ -1,3 +1,9 @@
+-@src=@cake.decorationImgURL
+-dif = Date.parse(@order.created_at.to_s) - Date.parse(@cake.created_at.to_s)
+-if dif.to_i.abs()>=1 then
+  -@src="previousCake/"+@cake.decorationImgURL
+ 
+
 %head
   %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %meta{:charset => "UTF-8"}/
@@ -86,7 +92,7 @@
       -if @order
         .col
           %p#notice= notice
-          %img.img-thumbnail{:src => File.join("../../",@cake.decorationImgURL), :height=>"150px"}
+          %img.img-thumbnail{:src => File.join("../../",@src), :height=>"150px"}
         .col
           %p
             %b Order:

@@ -6,4 +6,5 @@ module CakeOrdersHelper
     def orderStatusMethod
         orderStatusDic = ["Submitted", "Confirmed", "In the Oven", "Delivered"]
     end
+
 end

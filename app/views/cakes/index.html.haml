@@ -83,7 +83,8 @@
           .col-12.col-md-6.col-lg-4
             .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
               .post-thumb
-                %img.img-thumbnail{:src => File.join("..","previousCake",cake.decorationImgURL), :height=>"150px"}/
+                %a{:href => "/cake_orders/"+cake.id.to_s+"/previous"}
+                  %img.img-thumbnail{:src => File.join("..","previousCake",cake.decorationImgURL), :height=>"150px"}/
               .post-content
                 // %h7.post-headline= flavor.name
                 -if session["role"]==true

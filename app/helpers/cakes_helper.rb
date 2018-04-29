@@ -1,2 +1,3 @@
 module CakesHelper
+    @src = ""
 end
