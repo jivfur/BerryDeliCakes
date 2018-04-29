@@ -82,8 +82,11 @@
                     %i.fa.fa-home{"aria-hidden" => "true"}
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Previous Designs
-    %section.archive-area.section_padding_80
     .container
+      -if current_user!=nil
+        -if current_user.role == true
+          %a{:href => "/cakes/new"}
+            %btn-add.btn-add Add New
       .row
         - @cakes.each_with_index do |cake, index|
           .col-12.col-md-6.col-lg-4

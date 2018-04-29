@@ -1515,7 +1515,7 @@ li {
     margin-right: 50;
     padding: 0;
     list-style-type: none;
-    position: absolute;
+    position: relative;
     left: 80%;
     top: 90.5%;
 }

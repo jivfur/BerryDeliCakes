@@ -11,7 +11,7 @@
     %link{:href => "style.css", :rel => "stylesheet"}/
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
     // #preloader
-    .yummy-load
+    // .yummy-load
     .top_header_area
       .container
         .row
@@ -85,9 +85,8 @@
     .container
       -if current_user!=nil
         -if current_user.role == true
-          .container
-            %a{:href => "/flavors/new"}
-              %btn-add.btn-add Add New
+          %a{:href => "/flavors/new"}
+            %btn-add.btn-add Add New
       .row
         - @flavors.each_with_index do |flavor, index|
           .col-12.col-md-6.col-lg-4
