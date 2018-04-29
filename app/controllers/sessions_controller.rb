@@ -83,13 +83,14 @@ class SessionsController < ApplicationController
         @user = User.find_by_userName(params[:username])
         
         if (params[:username] == 'admin' && params[:password] == 'adminPW')
-            if(@user !=nil)
+            if(@user != nil)
                 puts "admin case"
                 @user.role =1
                 puts "@user.role = #{@user.role}"
                 log_in(@user)
                 flash[:notice] = 'You logged in as a admin!'
             else
+                puts "admin case -- not exist admin"
                 flash[:notice] = 'You have to sign up admin first!!'
             end
             #redirect_to sessions_path
