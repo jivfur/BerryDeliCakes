@@ -103,6 +103,10 @@
                     %a.nav-link{:href => "staticflavors.html"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "contact.html"} Contact Me
+                  -if current_user!=nil
+                    -if current_user.role == true
+                      %li.nav-item
+                        %a.nav-link{:href => "/sessions"} listing User                    
     / ****** Header Area End ******
     / ****** Welcome Post Area Start ******
     %section.welcome-post-sliders.owl-carousel

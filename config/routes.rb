@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post   '/login'   => 'sessions#create'
   get '/users/signout' => 'users#signout'
   post '/users/signout', to: 'users#signout'
-  # get '/users/userlist' => 'users#index'
-  # post '/users/userlist', to: 'users#index'
+  #get '/sessions/admin_test' => 'sessions#admin_test'
+  post '/sessions/admin_test', to: 'sessions#admin_test'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

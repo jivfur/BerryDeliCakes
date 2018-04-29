@@ -1,0 +1,41 @@
+// have to remove -- useless
+%h1 admin test
+
+%h1 Order tracking
+%table
+  %thead
+    %tr
+      %th= "user id"
+      %th= "deliveryDate"
+      %th= "deliveryAddress"
+      %th= "deliveryPhone"
+      %th= "comments"
+      %th= "paidStatus"
+      %th= "Show"
+      %th= "status"
+      %th= "Destroy"
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.user_id
+        %td= order.deliveryDate
+        %td= order.deliveryAddress
+        %td= order.deliveryPhone
+        %td= order.comments
+        %td= order.paidStatus
+        %td= link_to 'Show', order
+        %td= order.status
+        %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'want to go new flavors', new_flavor_path
+%br
+= link_to 'want to change exist flavor', edit_flavor_path
+%br
+= link_to 'want to make new past cake', new_cake_path
+%br
+= link_to 'want to change past cake', edit_cake_path
+%br
+= link_to 'want to see user listing', sessions_path

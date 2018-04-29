@@ -17,6 +17,14 @@ class SessionsController < ApplicationController
         end
         @user = User.all
     end
+   
+    def show
+      #admin test!!
+      puts "session ctrl -- admin test"
+      @users = User.all
+      @orders = Order.all
+      
+    end
     
     def edit
         #Mypage :: edit user data
@@ -79,9 +87,11 @@ class SessionsController < ApplicationController
             @user.role =1
             puts "@user.role = #{@user.role}"
             log_in(@user)
-            redirect_to sessions_path
-            #redirect_to new_flavor #where is the admin dashboard??
             flash[:notice] = 'You logged in as a admin!'
+            #redirect_to sessions_path
+            redirect_to users_path
+            #where is the admin dashboard??
+            
         elsif (!@user.nil?)
             puts "there is potential user exist"
             if @user.password == params[:password]
@@ -94,7 +104,7 @@ class SessionsController < ApplicationController
                 puts "password is not match"
                 flash[:notice] = 'please think about password again'
                 flash[:danger] = 'Invalid email/password combination' # Not quite right!
-                redirect_to root_path
+                redirect_to users_path
             end
         else
             puts "no user detected"
