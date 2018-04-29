@@ -29,12 +29,12 @@
               .search_button
                 %a.searchBtn{:href => "#"}
                   %i.fa.fa-search{"aria-hidden" => "true"}
-              .search-hidden-form
-                %form{:action => "#", :method => "get"}
-                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-                  %input.d-none{:type => "submit", :value => ""}/
-                  %span.searchBtn
-                    %i.fa.fa-times{"aria-hidden" => "true"}
+              // .search-hidden-form
+              //   %form{:action => "#", :method => "get"}
+              //     %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+              //     %input.d-none{:type => "submit", :value => ""}/
+              //     %span.searchBtn
+              //       %i.fa.fa-times{"aria-hidden" => "true"}
     %header.header_area
       .container
         .row
@@ -54,7 +54,7 @@
                       Home
                       %span.sr-only (current)
                   %li.nav-item
-                    %a.nav-link{:href => "archive.html"} Previous Designs
+                    %a.nav-link{:href => "/cakes"} Previous Designs
                   %li.nav-item
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
@@ -221,11 +221,11 @@
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
                     %li.nav-item.active
-                      %a.nav-link{:href => "#"}
+                      %a.nav-link{:href => "index.html"}
                         Home
                         %span.sr-only (current)
                     %li.nav-item
-                      %a.nav-link{:href => "archive.html"} Previous Designs
+                      %a.nav-link{:href => "/cakes"} Previous Designs
                     %li.nav-item
                       %a.nav-link{:href => "/flavors"} Flavors
                     %li.nav-item
