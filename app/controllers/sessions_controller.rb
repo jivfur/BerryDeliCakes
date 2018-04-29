@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             flash[:notice] = 'it is required to log in as admin. Please try to login.'
             redirect_to users_path
         end
-        if current_user.role == false
+        if (current_user !=nil) && (current_user.role == false)
             puts "illegal path"
             flash[:notice] = 'it is allowed only for admin'
             redirect_to users_path
@@ -83,11 +83,15 @@ class SessionsController < ApplicationController
         @user = User.find_by_userName(params[:username])
         
         if (params[:username] == 'admin' && params[:password] == 'adminPW')
-            puts "admin case"
-            @user.role =1
-            puts "@user.role = #{@user.role}"
-            log_in(@user)
-            flash[:notice] = 'You logged in as a admin!'
+            if(@user !=nil)
+                puts "admin case"
+                @user.role =1
+                puts "@user.role = #{@user.role}"
+                log_in(@user)
+                flash[:notice] = 'You logged in as a admin!'
+            else
+                flash[:notice] = 'You have to sign up admin first!!'
+            end
             #redirect_to sessions_path
             redirect_to users_path
             #where is the admin dashboard??
