@@ -81,8 +81,9 @@
               %li.breadcrumb-item.active{"aria-current" => "page"} 
   //NEW THINGS GO HERE
   .container
-    %form#regForm{:action => "/cake_orders", :method => "post", :enctype=>"multipart/form-data"}
-      %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" }
+    %form#regForm{:action => "/cake_orders/createOrder", :method => "post"}
+      %input{:type =>"hidden",:value => session["user_id"], :id => "order[user_id]" ,:name => "order[user_id]"}
+      
       .tab
         %h4 Choose your favorite flavor
         .container
@@ -97,19 +98,14 @@
                     .post-headline= flavor.name
                     %input.custom-control-input{:style => "visibility:hidden;", :id =>"flavor"+flavor.id.to_s, :name => "order[flavor_id]", :type => "radio", :value => flavor.id}/
                     %label.custom-control-input{:for => "order[flavor_id]"}
-          
       .tab
-        %h4 Choose a design
-        .row
-          .form-group
-            %label{:for => :cakes_decorationImgURL} Previous Design Selected
-            %input#cake_decorationImgURLImgURL.form-control-file{:name =>"order[decorationImgURL]", :type => "file", :onchange =>"loadFilePreview(event)"}/
+        %h4 Your Design
         .container
           .row
             .col-12.col-md-6.col-lg-4
               .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
                 .post-thumb
-                  %img.img-thumbnail{:id =>"previewImg",:style => "visibility:hidden;", :src => @src}/
+                  %img.img-thumbnail{:id =>"previewImg", :src => "../../../previousCake/"+@cake.decorationImgURL}/
                 .post-content
                   .post-headline{:id =>"previewHeadLine",:style => "visibility:hidden;"} Your Design
       .tab
@@ -131,6 +127,8 @@
           %input#cake_comments.form-control{:name => "order[comments]", :placeholder => "Do I need to know something extra?", :type => "text", :onchange => "document.getElementById('sComments').innerHTML='Comments: '+document.getElementById('cake_comments').value"}/
       .tab
         %h4 Order Delivery Details
+        .form-group
+          %input{:type =>"hidden",:value => @cake.id, :id => "order[cake_id]", :name => "order[cake_id]" }
         .form-group
           %label{:for =>"order_delivery_date"} Delivery Date and Hour
           %input#order_delivery_date.form-control{:name => "order[deliveryDate]", :type => "datetime-local",:onchange => "document.getElementById('sDate').innerHTML='Date: '+document.getElementById('order_delivery_date').value"}/
@@ -154,7 +152,7 @@
                     .single-post.wow.fadeInUp{"data-wow-delay" => ".2s"}
                       / Post Thumb
                       .post-thumb
-                        %img#summaryImg{:alt => "", :src => ""}/
+                        %img.img-thumbnail{:id =>"previewImg", :src => "../../../previousCake/"+@cake.decorationImgURL}/
                       / Post Content
                       .post-content
                         %p#sFlavor
