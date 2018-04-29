@@ -44,14 +44,13 @@
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
-                            <div class="login">
-                                <a href="register.html">Sign in</a>
+                            <div class="login"> 
+                                <!--<button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing in</button>-->
+                                <a href="#" data-toggle="modal" data-target="#loginModal" id="loginLink">Sign in</a> 
                             </div>
                             <div class="register">
-                                <a href="register.html">Sign up</a>
-                            </div>
-                            <div class="signout">
-                                <a href="register.html">Sign out</a>
+                                <!--<button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing up</button>-->
+                                <a href="#" data-toggle="modal" data-target="#registerModal" id="registerLink">Sign up</a>
                             </div>
                         </div>
                         <!-- Search Form -->
@@ -680,14 +679,14 @@
         </div>
     </footer>
     <!-- ****** Footer Menu Area End ****** -->
-<!--ALL THE LOGIN AND REGISTER PART -->
+    <!--ALL THE LOGIN AND REGISTER PART -->
 
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div id="registerView">
                 <div class="modal-header">
-                    <h4 class="modal-title">Register</h4>
+                    <h4 class="modal-title register">Register</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 </div>
                 <div class="modal-body">
@@ -703,7 +702,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="user[email]" class="control-label">E-mail</label>
-                                <input type="text" class="form-control" id="emailR" name="user[email]" title="Please enter your email" placeholder="E-mail">
+                                <input type="email" class="form-control" id="emailR" name="user[email]" title="Please enter your email" placeholder="E-mail">
                             </div>
                             <div class="form-group">
                                 <label for="user[phone]" class="control-label">Phone</label>
@@ -720,12 +719,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="user[password]" class="control-label">Password</label>
+                                <input type="password" placeholder="Password" class="form-control" id="passwordR" name="user[password]" required title="6 min password required" placeholder="Password" pattern=".{6,}">
+                                <!--
                                 <input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
-                                <span class="help-block">Min. 6 characteres</span>
+                                --><span class="help-block">Min. 6 characteres</span>
+                                
+                                
+                            <!--<input type="password" placeholder="Password" id="password" required>-->
+                            <!--<input type="password" placeholder="Confirm Password" id="confirm_password" required>-->
                             </div>
                             <div class="form-group">
                                 <label for="user[password]" class="control-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
+                                <input type="password" placeholder="Confirm Password" class="form-control" id="confirm_passwordR" name="user[passwordConfirm]" required title="Confirm password">
+                                <!--<input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">-->
                                 <span class="help-block"></span>
                             </div>
                             <div id="registerErrorMsg" class="alert alert-danger collapse" role="alert">Register error</div>
@@ -744,12 +750,12 @@
         <div class="modal-content">
             <div id="loginView">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
+                    <h4 class="modal-title login">Login</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="well">
-                        <form id="loginForm">
+                        <form id="loginForm" action="/sessions" method="post">
                             <div class="form-group">
                                 <label for="username" class="control-label">Username</label>
                                 <input type="text" class="form-control" id="usernameL" name="username" required title="Please enter your username" placeholder="Username">
@@ -767,6 +773,32 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="signoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="signoutView">
+                <div class="modal-header">
+                    <h4 class="modal-title">Signout</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="well">
+                        <form id="signoutForm" action="/users/signout" method="post">
+                            <div class="form-group">
+                                <label for="username" class="control-label">Do you want to really sign out?</label>
+                            </div>
+                            <button type="submit" class="btn  contact-btn btn-block">Signout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+
+
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
