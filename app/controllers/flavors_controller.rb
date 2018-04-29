@@ -17,7 +17,15 @@ class FlavorsController < ApplicationController
 
   # GET /flavors/new
   def new
+  #   -if not(defined? session["role"]) || session["role"]==false then
+  # -redirect_to users_path
+    @users = User.all
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      redirect_to users_path
+    end
     @flavor = Flavor.new
+    
   end
 
   # GET /flavors/1/edit
