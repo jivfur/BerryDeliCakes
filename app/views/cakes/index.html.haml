@@ -86,7 +86,6 @@
                 %a{:href => "/cake_orders/"+cake.id.to_s+"/previous"}
                   %img.img-thumbnail{:src => File.join("..","previousCake",cake.decorationImgURL), :height=>"150px"}/
               .post-content
-                // %h7.post-headline= flavor.name
                 -if session["role"]==true
                   .btn-flavor
                     %ul.edit-delte
@@ -98,7 +97,17 @@
                           //"data-confirm" => "Are you sure?", "data-method" => "delete", :href => "/flavors/"+flavor.id.to_s, :rel => "nofollow"
                           %h5 <i class="fa fa-trash fa-lg" aria-hidden="true"></i> 
               // =link_to  do flavor end
-              
+              .post-content
+                .post-meta.d-flex
+                  .post-author-date-area.d-flex
+                    / Post Author
+                    .post-author
+                      %a By Johana Marcela
+                    / Post Date
+                    .post-date
+                      %a=cake.created_at.to_s
+                %h4.post-headline=cake.comments
+  
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
     
       .instagram_gallery_item
