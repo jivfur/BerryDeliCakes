@@ -5,6 +5,11 @@ class SessionsController < ApplicationController
     end
     
     def index
+        # listing user part
+        if current_user == nil
+            flash[:notice] = 'it is required to log in as admin. Please try to login.'
+            redirect_to users_path
+        end
         if current_user.role == false
             puts "illegal path"
             flash[:notice] = 'it is allowed only for admin'
@@ -14,6 +19,7 @@ class SessionsController < ApplicationController
     end
     
     def edit
+        #Mypage :: edit user data
         #@user = User.find_by_userName(params[:username])
         @user_cur = User.new(user_params)
         @user_prev = current_user
@@ -63,7 +69,7 @@ class SessionsController < ApplicationController
     end
 
     def create
-        #login path
+        #login part
         puts "session -- create"
 
         @user = User.find_by_userName(params[:username])

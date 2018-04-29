@@ -14,7 +14,7 @@ Feature: signup
     And I fill in "user[password]" with "password"
     And I fill in "user[passwordConfirm]" with "password"
     And I press_html "Register"
-    Then I should be on the index page
+    Then I should be on the users path
     
     
 #   Scenario: login

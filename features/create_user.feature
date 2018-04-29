@@ -12,4 +12,4 @@ Feature: User Creation
     And I fill in "user[phone]" with "9794925979"
     And I fill in "user[address]" with "401 Anderson St"
     And I press "Register"
-    Then I should be on the my orders page
+    Then I should be on the users path

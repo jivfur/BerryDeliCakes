@@ -59,14 +59,15 @@
                 //- if !session[:user.id].nil?
                 //.login
                 -if logged_out?
-                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
-                  //.register
-                  %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+                  .login
+                    %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+                  .register
+                    %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
                 -if signged_in?
-                  %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+                  .login
+                    %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
-                  %a= " | "
-                  %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
             / Search Form
             .search-hidden-form
               %form{:action => "#", :method => "get"}

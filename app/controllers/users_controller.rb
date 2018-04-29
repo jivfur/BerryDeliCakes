@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     puts "users ctrl -- create"
-    
+    #sign up part
       
       @user = User.new(user_params)
       @user_check_username = User.find_by_userName(@user.userName)
