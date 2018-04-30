@@ -198,6 +198,27 @@ class CakeOrdersController < ApplicationController
         end
     end
     
+    def destroy
+        @order = Order.find(params[:id])
+        @cake_price = CakePrice.find(@order.cake_price_id)
+        @cake = Cake.find(@cake_price.cake_id)
+        if session[:role] == true then #if  you are admin you can delete any time
+            @order.destroy()
+            @cake_price.destroy()
+            if @cake.gallery==false then #Cake could be a previous design, we do not want to delete those.
+                @cake.destroy() 
+            end
+        else
+            #0 Submitted
+            #1 Confirmed
+            #2 In the oven
+            #3 Delivered
+            #4 Canceled
+            @order.update({:status =>4})
+        end    
+           redirect_back(fallback_location: root_path)      
+    end
+    
     
     
     private
