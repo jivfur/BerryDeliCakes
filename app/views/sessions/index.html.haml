@@ -87,16 +87,20 @@
               / Menu Area Start
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
-                  %li.nav-item
-                    %a.nav-link{:href => "index.html"}
+                  %li.nav-item.active
+                    %a.nav-link{:href => "/users"}
                       Home
                       %span.sr-only (current)
                   %li.nav-item
-                    %a.nav-link{:href => "archive.html"} Previous Designs
+                    %a.nav-link.previous{:href => "/cakes"} Previous Designs
                   %li.nav-item
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
-                    %a.nav-link{:href => "contact.html"} Contact Me
+                    %a.nav-link{:href => "/contacts"} Contact Me
+                  -if current_user!=nil
+                    -if current_user.role == true
+                      %li.nav-item
+                        %a.nav-link{:href => "/sessions"} listing User     
     / ****** Header Area End ******
     / ****** Breadcumb Area Start ******
     .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}

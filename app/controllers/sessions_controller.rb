@@ -73,7 +73,16 @@ class SessionsController < ApplicationController
             @user_prev.password = @user_cur.password
             flash[:notice] = 'successfully chage password'
         end
-        redirect_to users_path
+        if @user_prev.save
+          flash[:notice] = 'successfully edited'
+          redirect_to users_path
+        else
+          flash[:notice] = 'no response from server ... Please try again later'
+          redirect_to users_path
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+        # redirect_to users_path
     end
 
     def create
@@ -83,13 +92,14 @@ class SessionsController < ApplicationController
         @user = User.find_by_userName(params[:username])
         
         if (params[:username] == 'admin' && params[:password] == 'adminPW')
-            if(@user !=nil)
+            if(@user != nil)
                 puts "admin case"
                 @user.role =1
                 puts "@user.role = #{@user.role}"
                 log_in(@user)
                 flash[:notice] = 'You logged in as a admin!'
             else
+                puts "admin case -- not exist admin"
                 flash[:notice] = 'You have to sign up admin first!!'
             end
             #redirect_to sessions_path

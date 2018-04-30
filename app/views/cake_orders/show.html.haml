@@ -114,8 +114,8 @@
             %b Comments: 
             = @order.comments
           %p
-            %b Cakeprice: 
-            = @order.cakePrice
+            %b Cakeprice:$ 
+            =@cakePrice.price
           %p
             %b Paid Status:  
             = paidStatusMethod()[@order.paidStatus]

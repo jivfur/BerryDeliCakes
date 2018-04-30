@@ -28,6 +28,7 @@
                 %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
               .register
                 %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+<<<<<<< HEAD
             .search_button
               %a.searchBtn{:href => "#"}
                 %i.fa.fa-search{"aria-hidden" => "true"}
@@ -42,6 +43,177 @@
       .row
         .col-12
           .logo_area.text-center
+=======
+            -if signged_in?
+              .login
+                %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+              .signout
+                %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+          .search_button
+            %a.searchBtn{:href => "#"}
+              %i.fa.fa-search{"aria-hidden" => "true"}
+          .search-hidden-form
+            %form{:action => "#", :method => "get"}
+              %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+              %input.d-none{:type => "submit", :value => ""}/
+              %span.searchBtn
+                %i.fa.fa-times{"aria-hidden" => "true"}
+%header.header_area
+  .container
+    .row
+      .col-12
+        .logo_area.text-center
+          %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+    .row
+      .col-12
+        %nav.navbar.navbar-expand-lg
+          %button.navbar-toggler{"aria-controls" => "yummyfood-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-nav", "data-toggle" => "collapse", :type => "button"}
+            %i.fa.fa-bars{"aria-hidden" => "true"}
+            Menu
+          #yummyfood-nav.collapse.navbar-collapse.justify-content-center
+            %ul#yummy-nav.navbar-nav
+              %li.nav-item.active
+                %a.nav-link{:href => "/users"}
+                  Home
+                  %span.sr-only (current)
+              %li.nav-item
+                %a.nav-link.previous{:href => "/cakes"} Previous Designs
+              %li.nav-item
+                %a.nav-link{:href => "/flavors"} Flavors
+              %li.nav-item
+                %a.nav-link{:href => "/contacts"} Contact Me
+              -if current_user!=nil
+                -if current_user.role == true
+                  %li.nav-item
+                    %a.nav-link{:href => "/sessions"} listing User   
+.breadcumb-area{:style => "background-image: url("+asset_path("img/bg-img/breadcumb.jpg")+");"}
+  .container.h-100
+    .row.h-100.align-items-center
+      .col-12
+        .bradcumb-title.text-center
+          %h2 Flavor Editing
+.breadcumb-nav
+  .container
+    .row
+      .col-12
+        %nav{"aria-label" => "breadcrumb"}
+          %ol.breadcrumb
+            %li.breadcrumb-item
+              %a{:href => "index.html"}
+                %i.fa.fa-home{"aria-hidden" => "true"}
+                Home
+            %li.breadcrumb-item.active{"aria-current" => "page"} 
+//NEW THINGS GO HERE
+
+.container
+  %form#new_flavor.new_flavor{:action => "/flavors/"+@flavor.id.to_s, :method => "POST", :enctype=>"multipart/form-data"}
+    %input{:name => "_method", :type => "hidden", :value => "patch"}
+    .form-group
+      %label{:for => :flavor_name} Name
+      %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text", :value => @flavor.name}/
+.container
+  .row
+    .col
+      %img.img-thumbnail{:src => File.join("../../","flavorsUploads",@flavor.flavorImgURL), :height=>"150px"}
+    .col
+      .form-group
+        %label{:for => :flavor_flavorImgURL} Flavor Picture
+        %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file"}/
+  %button.btn.btn-primary{:type => "submit"} Submit
+  =link_to 'Show', @flavor
+  =link_to 'Back', flavors_path
+
+
+//END OF NEW THINGS
+#portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/1.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/2.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/3.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/4.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/5.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/6.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  // .instagram_gallery_item
+  //   %img{:alt => "", :src => asset_path("img/instagram-img/1.jpg")}/
+  //   .hover_overlay
+  //     .yummy-table
+  //       .yummy-table-cell
+  //         .follow-me.text-center
+  //           %a{:href => "#"}
+  //             %i.fa.fa-facebook{"aria-hidden" => "true"}
+  //             Like me
+  // .instagram_gallery_item
+  //   %img{:alt => "", :src => asset_path("img/instagram-img/2.jpg")}/
+  //   .hover_overlay
+  //     .yummy-table
+  //       .yummy-table-cell
+  //         .follow-me.text-center
+  //           %a{:href => "#"}
+  //             %i.fa.fa-facebook{"aria-hidden" => "true"}
+  //             Like me
+.social_icon_area.clearfix
+  .container
+    .row
+      .col-12
+        .footer-social-area.d-flex
+          .single-icon
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              %span facebook
+%footer.footer_area
+  .container
+    .row
+      .col-12
+        .footer-content
+          .footer-logo-area.text-center
+>>>>>>> 2d5e008c5e684871f7b6ce1aaa8f9018ac6d843e
             %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
       .row
         .col-12

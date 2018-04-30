@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  #root   'pages#index'
-  root 'users#index'
+  root  'pages#index'
+  #root 'users#index'
   
   
   resources :orders

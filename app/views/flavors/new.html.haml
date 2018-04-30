@@ -51,16 +51,24 @@
               Menu
             #yummyfood-nav.collapse.navbar-collapse.justify-content-center
               %ul#yummy-nav.navbar-nav
-                %li.nav-item
-                  %a.nav-link{:href => "../index.html"}
+                %li.nav-item.active
+                  %a.nav-link{:href => "/users"}
                     Home
                     %span.sr-only (current)
                 %li.nav-item
-                  %a.nav-link{:href => "../archive.html"} Previous Designs
+                  %a.nav-link.previous{:href => "/cakes"} Previous Designs
                 %li.nav-item
                   %a.nav-link{:href => "../flavors"} Flavors
                 %li.nav-item
+<<<<<<< HEAD
                   %a.nav-link{:href => "../contact.html"} Cake Design
+=======
+                  %a.nav-link{:href => "/contacts"} Contact Me
+                -if current_user!=nil
+                  -if current_user.role == true
+                    %li.nav-item
+                      %a.nav-link{:href => "/sessions"} listing User   
+>>>>>>> 2d5e008c5e684871f7b6ce1aaa8f9018ac6d843e
   .breadcumb-area{:style => "background-image: url(../img/bg-img/breadcumb.jpg);"}
     .container.h-100
       .row.h-100.align-items-center
@@ -84,10 +92,10 @@
     %form#new_flavor.new_flavor{:action => "/flavors", :method => "post", :enctype=>"multipart/form-data"}
       .form-group
         %label{:for => :flavor_name} Name
-        %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text"}/
+        %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text",:required=>"required"}/
       .form-group
         %label{:for => :flavor_flavorImgURL} Flavor Picture
-        %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file"}/
+        %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file",:required=>"required"}/
       %button.btn.btn-primary{:type => "submit"} Submit
   
   // = render 'form' 

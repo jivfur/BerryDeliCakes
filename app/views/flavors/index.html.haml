@@ -10,8 +10,9 @@
     %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
     %link{:href => "style.css", :rel => "stylesheet"}/
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
-    // #preloader
-    // .yummy-load
+    -if(session[:role]==true)
+      #pattern-switcher
+        %a{:href => "/flavors/new"}Add New
     .top_header_area
       .container
         .row
@@ -55,16 +56,20 @@
                 Menu
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
-                  %li.nav-item
-                    %a.nav-link{:href => "index.html"}
+                  %li.nav-item.active
+                    %a.nav-link{:href => "/users"}
                       Home
                       %span.sr-only (current)
                   %li.nav-item
-                    %a.nav-link{:href => "archive.html"} Previous Designs
+                    %a.nav-link.previous{:href => "/cakes"} Previous Designs
                   %li.nav-item
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
+                  -if current_user!=nil
+                    -if current_user.role == true
+                      %li.nav-item
+                        %a.nav-link{:href => "/sessions"} listing User     
     .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center
