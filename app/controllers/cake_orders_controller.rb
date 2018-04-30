@@ -145,6 +145,13 @@ class CakeOrdersController < ApplicationController
         end
     end
     
+    def edit
+        
+    end
+    
+    
+    
+    
     def createOrder
         Order.transaction do
             ########
@@ -202,7 +209,7 @@ class CakeOrdersController < ApplicationController
         @order = Order.find(params[:id])
         @cake_price = CakePrice.find(@order.cake_price_id)
         @cake = Cake.find(@cake_price.cake_id)
-        if session[:role] == true then #if  you are admin you can delete any time
+        if session[:role] == true and @order.status == 4 then #if  you are admin you can delete only if user canceled before
             @order.destroy()
             @cake_price.destroy()
             if @cake.gallery==false then #Cake could be a previous design, we do not want to delete those.
