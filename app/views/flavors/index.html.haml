@@ -10,8 +10,9 @@
     %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
     %link{:href => "style.css", :rel => "stylesheet"}/
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
-    // #preloader
-    // .yummy-load
+    -if(session[:role]==true)
+      #pattern-switcher
+        %a{:href => "/flavors/new"}Add New
     .top_header_area
       .container
         .row

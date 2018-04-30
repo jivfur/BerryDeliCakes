@@ -95,10 +95,10 @@
     %form#new_flavor.new_flavor{:action => "/flavors", :method => "post", :enctype=>"multipart/form-data"}
       .form-group
         %label{:for => :flavor_name} Name
-        %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text"}/
+        %input#:flavor_name.form-control{:name => "flavor[name]", :placeholder => "Flavor Name", :type => "text",:required=>"required"}/
       .form-group
         %label{:for => :flavor_flavorImgURL} Flavor Picture
-        %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file"}/
+        %input#flavor_flavorImgURL.form-control-file{:name =>"flavor[flavorImgURL]", :type => "file",:required=>"required"}/
       %button.btn.btn-primary{:type => "submit"} Submit
   
   // = render 'form' 
