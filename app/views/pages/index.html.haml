@@ -51,12 +51,16 @@
 						.signup-search-area.d-flex.align-items-center.justify-content-end
 							.login_register_area.d-flex
 								/ <input type="button" id="hw" value="Hello world" />
-								.login
-									/ <button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing in</button>
-									%a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
-								.register
-									/ <button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing up</button>
-									%a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+								-if logged_out?
+									.login
+										%a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+									.register
+										%a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+								-if signged_in?
+									.login
+										%a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+									.signout
+										%a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
 								/ <div class="signout">
 								/ <button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal" data-target="#loginModal" id="shareStory">Sing out</button>
 								/ <a href="#" data-toggle="modal" data-target="#signoutModal" id="signoutLink">Sign out</a>
@@ -102,6 +106,10 @@
 											%a.nav-link{:href => "/cake_orders"} My Orders
 										%li.nav-item
 											%a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
+									-if current_user!=nil
+										-if current_user.role == true
+											%li.nav-item
+												%a.nav-link{:href => "/sessions"} listing User 		
 		/ ****** Header Area End ******
 		/ ****** Welcome Post Area Start ******
 		%section.welcome-post-sliders.owl-carousel
@@ -586,7 +594,7 @@
 							%button.close{"data-dismiss" => "modal", :type => "button"}
 								%span{"aria-hidden" => "true"} ×
 								%span.sr-only Close
-						.modal-body
+						.modal-body			
 							.well
 								%form#registerForm{:action => "/users", "data-toggle" => "validator", :method => "post"}
 									.form-group
@@ -613,7 +621,7 @@
 										%input#passwordR.form-control{:name => "user[password]", :pattern => ".{6,}", :placeholder => "Password", :required => "", :title => "6 min password required", :type => "password"}/
 										/
 											<input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
-										%span.help-block Min. 6 characteres
+										%span.help-block Min. 6 characters
 										/ <input type="password" placeholder="Password" id="password" required>
 										/ <input type="password" placeholder="Confirm Password" id="confirm_password" required>
 									.form-group
@@ -621,8 +629,8 @@
 										%input#confirm_passwordR.form-control{:name => "user[passwordConfirm]", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
 										/ <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
 										%span.help-block
-									#registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
-									%button.btn.contact-btn.btn-block{:type => "submit"} Register
+										#registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+										%button.btn.contact-btn.btn-block{:type => "submit"} Register
 		#loginModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
 			.modal-dialog{:role => "document"}
 				.modal-content
@@ -643,6 +651,53 @@
 										%input#passwordL.form-control{:name => "password", :placeholder => "Password", :required => "", :title => "Please enter your password", :type => "password"}/
 									#loginErrorMsg.alert.alert-danger.collapse{:role => "alert"} Login error
 									%button.btn.contact-btn.btn-block{:type => "submit"} Login
+		#editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+			.modal-dialog{:role => "document"}
+				.modal-content
+					#editView
+						.modal-header
+							%h4.modal-title.register Edit
+							%button.close{"data-dismiss" => "modal", :type => "button"}
+							%span{"aria-hidden" => "true"} ×
+							%span.sr-only Close
+						.modal-body
+							.well
+								%form#editForm{:action => "/session/edit", "data-toggle" => "validator", :method => "post"}
+									.form-group
+										%label.control-label{:for => "user[name]"} Name
+										%input#nameR.form-control{:name => "user[name]", :placeholder => "Name", :title => "Please enter your name", :type => "text"}/
+									.form-group
+										%label.control-label{:for => "user[lastname]"} Lastname
+										%input#lastNameR.form-control{:name => "user[lastName]", :placeholder => "Lastname", :title => "Please enter your lastname", :type => "text"}/
+									.form-group
+										%label.control-label{:for => "user[email]"} E-mail
+										%input#emailR.form-control{:name => "user[email]", :placeholder => "E-mail", :title => "Please enter your email", :type => "email"}/
+									.form-group
+										%label.control-label{:for => "user[phone]"} Phone
+										%input#phoneR.form-control{:name => "user[phone]", :placeholder => "Phone Number", :title => "Please enter your telephone", :type => "text"}/
+									.form-group
+										%label.control-label{:for => "user[address]"} Address
+										%input#addressR.form-control{:name => "user[address]", :placeholder => "Address", :title => "Please enter your address", :type => "text"}/
+									.form-group
+										%label.control-label{:for => "user[userName]"} Username
+										%input#usernameR.form-control{:name => "user[userName]", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+										%span.help-block
+									.form-group
+										%label.control-label{:for => "user[password]"} Password
+										%input#passwordR.form-control{:name => "user[password]", :pattern => ".{6,}", :placeholder => "Password", :required => "", :title => "6 min password required", :type => "password"}/
+										/
+											<input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
+										%span.help-block Min. 6 characters
+										/ <input type="password" placeholder="Password" id="password" required>
+										/ <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+									.form-group
+										%label.control-label{:for => "user[password]"} Confirm Password
+										%input#confirm_passwordR.form-control{:name => "user[passwordConfirm]", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
+										/ <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
+										%span.help-block
+									#registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+									%button.btn.contact-btn.btn-block{:type => "submit"} Edit
+		
 		#signoutModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
 			.modal-dialog{:role => "document"}
 				.modal-content

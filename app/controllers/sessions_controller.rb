@@ -73,7 +73,16 @@ class SessionsController < ApplicationController
             @user_prev.password = @user_cur.password
             flash[:notice] = 'successfully chage password'
         end
-        redirect_to users_path
+        if @user_prev.save
+          flash[:notice] = 'successfully edited'
+          redirect_to users_path
+        else
+          flash[:notice] = 'no response from server ... Please try again later'
+          redirect_to users_path
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+        # redirect_to users_path
     end
 
     def create

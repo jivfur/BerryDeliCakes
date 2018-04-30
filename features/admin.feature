@@ -20,7 +20,7 @@ Feature: admin signup and signin
     When I fill in "username" with "admin"
     And I fill in "password" with "adminPW"
     And I press "Login"
-    Then I should be on the user listing path
+    Then I should see "You logged in as a admin!"
     
     #admin add 
     #Given I am in the flavor page
