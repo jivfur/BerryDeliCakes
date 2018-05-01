@@ -27,60 +27,95 @@ class SessionsController < ApplicationController
     end
     
     def edit
+        #user data edit
+        puts "edit -- session ctr"
+        check_first = 0
+        check_change = 0
         #Mypage :: edit user data
         #@user = User.find_by_userName(params[:username])
-        @user_cur = User.new(user_params)
+        # @user = User.new
+        #@user = User.new(user_params)
+        #@user_prev = User.find_by_id(params[:id])
         @user_prev = current_user
-        puts "@user_cur.userName : #{@user_cur.userName}"
-        puts "@user_cur.password : #{@user_cur.password}"
-        puts "@user_cur.email : #{@user_cur.email}"
+        if (params[:user] != nil)
+            #@user = User.new(params[:user])
+            puts "let's make @user"
+            @user = User.new(user_params)
+            check_first = 1
+            puts "@user : #{@user}"
+        end
+
         puts "@user_prev.userName : #{@user_prev.userName}"
         puts "@user_prev.password : #{@user_prev.password}"
-        puts "@user_cur.email.empty? : #{@user_cur.email.empty?}"
-        
-        if (!(@user_cur.userName.empty?)) && (@user_prev.userName != @user_cur.userName)
-            puts "username changes"
-            @user_prev.userName = @user_cur.userName
-            flash[:notice] = 'successfully chage user name'
+        puts "@user : #{params[:user]}"
+        # puts "@user.password : #{@user.password}"
+        puts "check point 1"
+        puts "check_first : #{check_first}"
+        if (check_first == 1)
+            if ((check_first == 1) && !(@user.userName.empty?)) && (@user_prev.userName != @user.userName)
+                puts "username changes"
+                @user_prev.userName = @user.userName
+                check_change = 1
+                flash[:notice] = 'successfully chage user name'
+            end
+            if ((check_first == 1) && !(@user.name.empty?)) && (@user_prev.name != @user.name)
+                puts "name changes"
+                @user_prev.name = @user.name
+                check_change = 1
+                flash[:notice] = 'successfully change name'
+            end
+            if ((check_first == 1) && !(@user.lastName.empty?)) && (@user_prev.lastName != @user.lastName)
+                puts "lastname changes"
+                @user_prev.lastName = @user.lastName
+                check_change = 1
+                flash[:notice] = 'successfully chage lastname'
+            end
+            if ((check_first == 1) && !(@user.email.empty?)) && (@user_prev.email != @user.email)
+                puts " email changes"
+                @user_prev.email = @user.email
+                check_change = 1
+                flash[:notice] = 'successfully chage email'
+            end
+            if ((check_first == 1) && !(@user.phone.empty?))&& (@user_prev.phone != @user.phone)
+                puts " phone changes"
+                @user_prev.phone = @user.phone
+                check_change = 1
+                flash[:notice] = 'successfully change phone number'
+            end
+            if ((check_first == 1) && !(@user.address.empty?)) && (@user_prev.address != @user.address)
+                puts " address changes"
+                @user_prev.address = @user.address
+                check_change = 1
+                flash[:notice] = 'successfully change address'
+            end
+            if ((check_first == 1) && !(@user.password.empty?)) && (@user_prev.password != @user.password)
+                puts " password changes"
+                @user_prev.password = @user.password
+                check_change = 1
+                flash[:notice] = 'successfully chage password'
+            end
+            check_first = 0
+            puts "check point 2"
         end
-        if (!(@user_cur.name.empty?)) && (@user_prev.name != @user_cur.name)
-            puts "name changes"
-            @user_prev.name = @user_cur.name
-            flash[:notice] = 'successfully change name'
+        if (check_change == 0)
+            puts "no changes"
+            flash[:notice] = 'If you do not want to edit something, please go another direction'
         end
-        if (!(@user_cur.lastName.empty?)) && (@user_prev.lastName != @user_cur.lastName)
-            puts "lastname changes"
-            @user_prev.lastName = @user_cur.lastName
-            flash[:notice] = 'successfully chage lastname'
-        end
-        if (!(@user_cur.email.empty?)) && (@user_prev.email != @user_cur.email)
-            puts " email changes"
-            @user_prev.email = @user_cur.email
-            flash[:notice] = 'successfully chage email'
-        end
-        if (!(@user_cur.phone.empty?))&& (@user_prev.phone != @user_cur.phone)
-            puts " phone changes"
-            @user_prev.phone = @user_cur.phone
-            flash[:notice] = 'successfully change phone number'
-        end
-        if (!(@user_cur.address.empty?)) && (@user_prev.address != @user_cur.address)
-            puts " address changes"
-            @user_prev.address = @user_cur.address
-            flash[:notice] = 'successfully change address'
-        end
-        if (!(@user_cur.password.empty?)) && (@user_prev.password != @user_cur.password)
-            puts " password changes"
-            @user_prev.password = @user_cur.password
-            flash[:notice] = 'successfully chage password'
-        end
-        if @user_prev.save
-          flash[:notice] = 'successfully edited'
-          redirect_to users_path
-        else
-          flash[:notice] = 'no response from server ... Please try again later'
-          redirect_to users_path
-          format.html { render :new }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
+        puts "check point 3"
+        puts "check_first : #{check_first}"
+        puts "check_change : #{check_change}"
+        if (check_change == 1)
+            puts "check point 4"
+            if @user_prev.save
+              puts "check point 5"
+              flash[:notice] = 'successfully edited'
+              redirect_to users_path 
+            else
+              flash[:notice] = 'no response from server ... Please try again later'
+              redirect_to users_path
+              format.html { render :new }
+              format.json { render json: @user.errors, status: :unprocessable_entity }
+            end
         end
         # redirect_to users_path
     end
