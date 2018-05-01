@@ -15,8 +15,9 @@
         .row
           .col-5.col-sm-6
             .top_social_bar
-              %a{:href => "#"}
+              %a{:href => "https://www.facebook.com/berrydelicakes/"}
                 %i.fa.fa-facebook{"aria-hidden" => "true"}
+                Facebook
           .col-7.col-sm-6
             .signup-search-area.d-flex.align-items-center.justify-content-end
               .login_register_area.d-flex
@@ -29,16 +30,6 @@
                   .login
                     %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
-                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
-              .search_button
-                %a.searchBtn{:href => "#"}
-                  %i.fa.fa-search{"aria-hidden" => "true"}
-              .search-hidden-form
-                %form{:action => "#", :method => "get"}
-                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-                  %input.d-none{:type => "submit", :value => ""}/
-                  %span.searchBtn
-                    %i.fa.fa-times{"aria-hidden" => "true"}
     %header.header_area
       .container
         .row
@@ -53,7 +44,7 @@
                 Menu
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
-                  %li.nav-item.active
+                  %li.nav-item
                     %a.nav-link{:href => "/"}
                       Home
                       %span.sr-only (current)
@@ -64,7 +55,7 @@
                   %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
                   -if(session[:user_id]!=nil)
-                    %li.nav-item
+                    %li.nav-item.active
                       %a.nav-link{:href => "/cake_orders"} My Orders
                     %li.nav-item
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
@@ -221,18 +212,25 @@
                   Menu
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
-                    %li.nav-item.active
-                      %a.nav-link{:href => "#"}
+                    %li.nav-item
+                      %a.nav-link{:href => "/"}
                         Home
                         %span.sr-only (current)
                     %li.nav-item
-                      %a.nav-link{:href => "archive.html"} Previous Designs
+                      %a.nav-link.previous{:href => "/cakes"} Previous Designs
                     %li.nav-item
-                      %a.nav-link{:href => "flavors.html"} Flavors
+                      %a.nav-link{:href => "/flavors"} Flavors
                     %li.nav-item
-                      %a.nav-link{:href => "reviews.html"} Customer Reviews
-                    %li.nav-item
-                      %a.nav-link{:href => "contact.html"} Contact Me
+                      %a.nav-link{:href => "/contacts"} Contact Me
+                    -if(session[:user_id]!=nil)
+                      %li.nav-item.active
+                        %a.nav-link{:href => "/cake_orders"} My Orders
+                      %li.nav-item
+                        %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
+                    -if current_user!=nil
+                      -if current_user.role == true
+                        %li.nav-item
+                          %a.nav-link{:href => "/sessions"} listing User 
       .container
         .row
           .col-12

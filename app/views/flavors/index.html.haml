@@ -20,6 +20,7 @@
             .top_social_bar
               %a{:href => "https://www.facebook.com/berrydelicakes/"}
                 %i.fa.fa-facebook{"aria-hidden" => "true"}
+                Facebook
           .col-7.col-sm-6
             .signup-search-area.d-flex.align-items-center.justify-content-end
               .login_register_area.d-flex
@@ -66,6 +67,11 @@
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
+                  -if(session[:user_id]!=nil)
+                    %li.nav-item
+                      %a.nav-link{:href => "/cake_orders"} My Orders
+                    %li.nav-item
+                      %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
@@ -122,7 +128,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
     
@@ -134,7 +140,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
     
@@ -146,7 +152,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
     
@@ -158,7 +164,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
     
@@ -170,7 +176,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
     
@@ -181,7 +187,7 @@
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   Like me
       // .instagram_gallery_item
@@ -208,7 +214,7 @@
           .col-12
             .footer-social-area.d-flex
               .single-icon
-                %a{:href => "#"}
+                %a{:href => "https://www.facebook.com/berrydelicakes/"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   %span facebook
     %footer.footer_area
@@ -224,16 +230,25 @@
                   Menu
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
-                    %li.nav-item.active
-                      %a.nav-link{:href => "#"}
+                    %li.nav-item
+                      %a.nav-link{:href => "/"}
                         Home
                         %span.sr-only (current)
                     %li.nav-item
-                      %a.nav-link{:href => "archive.html"} Previous Designs
-                    %li.nav-item
+                      %a.nav-link.previous{:href => "/cakes"} Previous Designs
+                    %li.nav-item.active
                       %a.nav-link{:href => "/flavors"} Flavors
                     %li.nav-item
                       %a.nav-link{:href => "/contacts"} Contact Me
+                    -if(session[:user_id]!=nil)
+                      %li.nav-item
+                        %a.nav-link{:href => "/cake_orders"} My Orders
+                      %li.nav-item
+                        %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
+                    -if current_user!=nil
+                      -if current_user.role == true
+                        %li.nav-item
+                          %a.nav-link{:href => "/sessions"} listing User 
       .container
         .row
           .col-12
