@@ -71,13 +71,10 @@
                       %a.nav-link{:href => "/cake_orders"} My Orders
                     %li.nav-item
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
-<<<<<<< HEAD
-=======
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
                         %a.nav-link{:href => "/sessions"} listing User    
->>>>>>> aa8db987cb6b278609e5fa394f18836aa602d50d
     .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center
