@@ -1,7 +1,368 @@
-%h1 Editing cake
 
-= render 'form'
+%body
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "UTF-8"}/
+%meta{:content => "", :name => "description"}/
+%meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+%meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+%title BerryDeli Cakes
+%link{:href => "../../img/core-img/favicon.ico", :rel => "icon"}/
+%link{:href => "../../style.css", :rel => "stylesheet"}/
+%link{:href => "../../css/responsive/responsive.css", :rel => "stylesheet"}/
+    
 
-= link_to 'Show', @cake
-\|
-= link_to 'Back', cakes_path
+// #preloader
+// .yummy-load
+.top_header_area
+  .container
+    .row
+      .col-5.col-sm-6
+        .top_social_bar
+          %a{:href => "#"}
+            %i.fa.fa-facebook{"aria-hidden" => "true"}
+      .col-7.col-sm-6
+        .signup-search-area.d-flex.align-items-center.justify-content-end
+          .login_register_area.d-flex
+            -if logged_out?
+              .login
+                %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+              .register
+                %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+            -if signged_in?
+              .login
+                %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+              .signout
+                %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+          .search_button
+            %a.searchBtn{:href => "#"}
+              %i.fa.fa-search{"aria-hidden" => "true"}
+          .search-hidden-form
+            %form{:action => "#", :method => "get"}
+              %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+              %input.d-none{:type => "submit", :value => ""}/
+              %span.searchBtn
+                %i.fa.fa-times{"aria-hidden" => "true"}
+%header.header_area
+  .container
+    .row
+      .col-12
+        .logo_area.text-center
+          %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+    .row
+      .col-12
+        %nav.navbar.navbar-expand-lg
+          %button.navbar-toggler{"aria-controls" => "yummyfood-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-nav", "data-toggle" => "collapse", :type => "button"}
+            %i.fa.fa-bars{"aria-hidden" => "true"}
+            Menu
+          #yummyfood-nav.collapse.navbar-collapse.justify-content-center
+            %ul#yummy-nav.navbar-nav
+              %li.nav-item.active
+                %a.nav-link{:href => "/users"}
+                  Home
+                  %span.sr-only (current)
+              %li.nav-item
+                %a.nav-link.previous{:href => "/cakes"} Previous Designs
+              %li.nav-item
+                %a.nav-link{:href => "/flavors"} Flavors
+              %li.nav-item
+                %a.nav-link{:href => "/contacts"} Contact Me
+            -if(session[:user_id]!=nil)
+              %li.nav-item
+                %a.nav-link{:href => "/cake_orders"} My Orders
+              %li.nav-item
+                %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile  
+.breadcumb-area{:style => "background-image: url("+asset_path("img/bg-img/breadcumb.jpg")+");"}
+  .container.h-100
+    .row.h-100.align-items-center
+      .col-12
+        .bradcumb-title.text-center
+          %h2 Editing cake
+.breadcumb-nav
+  .container
+    .row
+      .col-12
+        %nav{"aria-label" => "breadcrumb"}
+          %ol.breadcrumb
+            %li.breadcrumb-item
+              %a{:href => "index.html"}
+                %i.fa.fa-home{"aria-hidden" => "true"}
+                Home
+            %li.breadcrumb-item.active{"aria-current" => "page"} 
+//NEW THINGS GO HERE
+.container
+  .row
+    .col
+      %img.img-thumbnail{:src => File.join("../../","previousCake",@cake.decorationImgURL), :height=>"150px"}
+    .col
+      %form#new_cake.new_cake{:action => "/cakes/"+@cakes.id.to_s, :method => "post", :enctype=>"multipart/form-data"}
+        %input{:name => "_method", :type => "hidden", :value => "patch"}
+        .form-group
+          %label{:for => :cake_levels} Levels
+          %input#:cake_levels.form-control{:name => "cake[levels]", :placeholder => "Cake Levels", :type => "numeric",:required=>"required", :value=>@cakes[:levels]}/
+        .form-group
+          %label{:for => :cake_comments} Comments
+          %input#:cake_comments.form-control{:name => "cake[comments]", :placeholder => "Cake Comments", :type => "text",:required=>"required",:value=>@cakes[:comments]}/
+        .form-group
+          %label{:for => :cake_decorationImgURL} Flavor Picture
+          %input#cake_decorationImgURL.form-control-file{:name =>"cake[decorationImgURL]", :type => "file"}/
+        .form-group
+          %button.btn.btn-primary.pull-right{:type => "submit"} Submit
+
+// = render 'form'
+
+// = link_to 'Show', @cake
+// \|
+// = link_to 'Back', cakes_path
+
+
+//END OF NEW THINGS
+#portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/1.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/2.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/3.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/4.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/5.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  .instagram_gallery_item
+    %img{:alt => "", :src => "../img/instagram-img/6.jpg"}/
+    .hover_overlay
+      .yummy-table
+        .yummy-table-cell
+          .follow-me.text-center
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              Like me
+  // .instagram_gallery_item
+  //   %img{:alt => "", :src => asset_path("img/instagram-img/1.jpg")}/
+  //   .hover_overlay
+  //     .yummy-table
+  //       .yummy-table-cell
+  //         .follow-me.text-center
+  //           %a{:href => "#"}
+  //             %i.fa.fa-facebook{"aria-hidden" => "true"}
+  //             Like me
+  // .instagram_gallery_item
+  //   %img{:alt => "", :src => asset_path("img/instagram-img/2.jpg")}/
+  //   .hover_overlay
+  //     .yummy-table
+  //       .yummy-table-cell
+  //         .follow-me.text-center
+  //           %a{:href => "#"}
+  //             %i.fa.fa-facebook{"aria-hidden" => "true"}
+  //             Like me
+.social_icon_area.clearfix
+  .container
+    .row
+      .col-12
+        .footer-social-area.d-flex
+          .single-icon
+            %a{:href => "#"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+              %span facebook
+%footer.footer_area
+  .container
+    .row
+      .col-12
+        .footer-content
+          .footer-logo-area.text-center
+            %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+          %nav.navbar.navbar-expand-lg
+            %button.navbar-toggler{"aria-controls" => "yummyfood-footer-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-footer-nav", "data-toggle" => "collapse", :type => "button"}
+              %i.fa.fa-bars{"aria-hidden" => "true"}
+              Menu
+            #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
+              %ul.navbar-nav
+                %li.nav-item.active
+                  %a.nav-link{:href => "index.html"}
+                    Home
+                    %span.sr-only (current)
+                %li.nav-item
+                  %a.nav-link{:href => "archive.html"} Previous Designs
+                %li.nav-item
+                  %a.nav-link{:href => "/flavors"} Flavors
+                %li.nav-item
+                  %a.nav-link{:href => "/contacts"} Cake Design
+  .container
+    .row
+      .col-12
+        / Copywrite Text
+        .copy_right_text.text-center
+          %p
+            Copyright @2018 | BerryDeli Cakes
+            %i.fa.fa-heart-o{"aria-hidden" => "true"}
+/ ALL THE LOGIN AND REGISTER PART
+#registerModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      #registerView
+        .modal-header
+          %h4.modal-title.register Register
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+        .modal-body
+          .well
+            %form#registerForm{:action => "/users", "data-toggle" => "validator", :method => "post"}
+              .form-group
+                %label.control-label{:for => "user[name]"} Name
+                %input#nameR.form-control{:name => "user[name]", :placeholder => "Name", :title => "Please enter your name", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[lastname]"} Lastname
+                %input#lastNameR.form-control{:name => "user[lastName]", :placeholder => "Lastname", :title => "Please enter your lastname", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[email]"} E-mail
+                %input#emailR.form-control{:name => "user[email]", :placeholder => "E-mail", :title => "Please enter your email", :type => "email"}/
+              .form-group
+                %label.control-label{:for => "user[phone]"} Phone
+                %input#phoneR.form-control{:name => "user[phone]", :placeholder => "Phone Number", :title => "Please enter your telephone", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[address]"} Address
+                %input#addressR.form-control{:name => "user[address]", :placeholder => "Address", :title => "Please enter your address", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[userName]"} Username
+                %input#usernameR.form-control{:name => "user[userName]", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+                %span.help-block
+              .form-group
+                %label.control-label{:for => "user[password]"} Password
+                %input#passwordR.form-control{:name => "user[password]", :pattern => ".{6,}", :placeholder => "Password", :required => "", :title => "6 min password required", :type => "password"}/
+                /
+                  <input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
+                %span.help-block Min. 6 characters
+                / <input type="password" placeholder="Password" id="password" required>
+                / <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+              .form-group
+                %label.control-label{:for => "user[password]"} Confirm Password
+                %input#confirm_passwordR.form-control{:name => "user[passwordConfirm]", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
+                / <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
+                %span.help-block
+              #registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+              %button.btn.contact-btn.btn-block{:type => "submit"} Register
+#loginModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      #loginView
+        .modal-header
+          %h4.modal-title.login Login
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+        .modal-body
+          .well
+            %form#loginForm{:action => "/sessions", :method => "post"}
+              .form-group
+                %label.control-label{:for => "username"} Username
+                %input#usernameL.form-control{:name => "username", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "password"} Password
+                %input#passwordL.form-control{:name => "password", :placeholder => "Password", :required => "", :title => "Please enter your password", :type => "password"}/
+              #loginErrorMsg.alert.alert-danger.collapse{:role => "alert"} Login error
+              %button.btn.contact-btn.btn-block{:type => "submit"} Login
+#editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      #editView
+        .modal-header
+          %h4.modal-title.register Edit
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+        .modal-body
+          .well
+            %form#editForm{:action => "/session/edit", "data-toggle" => "validator", :method => "post"}
+              .form-group
+                %label.control-label{:for => "user[name]"} Name
+                %input#nameR.form-control{:name => "user[name]", :placeholder => "Name", :title => "Please enter your name", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[lastname]"} Lastname
+                %input#lastNameR.form-control{:name => "user[lastName]", :placeholder => "Lastname", :title => "Please enter your lastname", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[email]"} E-mail
+                %input#emailR.form-control{:name => "user[email]", :placeholder => "E-mail", :title => "Please enter your email", :type => "email"}/
+              .form-group
+                %label.control-label{:for => "user[phone]"} Phone
+                %input#phoneR.form-control{:name => "user[phone]", :placeholder => "Phone Number", :title => "Please enter your telephone", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[address]"} Address
+                %input#addressR.form-control{:name => "user[address]", :placeholder => "Address", :title => "Please enter your address", :type => "text"}/
+              .form-group
+                %label.control-label{:for => "user[userName]"} Username
+                %input#usernameR.form-control{:name => "user[userName]", :placeholder => "Username", :required => "", :title => "Please enter your username", :type => "text"}/
+                %span.help-block
+              .form-group
+                %label.control-label{:for => "user[password]"} Password
+                %input#passwordR.form-control{:name => "user[password]", :pattern => ".{6,}", :placeholder => "Password", :required => "", :title => "6 min password required", :type => "password"}/
+                /
+                  <input type="password" class="form-control" id="passwordR" name="user[password]" required title="Please enter your password" placeholder="Password">
+                %span.help-block Min. 6 characters
+                / <input type="password" placeholder="Password" id="password" required>
+                / <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+              .form-group
+                %label.control-label{:for => "user[password]"} Confirm Password
+                %input#confirm_passwordR.form-control{:name => "user[passwordConfirm]", :placeholder => "Confirm Password", :required => "", :title => "Confirm password", :type => "password"}/
+                / <input type="password" class="form-control" id="confirmPasswordR" name="user[passwordConfirm]" required title="Confirm password" placeholder="Confirm Password">
+                %span.help-block
+              #registerErrorMsg.alert.alert-danger.collapse{:role => "alert"} Register error
+              %button.btn.contact-btn.btn-block{:type => "submit"} Edit
+
+#signoutModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      #signoutView
+        .modal-header
+          %h4.modal-title Signout
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+        .modal-body
+          .well
+            %form#signoutForm{:action => "/users/signout", :method => "post"}
+              .form-group
+                %label.control-label{:for => "username"} Do you want to really sign out?
+              %button.btn.contact-btn.btn-block{:type => "submit"} Signout
+
+  // %script{:src => "../../../js/jquery/jquery-2.2.4.min.js"}
+  // %script{:src => "../../../js/bootstrap/popper.min.js"}
+  // %script{:src => "../../../js/bootstrap/bootstrap.min.js"}
+  // %script{:src => "../../../js/others/plugins.js"}
+%script{:src =>"https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"}
+
+

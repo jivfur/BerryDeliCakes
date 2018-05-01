@@ -66,10 +66,11 @@
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
-                  -if current_user!=nil
-                    -if current_user.role == true
-                      %li.nav-item
-                        %a.nav-link{:href => "/sessions"} listing User     
+                  -if(session[:user_id]!=nil)
+                    %li.nav-item
+                      %a.nav-link{:href => "/cake_orders"} My Orders
+                    %li.nav-item
+                      %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile      
     .breadcumb-area{:style => "background-image: url(img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center

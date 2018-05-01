@@ -20,6 +20,10 @@ class CakesController < ApplicationController
 
   # GET /cakes/1/edit
   def edit
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
+    @cakes = Cake.find(params[:id])
   end
 
   # POST /cakes
@@ -54,9 +58,23 @@ class CakesController < ApplicationController
   # PATCH/PUT /cakes/1
   # PATCH/PUT /cakes/1.json
   def update
+    @cake = Cake.find(params[:id])
+    @auxCake = {:levels => cake_params[:levels] , :comments => cake_params[:comments]}
+    folderAux = @cake.decorationImgURL.split("/")[0]
+    pp folderAux
+    uploaded_io = params[:cake][:decorationImgURL]
+    logger.debug("uploaded_io type")
+    orders_dir = Rails.root.join("public","previousCake",folderAux)
+    if(uploaded_io)
+      File.open(Rails.root.join(orders_dir, uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+        @auxCake[:decorationImgURL]= File.join(folderAux,uploaded_io.original_filename);
+        
+    end
     respond_to do |format|
-      if @cake.update(cake_params)
-        format.html { redirect_to @cake, notice: 'Cake was successfully updated.' }
+      if @cake.update(@auxCake)
+        format.html { redirect_to cakes_path, notice: 'Cake was successfully updated.' }
         format.json { render :show, status: :ok, location: @cake }
       else
         format.html { render :edit }
