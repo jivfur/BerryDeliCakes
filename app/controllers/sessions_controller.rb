@@ -1,3 +1,4 @@
+require 'pp'
 class SessionsController < ApplicationController
     include SessionsHelper
     skip_before_action :verify_authenticity_token
@@ -29,95 +30,49 @@ class SessionsController < ApplicationController
     def edit
         #user data edit
         puts "edit -- session ctr"
-        check_first = 0
-        check_change = 0
-        #Mypage :: edit user data
-        #@user = User.find_by_userName(params[:username])
-        # @user = User.new
-        #@user = User.new(user_params)
-        #@user_prev = User.find_by_id(params[:id])
-        @user_prev = current_user
-        if (params[:user] != nil)
-            #@user = User.new(params[:user])
-            puts "let's make @user"
-            @user = User.new(user_params)
-            check_first = 1
-            puts "@user : #{@user}"
+        
+        user = User.find params[:id]
+        pp user
+        @user_new = Hash.new
+        #@user_new = user
+        @user_new[:user] = user
+        # @user_new[:password] = user.password
+        # @user_new[:phone] = user.phone
+        # @user_new[:email] = user.email
+        # @user_new[:address] = user.address
+        pp @user_new
+    end
+    
+    def update
+        #user data edit
+        
+        puts "update -- session ctrl"
+        
+        @user = User.find params[:id]
+        puts "user'id : #{@user.id}"
+        puts "user'username : #{@user.userName}"
+        puts "user'address : #{@user.address}"
+        puts "point 1"
+        usernew_params = Hash.new
+        puts "point 2"
+        usernew_params[:password]=user_params[:password]
+        puts "point 3"
+        usernew_params[:phone]=user_params[:phone]
+        puts "point 4"
+        usernew_params[:email]=user_params[:email]
+        usernew_params[:address]=user_params[:address]
+        puts "user_params[:address] : #{user_params[:address]}"
+        # if(@userprev.update(user_params))
+        #     redirect_to(users_path)
+        # end
+        #if(user.update(user_params))
+        if(@user.update(usernew_params)) then
+            flash[:notice] = 'successfully updated profile'
+            redirect_to(users_path)
+        else
+            flash[:notice] = 'fail to update profile'
+            redirect_to edit_session_path
         end
-
-        puts "@user_prev.userName : #{@user_prev.userName}"
-        puts "@user_prev.password : #{@user_prev.password}"
-        puts "@user : #{params[:user]}"
-        # puts "@user.password : #{@user.password}"
-        puts "check point 1"
-        puts "check_first : #{check_first}"
-        if (check_first == 1)
-            if ((check_first == 1) && !(@user.userName.empty?)) && (@user_prev.userName != @user.userName)
-                puts "username changes"
-                @user_prev.userName = @user.userName
-                check_change = 1
-                flash[:notice] = 'successfully chage user name'
-            end
-            if ((check_first == 1) && !(@user.name.empty?)) && (@user_prev.name != @user.name)
-                puts "name changes"
-                @user_prev.name = @user.name
-                check_change = 1
-                flash[:notice] = 'successfully change name'
-            end
-            if ((check_first == 1) && !(@user.lastName.empty?)) && (@user_prev.lastName != @user.lastName)
-                puts "lastname changes"
-                @user_prev.lastName = @user.lastName
-                check_change = 1
-                flash[:notice] = 'successfully chage lastname'
-            end
-            if ((check_first == 1) && !(@user.email.empty?)) && (@user_prev.email != @user.email)
-                puts " email changes"
-                @user_prev.email = @user.email
-                check_change = 1
-                flash[:notice] = 'successfully chage email'
-            end
-            if ((check_first == 1) && !(@user.phone.empty?))&& (@user_prev.phone != @user.phone)
-                puts " phone changes"
-                @user_prev.phone = @user.phone
-                check_change = 1
-                flash[:notice] = 'successfully change phone number'
-            end
-            if ((check_first == 1) && !(@user.address.empty?)) && (@user_prev.address != @user.address)
-                puts " address changes"
-                @user_prev.address = @user.address
-                check_change = 1
-                flash[:notice] = 'successfully change address'
-            end
-            if ((check_first == 1) && !(@user.password.empty?)) && (@user_prev.password != @user.password)
-                puts " password changes"
-                @user_prev.password = @user.password
-                check_change = 1
-                flash[:notice] = 'successfully chage password'
-            end
-            check_first = 0
-            puts "check point 2"
-        end
-        if (check_change == 0)
-            puts "no changes"
-            flash[:notice] = 'If you do not want to edit something, please go another direction'
-        end
-        puts "check point 3"
-        puts "check_first : #{check_first}"
-        puts "check_change : #{check_change}"
-        if (check_change == 1)
-            puts "check point 4"
-            if @user_prev.save
-              puts "check point 5"
-              flash[:notice] = 'successfully edited'
-              redirect_to users_path 
-            else
-              flash[:notice] = 'no response from server ... Please try again later'
-              redirect_to users_path
-              format.html { render :new }
-              format.json { render json: @user.errors, status: :unprocessable_entity }
-            end
-        end
-        # redirect_to users_path
     end
 
     def create
@@ -161,10 +116,6 @@ class SessionsController < ApplicationController
         end
     end
 
-    # def userlist
-    #     puts "session -- userlist"
-    # end
-
     def destroy
         #logout path
         puts "session -- destroy"
@@ -176,7 +127,8 @@ class SessionsController < ApplicationController
     
     def user_params
       puts "users ctrl -- user_params"
-      params[:user].delete :passwordConfirm
+
+      #params[:user].delete :passwordConfirm
       params.require(:user).permit(:userName, :password, :name, :lastName, :phone, :email, :address)
     end
     
