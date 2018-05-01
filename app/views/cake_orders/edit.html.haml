@@ -128,7 +128,7 @@
                 .form-group
                   %label{:for => "address_delivery"} Delivery Address
                   %input#address_delivery.form-control{:name => "order[deliveryAddress]", :type => "text" ,:value=>@myOrder[:order].deliveryAddress}/
-            // -if session[:role] == true then      
+          -if session[:role] == true then      
             .row
               .col
                 %h4 Admin Use

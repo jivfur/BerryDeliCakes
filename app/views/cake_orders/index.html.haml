@@ -5,7 +5,7 @@
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %title BerryDeli Cakes/orders
-    %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
+    %link{:href => "../../img/core-img/favicon.ico", :rel => "icon"}/
     %link{:href => "style.css", :rel => "stylesheet"}/
     %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
     #preloader
@@ -54,7 +54,7 @@
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
                   %li.nav-item.active
-                    %a.nav-link{:href => "/users"}
+                    %a.nav-link{:href => "/"}
                       Home
                       %span.sr-only (current)
                   %li.nav-item
@@ -63,6 +63,11 @@
                     %a.nav-link{:href => "/flavors"} Flavors
                   %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
+                  -if(session[:user_id]!=nil)
+                    %li.nav-item
+                      %a.nav-link{:href => "/cake_orders"} My Orders
+                    %li.nav-item
+                      %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
@@ -89,7 +94,7 @@
         .col-12.col-md-6.col-lg-4
           .single-post.wow.fadeInUp{"data-wow-delay" => "0.2s"}
             .post-thumb
-              %img.img-thumbnail{:src => order[:cake].decorationImgURL, :height=>"150px"}
+              %img.img-thumbnail{:src => decorationImgURLMethod(order[:cake]), :height=>"150px"}
             .post-content
               %p.post-headline Ordered by
               %h4=order[:order].created_at.strftime("%Y-%m-%d").to_s

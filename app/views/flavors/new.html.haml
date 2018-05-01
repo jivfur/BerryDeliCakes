@@ -12,8 +12,6 @@
   %link{:href => "../../public/img/core-img/favicon.ico", :rel => "icon"}/
   %link{:href => "../css/multistep.css", :rel => "stylesheet"}/
 %body
-  #preloader
-    .yummy-load
   .top_header_area
     .container
       .row
@@ -60,15 +58,11 @@
                 %li.nav-item
                   %a.nav-link{:href => "../flavors"} Flavors
                 %li.nav-item
-<<<<<<< HEAD
-                  %a.nav-link{:href => "../contact.html"} Cake Design
-=======
                   %a.nav-link{:href => "/contacts"} Contact Me
                 -if current_user!=nil
                   -if current_user.role == true
                     %li.nav-item
                       %a.nav-link{:href => "/sessions"} listing User   
->>>>>>> 2d5e008c5e684871f7b6ce1aaa8f9018ac6d843e
   .breadcumb-area{:style => "background-image: url(../img/bg-img/breadcumb.jpg);"}
     .container.h-100
       .row.h-100.align-items-center
