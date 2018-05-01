@@ -96,7 +96,7 @@
                     %a.nav-link.previous{:href => "/cakes"} Previous Designs
                   %li.nav-item
                     %a.nav-link{:href => "/flavors"} Flavors
-                  %li.nav-item.active
+                  %li.nav-item
                     %a.nav-link{:href => "/contacts"} Contact Me
                   -if(session[:user_id]!=nil)
                     %li.nav-item
@@ -105,7 +105,7 @@
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
-                      %li.nav-item
+                      %li.nav-item.active
                         %a.nav-link{:href => "/sessions"} listing User     
     / ****** Header Area End ******
     / ****** Breadcumb Area Start ******
@@ -122,7 +122,7 @@
             %nav{"aria-label" => "breadcrumb"}
               %ol.breadcrumb
                 %li.breadcrumb-item
-                  %a{:href => "index.html"}
+                  %a{:href => "/"}
                     %i.fa.fa-home{"aria-hidden" => "true"}
                     Home
                 %li.breadcrumb-item.active{"aria-current" => "page"} Listing Users
@@ -322,7 +322,7 @@
                       %a.nav-link.previous{:href => "/cakes"} Previous Designs
                     %li.nav-item
                       %a.nav-link{:href => "/flavors"} Flavors
-                    %li.nav-item.active
+                    %li.nav-item
                       %a.nav-link{:href => "/contacts"} Contact Me
                     -if(session[:user_id]!=nil)
                       %li.nav-item
@@ -331,7 +331,7 @@
                         %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                     -if current_user!=nil
                       -if current_user.role == true
-                        %li.nav-item
+                        %li.nav-item.active
                           %a.nav-link{:href => "/sessions"} listing User 
       .container
         .row
