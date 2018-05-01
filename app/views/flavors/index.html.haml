@@ -34,9 +34,9 @@
                     %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
                     %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
-              .search_button
-                %a.searchBtn{:href => "#"}
-                  %i.fa.fa-search{"aria-hidden" => "true"}
+              //.search_button
+              //  %a.searchBtn{:href => "#"}
+              //    %i.fa.fa-search{"aria-hidden" => "true"}
               // .search-hidden-form
               //   %form{:action => "#", :method => "get"}
               //     %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
@@ -72,7 +72,6 @@
                       %a.nav-link{:href => "/cake_orders"} My Orders
                     %li.nav-item
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile      
-                      %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
