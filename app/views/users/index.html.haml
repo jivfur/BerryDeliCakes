@@ -15,7 +15,7 @@
     / Title
     %title BerryDeli Cakes
     / Favicon
-    %link{:href => "img/core-img/favicon.ico", :rel => "icon"}/
+    %link{:href => "../img/core-img/favicon.ico", :rel => "icon"}/
     / Core Stylesheet
     %link{:href => "style.css", :rel => "stylesheet"}/
     / Responsive CSS
@@ -60,17 +60,17 @@
                 //.login
                 -if logged_out?
                   .login
-                    %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+                    %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "/../cakes"} Sign in 
                   .register
-                    %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+                    %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "/../cakes"} Sign up
                 -if signged_in?
                   .login
-                    %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+                    %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "/../cakes"} MyPage 
                   .signout
-                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "/../cakes"} Sign out
             / Search Form
             .search-hidden-form
-              %form{:action => "#", :method => "get"}
+              %form{:action => "/../cakes", :method => "get"}
                 %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
                 %input.d-none{:type => "submit", :value => ""}/
                 %span.searchBtn
@@ -117,9 +117,9 @@
         / Overlay Text
         .project_title
           .post-date-commnents.d-flex
-            %a{:href => "#"} June 20, 2017
-            %a{:href => "#"} Our New Design
-          %a{:href => "#"}
+            %a{:href => "/../cakes"} June 20, 2017
+            %a{:href => "/../cakes"} Our New Design
+          %a{:href => "/../cakes"}
             %h5 Pick Me!
       / Single Slide
       .welcome-single-slide
@@ -128,9 +128,9 @@
         / Overlay Text
         .project_title
           .post-date-commnents.d-flex
-            %a{:href => "#"} July 20, 2017
-            %a{:href => "#"} Jupassic Park
-          %a{:href => "#"}
+            %a{:href => "/../cakes"} July 20, 2017
+            %a{:href => "/../cakes"} Jupassic Park
+          %a{:href => "/../cakes"}
             %h5 Pick Me!
       / Single Slide
       .welcome-single-slide
@@ -139,9 +139,9 @@
         / Overlay Text
         .project_title
           .post-date-commnents.d-flex
-            %a{:href => "#"} Cannot Order
-            %a{:href => "#"} Wood Chaff Cup
-          %a{:href => "#"}
+            %a{:href => "/../cakes"} Cannot Order
+            %a{:href => "/../cakes"} Wood Chaff Cup
+          %a{:href => "/../cakes"}
             %h5 Only Specials!
       / Single Slide
       .welcome-single-slide
@@ -150,9 +150,9 @@
         / Overlay Text
         .project_title
           .post-date-commnents.d-flex
-            %a{:href => "#"} July 22, 2017
-            %a{:href => "#"} Bridal shower cake
-          %a{:href => "#"}
+            %a{:href => "/../cakes"} July 22, 2017
+            %a{:href => "/../cakes"} Bridal shower cake
+          %a{:href => "/../cakes"}
             %h5 Pick Me!
       / Single Slide
       .welcome-single-slide
@@ -161,9 +161,9 @@
         / Overlay Text
         .project_title
           .post-date-commnents.d-flex
-            %a{:href => "#"} Dec 09, 2017
-            %a{:href => "#"} Vegas style 50th birthday cake
-          %a{:href => "#"}
+            %a{:href => "/../cakes"} Dec 09, 2017
+            %a{:href => "/../cakes"} Vegas style 50th birthday cake
+          %a{:href => "/../cakes"}
             %h5 Pick Me!
     / ****** Welcome Area End ******
     / ****** Categories Area Start ******
@@ -186,7 +186,7 @@
             .single_catagory.wow.fadeInUp{"data-wow-delay" => ".9s"}
               %img{:alt => "", :src => "img/catagory-img/3.jpg"}/
               .catagory-title
-                %a{:href => "#"}
+                %a{:href => "/../cakes"}
                   %h5 Order Status
     / ****** Categories Area End ******
     / ****** Blog Area Start ******
@@ -206,7 +206,7 @@
                     %a{:href => "archive.html"}
                       %h2.post-headline Make A Cup Of Tea and Enjoy Your Time!
                     %p Today is a nice day! Order one cake, brew a cup of tea! It is time to enjoy your favorate cake with a cup of black tea! You deserve it!
-                    %a.read-more{:href => "#"} Order Now!
+                    %a.read-more{:href => "/../cakes"} Order Now!
               / Single Post
               .col-12.col-md-6
                 .single-post.wow.fadeInUp{"data-wow-delay" => ".4s"}
@@ -219,11 +219,11 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} June 20, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} June 20, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline Our new creation
               / Single Post
               .col-12.col-md-6
@@ -237,11 +237,11 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} June 20, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} June 20, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline Our super dad is going to me amazed by the taste of chocolate-mixed nuts cake
               / Single Post
               .col-12.col-md-6
@@ -255,11 +255,11 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} May 8, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} May 8, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline A and J Wine Wedding Cake
               / Single Post
               .col-12.col-md-6
@@ -273,11 +273,11 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} Dec 23, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} Dec 23, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline Our first glazed mirror cake
               / ******* List Blog Area Start *******
               / Single Post
@@ -292,14 +292,14 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} July 22, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} July 22, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline Our special bridal shower cake
                     %p It is an awsome cake for a wedding! They really like it!
-                    %a.read-more{:href => "#"} Order it!
+                    %a.read-more{:href => "/../cakes"} Order it!
               / Single Post
               .col-12
                 .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".4s"}
@@ -312,14 +312,14 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} Sep 17, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} Sep 17, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline An awesome cake
                     %p Is it a surprize? It is 100% edible decoration!
-                    %a.read-more{:href => "#"} Order it!
+                    %a.read-more{:href => "/../cakes"} Order it!
               / Single Post
               .col-12
                 .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".6s"}
@@ -332,14 +332,14 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} May 19, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} May 19, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline An amazing chocolate cake!
                     %p It is all edible! If you really love pumpkin, do not miss it!
-                    %a.read-more{:href => "#"} Order it!
+                    %a.read-more{:href => "/../cakes"} Order it!
               / Single Post
               .col-12
                 .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".8s"}
@@ -352,14 +352,14 @@
                       .post-author-date-area.d-flex
                         / Post Author
                         .post-author
-                          %a{:href => "#"} By Johana Marcela
+                          %a{:href => "/../cakes"} By Johana Marcela
                         / Post Date
                         .post-date
-                          %a{:href => "#"} May 19, 2017
-                    %a{:href => "#"}
+                          %a{:href => "/../cakes"} May 19, 2017
+                    %a{:href => "/../cakes"}
                       %h4.post-headline Kongfu Panda!
                     %p If you like Kongfu Panda or any other animation figures, you can make it a cake! It is not a joke!
-                    %a.read-more{:href => "#"} Order it!
+                    %a.read-more{:href => "/../cakes"} Order it!
           / ****** Blog Sidebar ******
           .col-12.col-sm-8.col-md-6.col-lg-4
             .blog-sidebar.mt-5.mt-lg-0
@@ -384,35 +384,35 @@
                 .single-populer-post.d-flex
                   %img{:alt => "", :src => "img/sidebar-img/1.jpg"}/
                   .post-content
-                    %a{:href => "#"}
+                    %a{:href => "/../cakes"}
                       %h6 Sugger Birthday cake!
                     %p Choco-wine cake
                 / Single Popular Post
                 .single-populer-post.d-flex
                   %img{:alt => "", :src => "img/sidebar-img/2.jpg"}/
                   .post-content
-                    %a{:href => "#"}
+                    %a{:href => "/../cakes"}
                       %h6 The cake I like most
                     %p Hat cake
                 / Single Popular Post
                 .single-populer-post.d-flex
                   %img{:alt => "", :src => "img/sidebar-img/3.jpg"}/
                   .post-content
-                    %a{:href => "#"}
+                    %a{:href => "/../cakes"}
                       %h6 Cake with most rebuy
                     %p Chocolate-raspberry cake
                 / Single Popular Post
                 .single-populer-post.d-flex
                   %img{:alt => "", :src => "img/sidebar-img/4.jpg"}/
                   .post-content
-                    %a{:href => "#"}
+                    %a{:href => "/../cakes"}
                       %h6 Cake looks best
                     %p Rose cake
                 / Single Popular Post
                 .single-populer-post.d-flex
                   %img{:alt => "", :src => "img/sidebar-img/5.jpg"}/
                   .post-content
-                    %a{:href => "#"}
+                    %a{:href => "/../cakes"}
                       %h6 Cake My friends like most
                     %p Tiramisu
               / Single Widget Area
@@ -430,7 +430,7 @@
                   %h6 Contact me
                 %p Sent me your email here.
                 .newsletter-form
-                  %form{:action => "#", :method => "post"}
+                  %form{:action => "/../cakes", :method => "post"}
                     %input#email{:name => "newsletter-email", :placeholder => "Email@example.com", :type => "email"}/
                     %button{:type => "submit"}
                       %i.fa.fa-paper-plane-o{"aria-hidden" => "true"}

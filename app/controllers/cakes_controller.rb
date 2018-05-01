@@ -16,6 +16,7 @@ class CakesController < ApplicationController
 
   # GET /cakes/new
   def new
+    
   end
 
   # GET /cakes/1/edit

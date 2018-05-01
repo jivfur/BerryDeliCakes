@@ -1,7 +1,52 @@
-%h1 Editing user
+// // %h1 Editing user
 
-// = render 'form'
+// // // = render 'form'
 
-= link_to 'Show', @user
-\|
+// // = link_to 'Show', @user
+// // \|
+// // = link_to 'Back', users_path
+%p#notice= notice
+%h1 Edit users
+
+= form_tag edit_session_path do
+
+  = label :user, :userName, 'User Name'
+  = User.find_by_id(session[:user_id]).userName
+  = text_field :user, 'userName'
+  <br>
+  
+  = label :user, :password, 'Password'
+  = User.find_by_id(session[:user_id]).password
+  = text_field :user, 'password'
+  <br>
+
+  = label :user, :name, 'Name'
+  = User.find_by_id(session[:user_id]).name
+  = text_field :user, 'name'
+  <br>
+  
+  = label :user, :lastName, 'Last Name'
+  = User.find_by_id(session[:user_id]).lastName
+  = text_field :user, 'lastName'
+  <br>
+
+  = label :user, :phone, 'Phone'
+  = User.find_by_id(session[:user_id]).phone
+  = text_field :user, 'phone'
+  <br>
+  
+  = label :user, :email, 'Email'
+  = User.find_by_id(session[:user_id]).email
+  = text_field :user, 'email'
+  <br>
+
+  = label :user, :address, 'Address'
+  = User.find_by_id(session[:user_id]).address
+  = text_area :user, 'address'
+  <br>
+  
+  = submit_tag 'Save Changes'
+
+
 = link_to 'Back', users_path
+

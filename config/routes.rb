@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :cake_orders
   resources :sessions
   
-  post '/session/edit', to: 'sessions#edit'
+  # post '/session/:id/edit', to: 'sessions#edit'
+  post "/sessions/:id/edit"=> "sessions#edit"
+  get "/sessions/:id/edit" => "sessions#edit"
   
   get "/cake_orders/:id/previous"=> "cake_orders#previous"
   post "/cake_orders/createOrder"=>"cake_orders#createOrder"
