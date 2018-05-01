@@ -19,11 +19,11 @@ class FlavorsController < ApplicationController
   def new
   #   -if not(defined? session["role"]) || session["role"]==false then
   # -redirect_to users_path
-    @users = User.all
+    #@users = User.all
     if (session[:user_id] == nil) || (session[:role] == false)
       puts "here is flavors new, but this person is not admin --> go to users path"
       flash[:notice] = 'You are not allowed to this page. Only admin can make new flavors'
-      redirect_to users_path
+      redirect_to root_path
     end
     @flavor = Flavor.new
     
@@ -31,17 +31,21 @@ class FlavorsController < ApplicationController
 
   # GET /flavors/1/edit
   def edit
-    logger.debug("USER IS: "+session[:user_id].to_s)
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    pp "USER IS: "+session[:user_id].to_s
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page. Only admin can manage flavors'
+      redirect_to root_path
     end
   end
 
   # POST /flavors
   # POST /flavors.json
   def create
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page. Only admin can manage flavors'
+      redirect_to root_path
     end
     uploaded_io = params[:flavor][:flavorImgURL]
     File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
@@ -64,8 +68,10 @@ class FlavorsController < ApplicationController
   # PATCH/PUT /flavors/1
   # PATCH/PUT /flavors/1.json
   def update
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page. Only admin can manage flavors'
+      redirect_to root_path
     end
     aux = {name: params[:flavor][:name]}
     uploaded_io = params[:flavor][:flavorImgURL]

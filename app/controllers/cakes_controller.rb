@@ -16,13 +16,19 @@ class CakesController < ApplicationController
 
   # GET /cakes/new
   def new
-    
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page'
+      redirect_to root_path
+    end
   end
 
   # GET /cakes/1/edit
   def edit
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+   if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page'
+      redirect_to root_path
     end
     @cakes = Cake.find(params[:id])
   end
@@ -30,8 +36,10 @@ class CakesController < ApplicationController
   # POST /cakes
   # POST /cakes.json
   def create
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page'
+      redirect_to root_path
     end
     aux = {levels: params[:cake][:levels], gallery: true, flavor_id: Flavor.last.id, comments: params[:cake][:comments]}
     uploaded_io = params[:cake][:decorationImgURL]
@@ -62,8 +70,10 @@ class CakesController < ApplicationController
   # PATCH/PUT /cakes/1
   # PATCH/PUT /cakes/1.json
   def update
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page'
+      redirect_to root_path
     end
     @cake = Cake.find(params[:id])
     @auxCake = {:levels => cake_params[:levels] , :comments => cake_params[:comments]}
@@ -92,8 +102,10 @@ class CakesController < ApplicationController
   # DELETE /cakes/1
   # DELETE /cakes/1.json
   def destroy
-    if session[:role] ||session[:role] == False then
-      redirect_to root_path()
+    if (session[:user_id] == nil) || (session[:role] == false)
+      puts "here is flavors new, but this person is not admin --> go to users path"
+      flash[:notice] = 'You are not allowed to this page'
+      redirect_to root_path
     end
     @cake.destroy
     respond_to do |format|

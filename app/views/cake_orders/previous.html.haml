@@ -49,9 +49,9 @@
             #yummyfood-nav.collapse.navbar-collapse.justify-content-center
               %ul#yummy-nav.navbar-nav
                 %li.nav-item
-                    %a.nav-link{:href => "/"}
-                      Home
-                      %span.sr-only (current)
+                  %a.nav-link{:href => "/"}
+                    Home
+                    %span.sr-only (current)
                 %li.nav-item
                   %a.nav-link.previous{:href => "/cakes"} Previous Designs
                 %li.nav-item
@@ -63,10 +63,6 @@
                     %a.nav-link{:href => "/cake_orders"} My Orders
                   %li.nav-item
                     %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
-                -if current_user!=nil
-                  -if current_user.role == true
-                    %li.nav-item
-                      %a.nav-link{:href => "/sessions"} listing User
   .breadcumb-area{:style => "background-image: url(../../img/bg-img/breadcumb.jpg);"}
     .container.h-100
       .row.h-100.align-items-center
@@ -430,7 +426,8 @@
               %span.sr-only Close
           .modal-body
             .well
-              %form#signoutForm{:action => "/users/signout", :method => "post"}
+              %form#signoutForm{:action => "/sessions/"+session[:user_id].to_s, :method => "post"}
+                %input{:name => "_method", :type => "hidden", :value => "DELETE"}
                 .form-group
                   %label.control-label{:for => "username"} Do you want to really sign out?
                 %button.btn.contact-btn.btn-block{:type => "submit"} Signout

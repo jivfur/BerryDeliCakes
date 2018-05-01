@@ -424,8 +424,8 @@
               %span.sr-only Close
           .modal-body
             .well
-              %form#signoutForm{:action => "/users/signout", :method => "post"}
-                .form-group
+              %form#signoutForm{:action => "/sessions/"+session[:user_id].to_s, :method => "post"}
+                %input{:name => "_method", :type => "hidden", :value => "DELETE"}
                   %label.control-label{:for => "username"} Do you want to really sign out?
                 %button.btn.contact-btn.btn-block{:type => "submit"} Signout
   %script{:src => "../js/jquery/jquery-2.2.4.min.js"}
