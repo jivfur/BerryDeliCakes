@@ -30,6 +30,9 @@ class CakesController < ApplicationController
   # POST /cakes
   # POST /cakes.json
   def create
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     aux = {levels: params[:cake][:levels], gallery: true, flavor_id: Flavor.last.id, comments: params[:cake][:comments]}
     uploaded_io = params[:cake][:decorationImgURL]
     logger.debug("uploaded_io type")
@@ -59,6 +62,9 @@ class CakesController < ApplicationController
   # PATCH/PUT /cakes/1
   # PATCH/PUT /cakes/1.json
   def update
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     @cake = Cake.find(params[:id])
     @auxCake = {:levels => cake_params[:levels] , :comments => cake_params[:comments]}
     folderAux = @cake.decorationImgURL.split("/")[0]
@@ -71,7 +77,6 @@ class CakesController < ApplicationController
         file.write(uploaded_io.read)
       end
         @auxCake[:decorationImgURL]= File.join(folderAux,uploaded_io.original_filename);
-        
     end
     respond_to do |format|
       if @cake.update(@auxCake)
@@ -87,6 +92,9 @@ class CakesController < ApplicationController
   # DELETE /cakes/1
   # DELETE /cakes/1.json
   def destroy
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     @cake.destroy
     respond_to do |format|
       format.html { redirect_to cakes_url, notice: 'Cake was successfully destroyed.' }

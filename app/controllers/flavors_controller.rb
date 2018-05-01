@@ -32,25 +32,17 @@ class FlavorsController < ApplicationController
   # GET /flavors/1/edit
   def edit
     logger.debug("USER IS: "+session[:user_id].to_s)
-    
-    if(session[:user_id])
-      logger.debug("USER IS: "+session[:user_id].to_s)
-      user = User.find(session[:user_id])
-      if(user.role==false)
-        redirect_to "/"
-      end
-    else
-      redirect_to "/"
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
     end
   end
 
   # POST /flavors
   # POST /flavors.json
   def create
-    logger.debug "Something HERE"
-    logger.debug params
-    logger.debug flavor_params
-    logger.debug "**************************"
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     uploaded_io = params[:flavor][:flavorImgURL]
     File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
     file.write(uploaded_io.read)
@@ -72,6 +64,9 @@ class FlavorsController < ApplicationController
   # PATCH/PUT /flavors/1
   # PATCH/PUT /flavors/1.json
   def update
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     aux = {name: params[:flavor][:name]}
     uploaded_io = params[:flavor][:flavorImgURL]
     logger.debug("uploaded_io type")
@@ -95,6 +90,9 @@ class FlavorsController < ApplicationController
   # DELETE /flavors/1
   # DELETE /flavors/1.json
   def destroy
+    if session[:role] ||session[:role] == False then
+      redirect_to root_path()
+    end
     @flavor.destroy
     respond_to do |format|
       format.html { redirect_to flavors_url, notice: 'Flavor was successfully destroyed.' }
