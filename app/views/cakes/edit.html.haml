@@ -34,15 +34,6 @@
                 %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
               .signout
                 %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
-          .search_button
-            %a.searchBtn{:href => "#"}
-              %i.fa.fa-search{"aria-hidden" => "true"}
-          .search-hidden-form
-            %form{:action => "#", :method => "get"}
-              %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-              %input.d-none{:type => "submit", :value => ""}/
-              %span.searchBtn
-                %i.fa.fa-times{"aria-hidden" => "true"}
 %header.header_area
   .container
     .row
