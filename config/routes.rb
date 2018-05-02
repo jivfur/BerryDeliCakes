@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   get "/cake_orders/:id/previous"=> "cake_orders#previous"
   post "/cake_orders/createOrder"=>"cake_orders#createOrder"
-  
+  get "/users/deleteAllUsers" => "users#deleteAllUsers"
   get "/contacts/"=> "contacts#index"
   get "/pages/:page" => "pages#show"
   post   '/login'   => 'sessions#create'

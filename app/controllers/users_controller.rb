@@ -1,5 +1,6 @@
 require 'pp'
 class UsersController < ApplicationController
+  include SessionsHelper
   skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
   def index
     logger.debug "User/Index"
     @users = User.all
+    deleteAllUsers()
   end
   
 
@@ -27,23 +29,41 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-
+  # GET user/deleteAllUsers
+  def deleteAllUsers
+    users = User.all
+    users.each do |user|
+      orders = Order.where({:user_id => user.id})
+      orders.each do |order|
+        cakesPrice = CakePrice.where({:id=>order.cake_price_id})
+        order.destroy()
+        cakesPrice.each do |cakePrice|
+          cakes = Cake.where({:id =>cakePrice.cake_id})
+          cakePrice.destroy()
+          cakes.each do |cake|
+            cake.destroy()
+          end
+        end
+      end
+      user.destroy()
+    end
+  end
   # POST /users
   # POST /users.json
   def create
-    if(user = User.find({:userName => "admin"}))
-      user.destroy()
-    end
     user_params.except(:confirmPassword)
     aux = user_params.except(:confirmPassword)
     aux[:role] = true
     @user = User.new(aux)
     if(@user.save)
        flash[:notice] = "Your profile was created"
+       log_in(@user)
+       redirect_to edit_user_path(@user.id)
     else
       flash[:danger] = "Something went wrong"
+      redirect_to root_path()
     end
-    redirect_to edit_user_path(@user.id)
+    
   end
 
   # PATCH/PUT /users/1
