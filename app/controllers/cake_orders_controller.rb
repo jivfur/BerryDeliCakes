@@ -17,13 +17,13 @@ class CakeOrdersController < ApplicationController
     end
     
     def index
-        logger.debug(session[:user_id])
+        puts "This is the user"+session[:user_id].to_s
         @cakeOrders = Hash.new # this will be all the orders, organized by orders Id
         if(session[:user_id])
             user = User.find(session[:user_id])
             if(user.role == false)
                 #you are not an admin
-                logger.debug("this is the user"+user.id.to_s)
+                puts "this is the user"+user.id.to_s
                 orders = Order.where({:user_id =>user.id}).order(:created_at) #bring all the orders of this user ordered by creation date
             else
                 #you are ad admin
