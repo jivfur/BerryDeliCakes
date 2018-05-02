@@ -50,7 +50,7 @@
         .row
           .col-12
             .logo_area.text-center
-              %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+              %a.yummy-logo{:href => "/"} BerryDeli Cakes
         .row
           .col-12
             %nav.navbar.navbar-expand-lg
@@ -91,11 +91,25 @@
           .col-12
             %nav{"aria-label" => "breadcrumb"}
               %ol.breadcrumb
-                %li.breadcrumb-item
-                  %a{:href => "index.html"}
-                    %i.fa.fa-home{"aria-hidden" => "true"}
-                    Home
-                %li.breadcrumb-item.active{"aria-current" => "page"} Contact Me
+                %li.nav-item.active
+									%a.nav-link{:href => "/"}
+										Home
+										%span.sr-only (current)
+								%li.nav-item
+									%a.nav-link.previous{:href => "/cakes"} Previous Designs
+								%li.nav-item
+									%a.nav-link{:href => "/flavors"} Flavors
+								%li.nav-item
+									%a.nav-link{:href => "/contacts"} Contact Me
+								-if(session[:user_id]!=nil)
+									%li.nav-item
+										%a.nav-link{:href => "/cake_orders"} My Orders
+									%li.nav-item
+										%a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
+								-if current_user!=nil
+									-if current_user.role == true
+										%li.nav-item
+											%a.nav-link{:href => "/sessions"} listing User
     .contact-area.section_padding_80
       .container
         .row
@@ -219,25 +233,32 @@
           .col-12
             .footer-content
               .footer-logo-area.text-center
-                %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
+                %a.yummy-logo{:href => "/"} BerryDeli Cakes
               %nav.navbar.navbar-expand-lg
                 %button.navbar-toggler{"aria-controls" => "yummyfood-footer-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-footer-nav", "data-toggle" => "collapse", :type => "button"}
                   %i.fa.fa-bars{"aria-hidden" => "true"}
                   Menu
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
-                    %li.nav-item.active
-                      %a.nav-link{:href => "#"}
-                        Home
-                        %span.sr-only (current)
                     %li.nav-item
-                      %a.nav-link{:href => "archive.html"} Previous Designs
-                    %li.nav-item
-                      %a.nav-link{:href => "flavors.html"} Flavors
-                    %li.nav-item
-                      %a.nav-link{:href => "reviews.html"} Customer Review
-                    %li.nav-item
-                      %a.nav-link{:href => "contact.html"} Contact Me
+											%a.nav-link{:href => "/"}
+												Home
+												%span.sr-only (current)
+										%li.nav-item
+											%a.nav-link.previous{:href => "/cakes"} Previous Designs
+										%li.nav-item
+											%a.nav-link{:href => "/flavors"} Flavors
+										%li.nav-item.active
+											%a.nav-link{:href => "/contacts"} Contact Me
+										-if(session[:user_id]!=nil)
+											%li.nav-item
+												%a.nav-link{:href => "/cake_orders"} My Orders
+											%li.nav-item
+												%a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
+										-if current_user!=nil
+											-if current_user.role == true
+												%li.nav-item
+													%a.nav-link{:href => "/sessions"} listing User
       .container
         .row
           .col-12
