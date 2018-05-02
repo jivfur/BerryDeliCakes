@@ -28,7 +28,8 @@
                     %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
                 -if signged_in?
                   .login
-                    %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+                    Hi
+                    %a=  User.find(session[:user_id]).userName
                   .signout
                     %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
     %header.header_area
@@ -150,9 +151,9 @@
                     .form-check.form-check-inline
                       %input.form-check-input{:name => "order[status]", :type => "radio", :value => index, :checked => @statusDB[index]}/
                       %label.form-check-label{:for => "order[status]"}=status
-            .row
-              .col
-                %button.btn.contact-btn.btn-block.pull-right{:type => "submit"} Edit
+          .row
+            .col
+              %button.btn.contact-btn.btn-block.pull-right{:type => "submit"} Edit
             
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
     

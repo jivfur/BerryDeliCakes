@@ -59,7 +59,8 @@
 										%a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
 								-if signged_in?
 									.login
-										%a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
+										Hi
+										%a=  User.find(session[:user_id]).userName
 									.signout
 										%a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
 								/ <div class="signout">

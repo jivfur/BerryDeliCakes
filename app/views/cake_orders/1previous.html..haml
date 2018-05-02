@@ -23,12 +23,16 @@
           .signup-search-area.d-flex.align-items-center.justify-content-end
             .login_register_area.d-flex
               -if logged_out?
-                %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
-                //.register
-                %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+                .login
+                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+                .register
+                  %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
               -if signged_in?
+                .login
+                  Hi
+                  %a=  User.find(session[:user_id]).userName
                 .signout
-                %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+                  %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
             .search_button
               %a.searchBtn{:href => "#"}
                 %i.fa.fa-search{"aria-hidden" => "true"}
