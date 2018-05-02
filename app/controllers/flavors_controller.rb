@@ -48,6 +48,8 @@ class FlavorsController < ApplicationController
       redirect_to root_path
     end
     uploaded_io = params[:flavor][:flavorImgURL]
+    orders_dir = Rails.root.join('public','flavorsUploads')
+    Dir.mkdir(orders_dir) unless File.exists?(orders_dir) 
     File.open(Rails.root.join('public', 'flavorsUploads', uploaded_io.original_filename), 'wb') do |file|
     file.write(uploaded_io.read)
     logger.debug uploaded_io.read

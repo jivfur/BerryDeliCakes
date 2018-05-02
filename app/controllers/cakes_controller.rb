@@ -36,6 +36,10 @@ class CakesController < ApplicationController
   # POST /cakes
   # POST /cakes.json
   def create
+    
+    orders_dir = Rails.root.join('public','previousCake')
+    Dir.mkdir(orders_dir) unless File.exists?(orders_dir)
+    
     if (session[:user_id] == nil) || (session[:role] == false)
       puts "here is flavors new, but this person is not admin --> go to users path"
       flash[:notice] = 'You are not allowed to this page'
