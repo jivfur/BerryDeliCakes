@@ -77,7 +77,6 @@ class CakeOrdersController < ApplicationController
             cake_price_params[:price] = cake_order_params[:price]
             if(@cakePrice.update(cake_price_params)) then
                 order_params = Hash.new
-                order_params[:user_id]=session[:user_id]
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
