@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   def create
     user_params.except(:confirmPassword)
     aux = user_params.except(:confirmPassword)
-    aux[:role] = true
+    aux[:role] = false
     @user = User.new(aux)
     if(@user.save)
        flash[:notice] = "Your profile was created"
