@@ -1,10 +1,9 @@
 module SessionsHelper
     def log_in(user)
         ##slogger.debug
-        pp user[0].id
-        session[:user_id] = user[0].id
+        session[:user_id] = user.id
         session[:loggedIn] = "BerryDeliCakesUserAccepted"
-        session[:role] = user[0].role
+        session[:role] = user.role
     end
     
     def current_user

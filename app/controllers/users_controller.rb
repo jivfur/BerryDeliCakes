@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     logger.debug "User/Index"
     @users = User.all
-    deleteAllUsers()
+    #deleteAllUsers()
   end
   
 

@@ -7,14 +7,16 @@ class SessionsController < ApplicationController
     
     def create
         user = User.where({:userName =>params[:username].downcase, :password =>params[:password]})
-        if user then
-            # Log the user in and redirect to the user's show page.
-          log_in(user)
-          redirect_to cake_orders_path()
-        else
-        # Create an error message.
+        pp user
+        if user.empty? then
+            # Create an error message.
             flash[:danger] = 'Invalid username/password combination'
-            render 'new'
+            redirect_to new_session_path()
+        else
+        # Log the user in and redirect to the user's show page.
+          log_in(user[0])
+          redirect_to cake_orders_path()
+        
         end
     end
 
