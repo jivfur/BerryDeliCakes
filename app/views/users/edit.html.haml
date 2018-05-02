@@ -82,15 +82,6 @@
                     %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
                     %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
-              .search_button
-                %a.searchBtn{:href => "#"}
-                  %i.fa.fa-search{"aria-hidden" => "true"}
-              .search-hidden-form
-                %form{:action => "#", :method => "get"}
-                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-                  %input.d-none{:type => "submit", :value => ""}/
-                  %span.searchBtn
-                    %i.fa.fa-times{"aria-hidden" => "true"}
     %header.header_area
       .container
         .row
@@ -123,11 +114,7 @@
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
-<<<<<<< HEAD
                         %a.nav-link{:href => "/sessions"} listing User 
-=======
-                        %a.nav-link{:href => "/users"} Users  
->>>>>>> 266a6aab743f0a71276485263b3a9d27bcc4148f
     .breadcumb-area{:style => "background-image: url(../../img/bg-img/breadcumb.jpg);"}
       .container.h-100
         .row.h-100.align-items-center
