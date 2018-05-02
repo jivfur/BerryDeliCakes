@@ -62,13 +62,10 @@
                     %a.nav-link{:href => "/cake_orders"} My Orders
                   %li.nav-item
                     %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
-<<<<<<< HEAD
-=======
                 -if current_user!=nil
                   -if current_user.role == true
                     %li.nav-item
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
->>>>>>> 934af5504c05914b796f9a9ce2fd9c33350c3e4c
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
