@@ -127,13 +127,13 @@
     });
 
     // :: 8.0 Search Form Active Code
-    $("#pattern-switcher").on('click', function () {
-        $("body").toggleClass("bg-pattern");
-    });
-    $("#patter-close").on('click', function () {
-        $(this).hide("slow");
-        $("#pattern-switcher").addClass("pattern-remove");
-    });
+    //$("#pattern-switcher").on('click', function () {
+    //    $("body").toggleClass("bg-pattern");
+    //});
+    //$("#patter-close").on('click', function () {
+    //    $(this).hide("slow");
+    //    $("#pattern-switcher").addClass("pattern-remove");
+    //});
 
     // :: 9.0 wow Active Code
     if ($.fn.init) {
