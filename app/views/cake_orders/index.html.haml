@@ -90,8 +90,16 @@
               .post-thumb
                 %img.img-thumbnail{:src => decorationImgURLMethod(order[:cake]), :height=>"150px"}
               .post-content
-                %p.post-headline Ordered by
-                %h4=order[:order].created_at.strftime("%Y-%m-%d").to_s
+                %p.post-headline 
+                .container
+                  .row
+                    .col
+                      %h6 Ordered by #{order[:order].created_at.strftime("%Y-%m-%d").to_s}
+                    .col
+                      %h6 Price: $ #{order[:cakePrice].price.to_s}
+                    
+                    
+                  
                 .btn-flavor
                   -if order[:order].status < 2 or session[:role]==true then
                     %ul.edit-delte
