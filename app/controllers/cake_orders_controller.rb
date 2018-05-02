@@ -3,8 +3,9 @@ class CakeOrdersController < ApplicationController
     skip_before_action :verify_authenticity_token
     
     def new
-        if session[:user_id] 
-            @user = User.find(session[:user_id] )
+        # if session[:user_id] 
+        #     @user = User.find(session[:user_id] )
+        # end    
         @flavors = Flavor.all
         @previousCakes = Cake.where({:gallery => true}) #It will return previous cakes
     end
@@ -264,3 +265,4 @@ class CakeOrdersController < ApplicationController
             params.require(:order).permit(:cake_id,:user_id,:deliveryDate, :deliveryAddress, :deliveryPhone, :comments,:flavor_id, :decorationImgURL, :comments, :levels,:size , :price, :paidStatus, :status)
         end
 end
+

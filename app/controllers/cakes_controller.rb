@@ -36,7 +36,6 @@ class CakesController < ApplicationController
   # POST /cakes
   # POST /cakes.json
   def create
-    
     orders_dir = Rails.root.join('public','previousCake')
     Dir.mkdir(orders_dir) unless File.exists?(orders_dir)
     
