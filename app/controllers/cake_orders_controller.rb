@@ -74,21 +74,20 @@ class CakeOrdersController < ApplicationController
         if( @cake.update(cakes_params)) then
             cake_price_params = Hash.new
             cake_price_params[:size] = cake_order_params[:size]
-            cake_price_params[:price] = cake_order_params[:price]
+            if(session[:role]==true)
+                cake_price_params[:price] = cake_order_params[:price]
+            end
             if(@cakePrice.update(cake_price_params)) then
                 order_params = Hash.new
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
-                if(cake_order_params[:status])
+                if(session[:role]==true)
                     order_params[:status]=cake_order_params[:status]
-                end
-                
-                order_params[:comments]=cake_order_params[:comments]
-                #order_params[:cake_price_id]=@cake_price.id
-                if(cake_order_params[:paidStatus])
                     order_params[:paidStatus]=cake_order_params[:paidStatus]
                 end
+                order_params[:comments]=cake_order_params[:comments]
+                #order_params[:cake_price_id]=@cake_price.id
                 #logger.debug Order.instance_methods
                 if(@order.update(order_params))
                     redirect_to(cake_order_path(@order.id))
