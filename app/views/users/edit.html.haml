@@ -50,7 +50,7 @@
 
 // = link_to 'Back', users_path
 
-%p#notice= notice
+
 %html
   %body
     %meta{:charset => "UTF-8"}/
@@ -138,6 +138,7 @@
       %form#regForm{:action => "/users/"+@user.id.to_s, :method => "post"}
         %input{:name => "_method", :type => "hidden", :value => "patch"}
           %h4 Check your profile and edit whatever you want!
+          %p#notice= notice
           .container
             .row
               .col
