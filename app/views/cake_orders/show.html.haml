@@ -24,12 +24,16 @@
           .signup-search-area.d-flex.align-items-center.justify-content-end
             .login_register_area.d-flex
               -if logged_out?
-                %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in
-                //.register
-                %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
+                .login
+                  %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
+                .register
+                  %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
               -if signged_in?
+                .login
+                  Hi
+                  %a=  User.find(session[:user_id]).userName
                 .signout
-                %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+                  %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
   %header.header_area
     .container
       .row
@@ -58,18 +62,10 @@
                     %a.nav-link{:href => "/cake_orders"} My Orders
                   %li.nav-item
                     %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
-                -if current_user!=nil
-                  -if current_user.role == true
-                    %li.nav-item
-<<<<<<< HEAD
-                      %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
                         %a.nav-link{:href => "/users"} Users   
-=======
-                      %a.nav-link{:href => "/users"} Users   
->>>>>>> 97209a6bffabaf3422ac767eceff45f4ea8e5b4b
   .breadcumb-area{:style => "background-image: url(../img/bg-img/breadcumb.jpg);"}
     .container.h-100
       .row.h-100.align-items-center
