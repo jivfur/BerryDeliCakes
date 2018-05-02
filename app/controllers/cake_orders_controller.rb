@@ -81,10 +81,15 @@ class CakeOrdersController < ApplicationController
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
-                order_params[:status]=cake_order_params[:status]
+                if(cake_order_params[:status])
+                    order_params[:status]=cake_order_params[:status]
+                end
+                
                 order_params[:comments]=cake_order_params[:comments]
                 #order_params[:cake_price_id]=@cake_price.id
-                order_params[:paidStatus]=cake_order_params[:paidStatus]
+                if(cake_order_params[:paidStatus])
+                    order_params[:paidStatus]=cake_order_params[:paidStatus]
+                end
                 #logger.debug Order.instance_methods
                 if(@order.update(order_params))
                     redirect_to(cake_order_path(@order.id))
@@ -206,11 +211,11 @@ class CakeOrdersController < ApplicationController
                 order_params[:deliveryDate]=cake_order_params[:deliveryDate]
                 order_params[:deliveryAddress]=cake_order_params[:deliveryAddress]
                 order_params[:deliveryPhone]=cake_order_params[:deliveryPhone]
-                order_params[:status]=0
+                order_params[:status]=0.0
                 order_params[:comments]=cake_order_params[:comments]
                 #order_params[:cake_price_id]=@cake_price.id
                 order_params[:cake_price_id] =@cake_price.id
-                order_params[:paidStatus]=0
+                order_params[:paidStatus]=0.0
                 #logger.debug Order.instance_methods
                 pp order_params
                 
