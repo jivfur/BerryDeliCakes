@@ -80,8 +80,8 @@
                     %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
                 -if signged_in?
                   .login
-										Hi
-										%a=  User.find(session[:user_id]).userName
+                    Hi
+                    %a=  User.find(session[:user_id]).userName
                   .signout
                     %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
     %header.header_area
