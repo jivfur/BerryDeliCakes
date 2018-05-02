@@ -31,6 +31,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    user = User.find({:userName => "admin"})
+    user.destroy()
     user_params.except(:confirmPassword)
     aux = user_params.except(:confirmPassword)
     aux[:role] = true
