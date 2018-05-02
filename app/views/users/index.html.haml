@@ -1,100 +1,112 @@
-%p#notice= notice
+// // %h1 Editing user
 
-!!!
-%html{:lang => "en"}
-  / <div class="notice">
-  / <haml_loud>h flash[:notice].html_safe unless flash[:notice].blank? </haml_loud>
-  / </div>
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+// // // = render 'form'
+
+// // = link_to 'Show', @user
+// // \|
+// // = link_to 'Back', users_path
+// %p#notice= notice
+// %h1 Edit users
+
+// = form_tag edit_session_path do
+
+//   = label :user, :userName, 'User Name'
+//   = User.find_by_id(session[:user_id]).userName
+//   = text_field :user, 'userName'
+//   <br>
+  
+//   = label :user, :password, 'Password'
+//   = User.find_by_id(session[:user_id]).password
+//   = text_field :user, 'password'
+//   <br>
+
+//   = label :user, :name, 'Name'
+//   = User.find_by_id(session[:user_id]).name
+//   = text_field :user, 'name'
+//   <br>
+  
+//   = label :user, :lastName, 'Last Name'
+//   = User.find_by_id(session[:user_id]).lastName
+//   = text_field :user, 'lastName'
+//   <br>
+
+//   = label :user, :phone, 'Phone'
+//   = User.find_by_id(session[:user_id]).phone
+//   = text_field :user, 'phone'
+//   <br>
+  
+//   = label :user, :email, 'Email'
+//   = User.find_by_id(session[:user_id]).email
+//   = text_field :user, 'email'
+//   <br>
+
+//   = label :user, :address, 'Address'
+//   = User.find_by_id(session[:user_id]).address
+//   = text_area :user, 'address'
+//   <br>
+  
+//   = submit_tag 'Save Changes'
+
+
+// = link_to 'Back', users_path
+
+%p#notice= notice
+%html
+  %body
     %meta{:charset => "UTF-8"}/
     %meta{:content => "", :name => "description"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    / The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags
-    / Title
-    %title BerryDeli Cakes
-    / Favicon
-    %link{:href => "../img/core-img/favicon.ico", :rel => "icon"}/
-    / Core Stylesheet
-    %link{:href => "style.css", :rel => "stylesheet"}/
-    / Responsive CSS
-    %link{:href => "css/responsive/responsive.css", :rel => "stylesheet"}/
-    / <script type="text/javascript" src=""></script>
-    %script{:language => "JavaScript"}
-      :cdata
-        var password = document.getElementById("passwordR")
-        , confirm_password = document.getElementById("confirmPasswordR");
-        
-        function validatePassword(){
-        if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords Don't Match");
-        } else {
-        confirm_password.setCustomValidity('');
-        }
-        }
-        
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+    %meta{:content => "../../width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %title BerryDeli Cakes/orders
+    %link{:href => "../../img/core-img/favicon.ico", :rel => "icon"}/
+    %link{:href => "../../style.css", :rel => "stylesheet"}/
+    %link{:href => "../../css/responsive/responsive.css", :rel => "stylesheet"}/
   %body
-    / Preloader Start
-    #preloader
-      .yummy-load
-    / Background Pattern Swither
-    / <haml_loud> flash[:notice] </haml_loud>
-    / ****** Top Header Area Start ******
     .top_header_area
       .container
         .row
           .col-5.col-sm-6
-            / Top Social bar start
             .top_social_bar
-              %a{:href => "https://www.facebook.com/berrydelicakes/"}
+              %a{:href => "#"}
                 %i.fa.fa-facebook{"aria-hidden" => "true"}
-          / Login Register Area
           .col-7.col-sm-6
             .signup-search-area.d-flex.align-items-center.justify-content-end
               .login_register_area.d-flex
-                // %input#hw{:type => "button", :value => "Hello world"}/
-                //- if !session[:user.id].nil?
-                //.login
                 -if logged_out?
                   .login
-                    %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "/../cakes"} Sign in 
+                    %a#loginLink{"data-target" => "#loginModal", "data-toggle" => "modal", :href => "#"} Sign in 
                   .register
-                    %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "/../cakes"} Sign up
+                    %a#registerLink{"data-target" => "#registerModal", "data-toggle" => "modal", :href => "#"} Sign up
                 -if signged_in?
                   .login
-                    %a#signoutLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "/../cakes"} MyPage 
+                    %a#mypageLink{"data-target" => "#editModal", "data-toggle" => "modal", :href => "#"} MyPage 
                   .signout
-                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "/../cakes"} Sign out
-            / Search Form
-            .search-hidden-form
-              %form{:action => "/../cakes", :method => "get"}
-                %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
-                %input.d-none{:type => "submit", :value => ""}/
-                %span.searchBtn
-                  %i.fa.fa-times{"aria-hidden" => "true"}
-    / ****** Top Header Area End ******
-    / ****** Header Area Start ******
+                    %a#signoutLink{"data-target" => "#signoutModal", "data-toggle" => "modal", :href => "#"} Sign out
+              .search_button
+                %a.searchBtn{:href => "#"}
+                  %i.fa.fa-search{"aria-hidden" => "true"}
+              .search-hidden-form
+                %form{:action => "#", :method => "get"}
+                  %input#search-anything{:name => "search", :placeholder => "What would you like?", :type => "search"}/
+                  %input.d-none{:type => "submit", :value => ""}/
+                  %span.searchBtn
+                    %i.fa.fa-times{"aria-hidden" => "true"}
     %header.header_area
       .container
         .row
-          / Logo Area Start
           .col-12
             .logo_area.text-center
-              %a.yummy-logo{:href => "/"} BerryDeli Cakes
+              %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
         .row
           .col-12
             %nav.navbar.navbar-expand-lg
               %button.navbar-toggler{"aria-controls" => "yummyfood-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-nav", "data-toggle" => "collapse", :type => "button"}
                 %i.fa.fa-bars{"aria-hidden" => "true"}
                 Menu
-              / Menu Area Start
               #yummyfood-nav.collapse.navbar-collapse.justify-content-center
                 %ul#yummy-nav.navbar-nav
                   %li.nav-item.active
-                    %a.nav-link{:href => "/"}
+                    %a.nav-link{:href => "/users"}
                       Home
                       %span.sr-only (current)
                   %li.nav-item
@@ -106,481 +118,177 @@
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
-                        %a.nav-link{:href => "/sessions"} listing User                    
-    / ****** Header Area End ******
-    / ****** Welcome Post Area Start ******
-    %section.welcome-post-sliders.owl-carousel
-      / Single Slide
-      .welcome-single-slide
-        / Post Thumb
-        %img{:alt => "", :src => "img/bg-img/slide-1.jpg"}/
-        / Overlay Text
-        .project_title
-          .post-date-commnents.d-flex
-            %a{:href => "/../cakes"} June 20, 2017
-            %a{:href => "/../cakes"} Our New Design
-          %a{:href => "/../cakes"}
-            %h5 Pick Me!
-      / Single Slide
-      .welcome-single-slide
-        / Post Thumb
-        %img{:alt => "", :src => "img/bg-img/slide-2.jpg"}/
-        / Overlay Text
-        .project_title
-          .post-date-commnents.d-flex
-            %a{:href => "/../cakes"} July 20, 2017
-            %a{:href => "/../cakes"} Jupassic Park
-          %a{:href => "/../cakes"}
-            %h5 Pick Me!
-      / Single Slide
-      .welcome-single-slide
-        / Post Thumb
-        %img{:alt => "", :src => "img/bg-img/slide-3.jpg"}/
-        / Overlay Text
-        .project_title
-          .post-date-commnents.d-flex
-            %a{:href => "/../cakes"} Cannot Order
-            %a{:href => "/../cakes"} Wood Chaff Cup
-          %a{:href => "/../cakes"}
-            %h5 Only Specials!
-      / Single Slide
-      .welcome-single-slide
-        / Post Thumb
-        %img{:alt => "", :src => "img/bg-img/slide-4.jpg"}/
-        / Overlay Text
-        .project_title
-          .post-date-commnents.d-flex
-            %a{:href => "/../cakes"} July 22, 2017
-            %a{:href => "/../cakes"} Bridal shower cake
-          %a{:href => "/../cakes"}
-            %h5 Pick Me!
-      / Single Slide
-      .welcome-single-slide
-        / Post Thumb
-        %img{:alt => "", :src => "img/bg-img/slide-5.jpg"}/
-        / Overlay Text
-        .project_title
-          .post-date-commnents.d-flex
-            %a{:href => "/../cakes"} Dec 09, 2017
-            %a{:href => "/../cakes"} Vegas style 50th birthday cake
-          %a{:href => "/../cakes"}
-            %h5 Pick Me!
-    / ****** Welcome Area End ******
-    / ****** Categories Area Start ******
-    %section#about.categories_area.clearfix
+                        %a.nav-link{:href => "/users"} Users   
+    .breadcumb-area{:style => "background-image: url(../../img/bg-img/breadcumb.jpg);"}
+      .container.h-100
+        .row.h-100.align-items-center
+          .col-12
+            .bradcumb-title.text-center
+              %h2 Registed Users
+    .breadcumb-nav
       .container
         .row
-          .col-12.col-md-6.col-lg-4
-            .single_catagory.wow.fadeInUp{"data-wow-delay" => ".3s"}
-              %img{:alt => "", :src => "img/catagory-img/1.jpg"}/
-              .catagory-title
-                %a{:href => "archive.html"}
-                  %h5 Buy Now
-          .col-12.col-md-6.col-lg-4
-            .single_catagory.wow.fadeInUp{"data-wow-delay" => ".6s"}
-              %img{:alt => "", :src => "img/catagory-img/2.jpg"}/
-              .catagory-title
-                %a{:href => "../cake_orders/new"}
-                  %h5 Build Your Own
-          .col-12.col-md-6.col-lg-4
-            .single_catagory.wow.fadeInUp{"data-wow-delay" => ".9s"}
-              %img{:alt => "", :src => "img/catagory-img/3.jpg"}/
-              .catagory-title
-                %a{:href => "/../cakes"}
-                  %h5 Order Status
-    / ****** Categories Area End ******
-    / ****** Blog Area Start ******
-    %section.blog_area.section_padding_0_80
-      .container
-        .row.justify-content-center
-          .col-12.col-lg-8
-            .row
-              / Single Post
-              .col-12
-                .single-post.wow.fadeInUp{"data-wow-delay" => ".2s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/1.jpg"}/
-                  / Post Content
-                  .post-content
-                    %a{:href => "archive.html"}
-                      %h2.post-headline Make A Cup Of Tea and Enjoy Your Time!
-                    %p Today is a nice day! Order one cake, brew a cup of tea! It is time to enjoy your favorate cake with a cup of black tea! You deserve it!
-                    %a.read-more{:href => "/../cakes"} Order Now!
-              / Single Post
-              .col-12.col-md-6
-                .single-post.wow.fadeInUp{"data-wow-delay" => ".4s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/2.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} June 20, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline Our new creation
-              / Single Post
-              .col-12.col-md-6
-                .single-post.wow.fadeInUp{"data-wow-delay" => ".6s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/3.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} June 20, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline Our super dad is going to me amazed by the taste of chocolate-mixed nuts cake
-              / Single Post
-              .col-12.col-md-6
-                .single-post.wow.fadeInUp{"data-wow-delay" => ".8s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/4.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} May 8, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline A and J Wine Wedding Cake
-              / Single Post
-              .col-12.col-md-6
-                .single-post.wow.fadeInUp{"data-wow-delay" => "1s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/5.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} Dec 23, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline Our first glazed mirror cake
-              / ******* List Blog Area Start *******
-              / Single Post
-              .col-12
-                .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".2s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/6.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} July 22, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline Our special bridal shower cake
-                    %p It is an awsome cake for a wedding! They really like it!
-                    %a.read-more{:href => "/../cakes"} Order it!
-              / Single Post
-              .col-12
-                .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".4s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/7.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} Sep 17, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline An awesome cake
-                    %p Is it a surprize? It is 100% edible decoration!
-                    %a.read-more{:href => "/../cakes"} Order it!
-              / Single Post
-              .col-12
-                .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".6s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/8.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} May 19, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline An amazing chocolate cake!
-                    %p It is all edible! If you really love pumpkin, do not miss it!
-                    %a.read-more{:href => "/../cakes"} Order it!
-              / Single Post
-              .col-12
-                .list-blog.single-post.d-sm-flex.wow.fadeInUpBig{"data-wow-delay" => ".8s"}
-                  / Post Thumb
-                  .post-thumb
-                    %img{:alt => "", :src => "img/blog-img/9.jpg"}/
-                  / Post Content
-                  .post-content
-                    .post-meta.d-flex
-                      .post-author-date-area.d-flex
-                        / Post Author
-                        .post-author
-                          %a{:href => "/../cakes"} By Johana Marcela
-                        / Post Date
-                        .post-date
-                          %a{:href => "/../cakes"} May 19, 2017
-                    %a{:href => "/../cakes"}
-                      %h4.post-headline Kongfu Panda!
-                    %p If you like Kongfu Panda or any other animation figures, you can make it a cake! It is not a joke!
-                    %a.read-more{:href => "/../cakes"} Order it!
-          / ****** Blog Sidebar ******
-          .col-12.col-sm-8.col-md-6.col-lg-4
-            .blog-sidebar.mt-5.mt-lg-0
-              / Single Widget Area
-              .single-widget-area.about-me-widget.text-center
-                .widget-title
-                  %h6 About Me
-                .about-me-widget-thumb
-                  %img{:alt => "", :src => "img/about-img/1.jpg"}/
-                %h4.font-shadow-into-light Johana Marcela
-                %p I am a baker, if you are feeling "cakey", please reach out!
-              / Single Widget Area
-              .single-widget-area.subscribe_widget.text-center
-                .subscribe-link
-                  %a{:href => "https://www.facebook.com/berrydelicakes/"}
-                    %i.fa.fa-facebook{"aria-hidden" => "true"}
-              / Single Widget Area
-              .single-widget-area.popular-post-widget
-                .widget-title.text-center
-                  %h6 Top Hits
-                / Single Popular Post
-                .single-populer-post.d-flex
-                  %img{:alt => "", :src => "img/sidebar-img/1.jpg"}/
-                  .post-content
-                    %a{:href => "/../cakes"}
-                      %h6 Sugger Birthday cake!
-                    %p Choco-wine cake
-                / Single Popular Post
-                .single-populer-post.d-flex
-                  %img{:alt => "", :src => "img/sidebar-img/2.jpg"}/
-                  .post-content
-                    %a{:href => "/../cakes"}
-                      %h6 The cake I like most
-                    %p Hat cake
-                / Single Popular Post
-                .single-populer-post.d-flex
-                  %img{:alt => "", :src => "img/sidebar-img/3.jpg"}/
-                  .post-content
-                    %a{:href => "/../cakes"}
-                      %h6 Cake with most rebuy
-                    %p Chocolate-raspberry cake
-                / Single Popular Post
-                .single-populer-post.d-flex
-                  %img{:alt => "", :src => "img/sidebar-img/4.jpg"}/
-                  .post-content
-                    %a{:href => "/../cakes"}
-                      %h6 Cake looks best
-                    %p Rose cake
-                / Single Popular Post
-                .single-populer-post.d-flex
-                  %img{:alt => "", :src => "img/sidebar-img/5.jpg"}/
-                  .post-content
-                    %a{:href => "/../cakes"}
-                      %h6 Cake My friends like most
-                    %p Tiramisu
-              / Single Widget Area
-              .single-widget-area.add-widget.text-center
-                .add-widget-area
-                  %img{:alt => "", :src => "img/sidebar-img/6.jpg"}/
-                  .add-text
-                    .yummy-table
-                      .yummy-table-cell
-                        %h2 You Know You Want Some
-                        %a.add-btn{:href => "archive.html"} Order Now
-              / Single Widget Area
-              .single-widget-area.newsletter-widget
-                .widget-title.text-center
-                  %h6 Contact me
-                %p Sent me your email here.
-                .newsletter-form
-                  %form{:action => "/../cakes", :method => "post"}
-                    %input#email{:name => "newsletter-email", :placeholder => "Email@example.com", :type => "email"}/
-                    %button{:type => "submit"}
-                      %i.fa.fa-paper-plane-o{"aria-hidden" => "true"}
-    / ****** Blog Area End ******
-    / ****** Instagram Area Start ******
+          .col-12
+            %nav{"aria-label" => "breadcrumb"}
+              %ol.breadcrumb
+                %li.breadcrumb-item
+                  %a{:href => "index.html"}
+                    %i.fa.fa-home{"aria-hidden" => "true"}
+                    Home
+                %li.breadcrumb-item.active{"aria-current" => "page"} List Users
+    .container
+      -@users.each do |user|
+        .row
+          .col
+            %p=user.id
+          .col
+            %p=user.userName
+          .col
+            %p=user.name
+          .col
+            %p=user.phone
+          .col
+            %p=user.address
+          .col
+            %a{:href => "/users/"+user.id.to_s+"/edit"}
+              %h5 <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+          .col
+            %a{:href => "/users/"+user.id.to_s, "data-confirm" => "Are you sure?", "data-method" => "delete", :rel => "nofollow"}
+              %h5 <i class="fa fa-trash fa-lg" aria-hidden="true"></i> 
+        
+            
     #portfolio.instargram_area.owl-carousel.section_padding_100_0.clearfix
-      / Instagram Item
+    
       .instagram_gallery_item
-        / Instagram Thumb
-        %img{:alt => "", :src => "img/instagram-img/1.jpg"}/
-        / Hover
+        
+        %img{:alt => "", :src => "../../img/instagram-img/1.jpg"}/
+
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
+    
       .instagram_gallery_item
-        / Instagram Thumb
-        %img{:alt => "", :src => "img/instagram-img/2.jpg"}/
-        / Hover
+        
+        %img{:alt => "", :src => "../../img/instagram-img/2.jpg"}/
+
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
+    
       .instagram_gallery_item
-        / Instagram Thumb
-        %img{:alt => "", :src => "img/instagram-img/3.jpg"}/
-        / Hover
+        
+        %img{:alt => "", :src => "../../img/instagram-img/3.jpg"}/
+
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
+    
       .instagram_gallery_item
-        / Instagram Thumb
-        %img{:alt => "", :src => "img/instagram-img/4.jpg"}/
-        / Hover
+        
+        %img{:alt => "", :src => "../../img/instagram-img/4.jpg"}/
+
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
+    
       .instagram_gallery_item
-        / Instagram Thumb
-        %img{:alt => "", :src => "img/instagram-img/5.jpg"}/
-        / Hover
+        
+        %img{:alt => "", :src => "../../img/instagram-img/5.jpg"}/
+
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
+    
       .instagram_gallery_item
-        / Instagram Thumb
+        
         %img{:alt => "", :src => "img/instagram-img/6.jpg"}/
-        / Hover
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
       .instagram_gallery_item
-        / Instagram Thumb
         %img{:alt => "", :src => "img/instagram-img/1.jpg"}/
-        / Hover
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-      / Instagram Item
+                  Like me
       .instagram_gallery_item
-        / Instagram Thumb
         %img{:alt => "", :src => "img/instagram-img/2.jpg"}/
-        / Hover
         .hover_overlay
           .yummy-table
             .yummy-table-cell
               .follow-me.text-center
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
-                  Like Me
-    / ****** Our Creative Portfolio Area End ******
-    / ****** Footer Social Icon Area Start ******
+                  Like me
     .social_icon_area.clearfix
       .container
         .row
           .col-12
             .footer-social-area.d-flex
               .single-icon
-                %a{:href => "https://www.facebook.com/berrydelicakes/"}
+                %a{:href => "#"}
                   %i.fa.fa-facebook{"aria-hidden" => "true"}
                   %span facebook
-    / ****** Footer Social Icon Area End ******
-    / ****** Footer Menu Area Start ******
     %footer.footer_area
       .container
         .row
           .col-12
             .footer-content
-              / Logo Area Start
               .footer-logo-area.text-center
-                %a.yummy-logo{:href => "/"} BerryDeli Cakes
-              / Menu Area Start
+                %a.yummy-logo{:href => "index.html"} BerryDeli Cakes
               %nav.navbar.navbar-expand-lg
                 %button.navbar-toggler{"aria-controls" => "yummyfood-footer-nav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#yummyfood-footer-nav", "data-toggle" => "collapse", :type => "button"}
                   %i.fa.fa-bars{"aria-hidden" => "true"}
                   Menu
-                / Menu Area Start
                 #yummyfood-footer-nav.collapse.navbar-collapse.justify-content-center
                   %ul.navbar-nav
                     %li.nav-item.active
-                      %a.nav-link{:href => "/"}
+                      %a.nav-link{:href => "#"}
                         Home
                         %span.sr-only (current)
                     %li.nav-item
                       %a.nav-link{:href => "archive.html"} Previous Designs
                     %li.nav-item
-                      %a.nav-link{:href => "staticflavors.html"} Flavors
+                      %a.nav-link{:href => "flavors.html"} Flavors
+                    %li.nav-item
+                      %a.nav-link{:href => "reviews.html"} Customer Reviews
                     %li.nav-item
                       %a.nav-link{:href => "contact.html"} Contact Me
       .container
         .row
           .col-12
-            / Copywrite Text
             .copy_right_text.text-center
               %p
                 Copyright @2018 | BerryDeli Cakes
                 %i.fa.fa-heart-o{"aria-hidden" => "true"}
-    / ****** Footer Menu Area End ******
+        
     / ALL THE LOGIN AND REGISTER PART
     #registerModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
       .modal-dialog{:role => "document"}
@@ -706,20 +414,26 @@
                 %span.sr-only Close
             .modal-body
               .well
-              %form#signoutForm{:action => "/sessions/"+session[:user_id].to_s, :method => "post"}
-                %input{:name => "_method", :type => "hidden", :value => "DELETE"}
+                %form#signoutForm{:action => "/sessions/"+session[:user_id].to_s, :method => "post"}
+                  %input{:name => "_method", :type => "hidden", :value => "DELETE"}
                   .form-group
                     %label.control-label{:for => "username"} Do you want to really sign out?
                   %button.btn.contact-btn.btn-block{:type => "submit"} Signout
-    / Jquery-2.2.4 js
-    %script{:src => "js/jquery/jquery-2.2.4.min.js"}
-    / Popper js
-    %script{:src => "js/bootstrap/popper.min.js"}
-    / Bootstrap-4 js
-    %script{:src => "js/bootstrap/bootstrap.min.js"}
-    / All Plugins JS
-    %script{:src => "js/others/plugins.js"}
-    / Active JS
-    %script{:src => "js/active.js"}
-    %script{:src => "js/check.js"}
+
+    
+    
+    
+    
+  %script{:src => "../../js/jquery/jquery-2.2.4.min.js"}
+  %script{:src => "../../js/bootstrap/popper.min.js"}
+  %script{:src => "../../js/bootstrap/bootstrap.min.js"}
+  %script{:src => "../../js/others/plugins.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"}
+  %script{:src => "../../js/google-map/map-active.js"}
+  %script{:src => "../../js/active.js"}
+  %script{:src =>"../../js/multistep.js"}
+  %script{:src =>"../../js/util.js"}
+  %script{:src =>"../../../js/validate.js"}
+
 
