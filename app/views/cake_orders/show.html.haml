@@ -61,15 +61,11 @@
                 -if current_user!=nil
                   -if current_user.role == true
                     %li.nav-item
-<<<<<<< HEAD
                       %a.nav-link{:href => "/users/"+session[:user_id].to_s+"/edit"} My Profile
                   -if current_user!=nil
                     -if current_user.role == true
                       %li.nav-item
                         %a.nav-link{:href => "/users"} Users   
-=======
-                      %a.nav-link{:href => "/users"} Users   
->>>>>>> 97209a6bffabaf3422ac767eceff45f4ea8e5b4b
   .breadcumb-area{:style => "background-image: url(../img/bg-img/breadcumb.jpg);"}
     .container.h-100
       .row.h-100.align-items-center
