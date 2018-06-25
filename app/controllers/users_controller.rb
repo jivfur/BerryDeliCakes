@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     logger.debug "User/Index"
-    @users = User.all
+    if(session[:role]==true)
+      @users = User.all
+    else
+      redirect_to root_path()
+    end
     #deleteAllUsers()
   end
   

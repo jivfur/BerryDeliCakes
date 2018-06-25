@@ -37,6 +37,7 @@ class FlavorsController < ApplicationController
       flash[:notice] = 'You are not allowed to this page. Only admin can manage flavors'
       redirect_to root_path
     end
+    @flavor = Flavor.find(params[:id])
   end
 
   # POST /flavors
